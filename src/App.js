@@ -3,21 +3,19 @@ import './App.scss';
 import 'materialize-css'
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {AuthPage} from "./Pages/AuthPage/AuthPage";
-import {PersonalPage} from "./Pages/PersonalPage/PersonalPage";
-import Header from "./Components/Header/Header";
+import PersonalPageContainer from "./Pages/PersonalPage/PersonalPage";
+import HeaderContainer from "./Components/Header/Header";
+import ProfilePageContainer from "./Pages/ProfilePage/ProfilePage";
 
 function App() {
     return (
         <BrowserRouter>
-            <Header />
+            <HeaderContainer/>
             <div className="container">
                 <Switch>
-                    <Route path='/' exact>
-                        <AuthPage/>
-                    </Route>
-                    <Route path='/personal' exact>
-                        <PersonalPage/>
-                    </Route>
+                    <Route path='/' exact render={() => <AuthPage/>}/>
+                    <Route path='/profile' render={() => <ProfilePageContainer/>}/>
+                    <Route path='/personal' exact render={() => <PersonalPageContainer/>}/>
                 </Switch>
             </div>
         </BrowserRouter>

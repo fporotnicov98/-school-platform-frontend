@@ -1,6 +1,9 @@
-.header {
-  // display: flex;
-  // align-items: center;
+
+nav .brand-logo {
+  font-size: 2.4rem;
+}
+li.role-user {
+  font-size: 2em !important;
 }
 a {
   color: #585858 !important;
@@ -9,3 +12,18 @@ a {
     margin: 5px 5px 5px 20px;
   }
 }
+nav i.material-icons {
+  line-height: 64px;
+}
+.dropdown-content.role {
+  width: 200px !important;
+}
+a.side-btn {
+  margin-bottom: 30px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+}
+
