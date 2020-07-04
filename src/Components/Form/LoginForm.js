@@ -49,7 +49,7 @@ export const LoginFormiks = withFormik({
         }
     },
     handleSubmit(formData, {props}) {
-        props.registration(formData.login, formData.password);
+        props.login(formData.login, formData.password);
 
     }
 })(LoginForm)

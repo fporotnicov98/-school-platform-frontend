@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 const ProfilePage = (props) => {
     return (
-        <>
+        <div className='wrapper'>
             {
                 props.isToggleStudent && <div className='data'>
                     <h5>Мои данные:</h5>
@@ -90,7 +90,7 @@ const ProfilePage = (props) => {
                     </div>
                 </div>
             }
-        </>
+        </div>
 
     )
         ;

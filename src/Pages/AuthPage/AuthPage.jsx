@@ -1,11 +1,15 @@
 import React from 'react';
 import './AuthPage.scss'
 import {LoginFormiks} from "../../Components/Form/LoginForm";
+import {connect} from "react-redux";
+import {login} from "../../Redux/authReducer";
 
-export const AuthPage = () => {
+const AuthPage = (props) => {
     return (
         <div className='wrapper'>
-            <LoginFormiks />
+            <LoginFormiks login={props.login}/>
         </div>
     );
 }
+
+export default connect(null, {login})(AuthPage)

@@ -2,8 +2,8 @@ import {toast, Flip} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 toast.configure()
-export const regError = () => {
-    toast.error('Пользователь с таким логином или email уже существует!', {
+export const regError = (text) => {
+    toast.error(text, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1700,
         hideProgressBar: true,
@@ -12,8 +12,8 @@ export const regError = () => {
         transition: Flip
     })
 }
-export const authError = () => {
-    toast.error('Неправильный email или пароль!', {
+export const authError = (text) => {
+    toast.error(text, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1700,
         hideProgressBar: true,

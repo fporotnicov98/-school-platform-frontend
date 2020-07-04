@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 toast.configure()
 export const authSuccess = () => {
-    toast.success('Авторизация прошла успешно!', {
+    toast.success('Авторизация прошла успешно', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1700,
         hideProgressBar: true,
@@ -12,8 +12,8 @@ export const authSuccess = () => {
         transition: Flip
     })
 }
-export const regSuccess = () => {
-    toast.success('Регистрация прошла успешна!', {
+export const regSuccess = (text) => {
+    toast.success(text, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1700,
         hideProgressBar: true,

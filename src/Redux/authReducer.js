@@ -24,11 +24,6 @@ let initial = {
 
 const authReducer = (state = initial, action) => {
     switch (action.type) {
-        case SET_AUTH_DATA:
-            return {
-                ...state,
-                ...action.payload
-            }
         case SET_ON_REG:
             return {
                 ...state,
@@ -66,37 +61,40 @@ export const chooseStudent = () => ({type: CHOOSE_STUDENT})
 export const chooseTeacher = () => ({type: CHOOSE_TEACHER})
 export const chooseModerator = () => ({type: CHOOSE_MODERATOR})
 export const setOnReg = (flag) => ({type: SET_ON_REG, payload: flag})
-// export const setAuthData = (email, fio, userId, roleUser, isAuth) => ({
-//     type: "SET_AUTH_DATA",
-//     payload: {email, fio, userId, roleUser, isAuth}
-// })
 
 
-export const registration = (fio, login, email, mobileNumber, role, password) => dispatch => {
-    authAPI.registration(fio, login, email, mobileNumber, role, password)
+export const moderatorReg = (fio, login, password) => dispatch => {
+    authAPI.moderatorRegist(fio, login, password)
         .then(response => {
-            dispatch(setOnReg(true))
-            regSuccess()
-        })
-        .catch(err => {
-            regError()
+            if (response.data.resultCode === 0) {
+                dispatch(setOnReg(true))
+                regSuccess(response.data.message)
+            } else regError(response.data.message)
         })
 }
-// export const login = (login, password) => dispatch => {
-//     authAPI.login(login, password)
-//         .then(response => {
-//             if (response.data.resultCode === 0) {
-//                 dispatch(getAuth(response.data.token))
-//                 authSuccess()
-//             }
-//         })
-//         .catch(err => {
-//             authError()
-//         })
-// }
-// export const getAuth = (token) => (dispatch) => {
-//     authAPI.getAuth(token)
-//         .then(response => {
-//             dispatch(setAuthData(response.data.email, response.data.fio, response.data.id, response.data.roleUser, true))
-//         })
-// }
+export const studentReg = (fio, login, email, mobileNumber, password) => dispatch => {
+    authAPI.studentRegist(fio, login, email, mobileNumber, password)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setOnReg(true))
+                regSuccess(response.data.message)
+            } else regError(response.data.message)
+        })
+}
+export const teacherReg = (fio, login, email, mobileNumber, subject, password) => dispatch => {
+    authAPI.teacherRegist(fio, login, email, mobileNumber, subject, password)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setOnReg(true))
+                regSuccess(response.data.message)
+            } else regError(response.data.message)
+        })
+}
+export const login = (login, password) => dispatch => {
+    authAPI.login(login, password)
+        .then(response => {
+            if (response.data.token) {
+                authSuccess()
+            } else authError(response.data.message)
+        })
+}
