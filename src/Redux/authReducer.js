@@ -2,6 +2,7 @@ import {authAPI} from "../Api/Api";
 import {authError, regError} from "../Components/ConfirmForm/ErrorConfirm";
 import {authSuccess, regSuccess} from "../Components/ConfirmForm/SuccessConfirm";
 
+const SET_ON_AUTH = 'SET_ON_AUTH'
 const SET_AUTH_DATA = 'SET_AUTH_DATA'
 const SET_ON_REG = 'SET_ON_REG'
 const CHOOSE_STUDENT = 'CHOOSE_STUDENT'
@@ -16,6 +17,7 @@ let initial = {
     role: null,
     password: null,
     onReg: false,
+    isAuth: null,
 
     isToggleStudent: false,
     isToggleTeacher: false,
@@ -24,32 +26,23 @@ let initial = {
 
 const authReducer = (state = initial, action) => {
     switch (action.type) {
+        case SET_AUTH_DATA: {
+            return {
+                ...state,
+                ...action.payload
+            }
+        }
+        case SET_ON_AUTH:
+            return {
+                ...state,
+                isAuth: action.payload
+            }
         case SET_ON_REG:
             return {
                 ...state,
                 onReg: action.payload
             }
-        case CHOOSE_STUDENT:
-            return {
-                ...state,
-                isToggleStudent: true,
-                isToggleTeacher: false,
-                isToggleModerator: false,
-            }
-        case CHOOSE_TEACHER:
-            return {
-                ...state,
-                isToggleTeacher: true,
-                isToggleModerator: false,
-                isToggleStudent: false,
-            }
-        case CHOOSE_MODERATOR:
-            return {
-                ...state,
-                isToggleModerator: true,
-                isToggleTeacher: false,
-                isToggleStudent: false,
-            }
+
         default:
             return state;
     }
@@ -57,10 +50,11 @@ const authReducer = (state = initial, action) => {
 
 export default authReducer;
 
-export const chooseStudent = () => ({type: CHOOSE_STUDENT})
-export const chooseTeacher = () => ({type: CHOOSE_TEACHER})
-export const chooseModerator = () => ({type: CHOOSE_MODERATOR})
 export const setOnReg = (flag) => ({type: SET_ON_REG, payload: flag})
+export const setAuthData = (role, isAuth) => ({
+    type: SET_AUTH_DATA,
+    payload: {role, isAuth}
+})
 
 
 export const moderatorReg = (fio, login, password) => dispatch => {
@@ -94,7 +88,12 @@ export const login = (login, password) => dispatch => {
     authAPI.login(login, password)
         .then(response => {
             if (response.data.token) {
+                dispatch(setAuthData(response.data.role, true))
                 authSuccess()
             } else authError(response.data.message)
         })
+}
+
+export const logout = () => dispatch => {
+    dispatch(setAuthData(null, null))
 }

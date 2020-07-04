@@ -2,9 +2,10 @@ import React from 'react';
 import './PersonalPage.scss'
 import {RegisterStudentFormiks} from "../../Components/Form/RegisterForm/RegisterFormStudent";
 import {connect} from "react-redux";
-import {moderatorReg, registration, studentReg, teacherReg} from "../../Redux/authReducer";
+import {moderatorReg, studentReg, teacherReg} from "../../Redux/authReducer";
 import {RegisterModeratorFormiks} from "../../Components/Form/RegisterForm/RegisterFormModerator";
 import {RegisterTeacherFormiks} from "../../Components/Form/RegisterForm/RegisterFormTeacher";
+import {Redirect} from "react-router-dom";
 
 class PersonalPage extends React.Component {
     state = {
@@ -23,7 +24,8 @@ class PersonalPage extends React.Component {
         this.setState({isToggleTeacher: true, isToggleModerator: false, isToggleStudent: false})
     }
     render() {
-        if (!this.props.isToggleModerator) return null
+        if (this.props.role != 'moderator') return null
+        if (!this.props.isAuth) return <Redirect to={'/'}></Redirect>
         return (
             <div className='wrapper'>
                 <div className='moderator'>
@@ -73,9 +75,8 @@ class PersonalPage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isToggleStudent: state.auth.isToggleStudent,
-        isToggleTeacher: state.auth.isToggleTeacher,
-        isToggleModerator: state.auth.isToggleModerator
+        isAuth: state.auth.isAuth,
+        role: state.auth.role
     }
 }
 

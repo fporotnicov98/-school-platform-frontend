@@ -1,12 +1,14 @@
 import React from 'react';
 import './ProfilePage.scss'
 import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
 const ProfilePage = (props) => {
+    // if (!props.isAuth) return <Redirect to={'/'}></Redirect>
     return (
         <div className='wrapper'>
             {
-                props.isToggleStudent && <div className='data'>
+                (props.role === 'student') && <div className='data'>
                     <h5>Мои данные:</h5>
                     <div className='user-data'>
                         <div className="input-field">
@@ -37,7 +39,7 @@ const ProfilePage = (props) => {
                 </div>
             }
             {
-                props.isToggleModerator && <div className='data'>
+                (props.role === 'moderator') && <div className='data'>
                     <h5>Мои данные:</h5>
                     <div className='user-data'>
                         <div className="input-field">
@@ -56,7 +58,7 @@ const ProfilePage = (props) => {
                 </div>
             }
             {
-                props.isToggleTeacher && <div className='data'>
+                (props.role === 'teacher') && <div className='data'>
                     <h5>Мои данные:</h5>
                     <div className='user-data'>
                         <div className="input-field">
@@ -91,18 +93,15 @@ const ProfilePage = (props) => {
                 </div>
             }
         </div>
-
     )
-        ;
 };
 
 const mapStateToProps = state => {
     return {
-        isToggleStudent: state.auth.isToggleStudent,
-        isToggleTeacher: state.auth.isToggleTeacher,
-        isToggleModerator: state.auth.isToggleModerator
+        isAuth: state.auth.isAuth,
+        role: state.auth.role
     }
 }
 
-export default connect(mapStateToProps, {})(ProfilePage);
+export default connect(mapStateToProps, null)(ProfilePage);
 

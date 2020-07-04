@@ -1,7 +1,10 @@
 import React from 'react';
 import './SchedulePage.scss'
+import {Redirect} from "react-router-dom";
+import {connect} from "react-redux";
 
-const SchedulePage = () => {
+const SchedulePage = (props) => {
+    if (!props.isAuth) return <Redirect to={'/'}></Redirect>
     return (
         <div className='wrapper'>
             <div className="row">
@@ -64,4 +67,10 @@ const SchedulePage = () => {
     );
 };
 
-export default SchedulePage;
+const mapStateToProps = state => {
+    return {
+        isAuth: state.auth.isAuth,
+    }
+}
+
+export default connect(mapStateToProps, {})(SchedulePage);

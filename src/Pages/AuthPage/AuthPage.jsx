@@ -3,8 +3,10 @@ import './AuthPage.scss'
 import {LoginFormiks} from "../../Components/Form/LoginForm";
 import {connect} from "react-redux";
 import {login} from "../../Redux/authReducer";
+import {Redirect} from "react-router-dom";
 
 const AuthPage = (props) => {
+    if (props.isAuth) return <Redirect to={'/profile'}></Redirect>
     return (
         <div className='wrapper'>
             <LoginFormiks login={props.login}/>
@@ -12,4 +14,10 @@ const AuthPage = (props) => {
     );
 }
 
-export default connect(null, {login})(AuthPage)
+const mapStateToProps = state => {
+    return {
+        isAuth: state.auth.isAuth,
+    }
+}
+
+export default connect(mapStateToProps, {login})(AuthPage)

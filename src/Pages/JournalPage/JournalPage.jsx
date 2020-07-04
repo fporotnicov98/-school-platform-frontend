@@ -1,7 +1,10 @@
 import React from 'react';
 import './JournalPage.scss'
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
-const JournalPage = () => {
+const JournalPage = (props) => {
+    if (!props.isAuth) return <Redirect to={'/'}></Redirect>
     return (
         <div className='wrapper'>
             <div className='z-depth-2 journal blue-grey lighten-4'>
@@ -209,4 +212,10 @@ const JournalPage = () => {
     );
 };
 
-export default JournalPage;
+const mapStateToProps = state => {
+    return {
+        isAuth: state.auth.isAuth,
+    }
+}
+
+export default connect(mapStateToProps, {})(JournalPage);
