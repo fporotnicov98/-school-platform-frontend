@@ -55,7 +55,7 @@ class RegisterFormTeacher extends React.Component {
                                     className="validate"
                                     required='required'
                                 />
-                                <label htmlFor="subject">Телефон</label>
+                                <label htmlFor="subject">Предмет</label>
                             </div>
                             <div className="input-field">
                                 <Field

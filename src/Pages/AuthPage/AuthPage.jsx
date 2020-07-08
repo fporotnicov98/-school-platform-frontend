@@ -1,6 +1,6 @@
 import React from 'react';
 import './AuthPage.scss'
-import {LoginFormiks} from "../../Components/Form/LoginForm";
+import {LoginFormiks} from "../../Components/Form/LoginForm/LoginForm";
 import {connect} from "react-redux";
 import {login} from "../../Redux/authReducer";
 import {Redirect} from "react-router-dom";

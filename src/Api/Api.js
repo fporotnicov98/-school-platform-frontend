@@ -22,3 +22,15 @@ export const authAPI = {
         return instanse.get(`...`, { headers: { "Authorization": `Bearer ${token}` } })
     },
 }
+
+export const userAPI = {
+    getStudents() {
+        return instanse.get('/users/students')
+    },
+    getTeachers() {
+        return instanse.get('/users/teachers')
+    },
+    getModerators() {
+        return instanse.get('/users/moderators')
+    },
+}

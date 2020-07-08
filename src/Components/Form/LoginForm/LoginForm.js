@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, Form, withFormik} from "formik";
-import './Form.scss'
+import '../Form.scss'
 
 class LoginForm extends React.Component {
     render() {

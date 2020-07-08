@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 
 const ProfilePage = (props) => {
-    // if (!props.isAuth) return <Redirect to={'/'}></Redirect>
+    if (!props.isAuth) return <Redirect to={'/'}></Redirect>
     return (
         <div className='wrapper'>
             {
