@@ -7,10 +7,12 @@ import {regError} from "../Components/ConfirmForm/ErrorConfirm";
 import {setOnReg} from "./authReducer";
 
 const SET_CLASS = 'SET_CLASS'
-const SET_CLASS_DATA = 'SET_CLASS_DATA'
+const SET_CLASS_INFO = 'SET_CLASS_INFO'
 
 let initial = {
-    classroom: []
+    classroom: [],
+    classNumber: null,
+    classId: null
 }
 
 const classReducer = (state = initial, action) => {
@@ -35,11 +37,21 @@ export const setClassData = (classes) => ({
     type: SET_CLASS,
     payload: classes
 })
+export const setClassInfo = (classNumber,classId) => ({
+    type: SET_CLASS_INFO,
+    payload: {classNumber,classId}
+})
 
 export const getClasses = () => dispatch => {
     classAPI.getClasses()
         .then(response => {
             dispatch(setClasses(response.data))
+        })
+}
+export const getClassroom = (id) => dispatch => {
+    classAPI.getClassroom(id)
+        .then(response => {
+            dispatch(setClassInfo(response.data.classNumber,response.data._id))
         })
 }
 export const addClassroom = (classNumber) => dispatch => {

@@ -26,7 +26,7 @@ function App() {
                     <Route path='/profile' render={() => <ProfilePageContainer/>}/>
                     <Route path='/personal' exact render={() => <PersonalPageContainer/>}/>
                     <Route path='/classroom' exact render={() => <Classes/>}/>
-                    <Route path='/classroom:classroomId?'  render={() => <ClassroomItem/>}/>
+                    <Route path='/classroom/:classId?'  render={() => <ClassroomItem/>}/>
                     <Route path='/students' exact render={() => <Students/>}/>
                     <Route path='/teachers' exact render={() => <Teachers/>}/>
                     <Route path='/moderators' exact render={() => <Moderators/>}/>

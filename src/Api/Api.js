@@ -51,10 +51,14 @@ export const classAPI = {
     getClasses() {
         return instanse.get(`/classroom/classrooms`)
     },
+    getClassroom(id){
+        return instanse.get(`/classroom/classrooms/${id}`)
+    },
     addClassroom(classNumber) {
         return instanse.post(`/classroom/setClassroom`, {classNumber})
     },
     deleteClassroom(id) {
         return instanse.delete(`/classroom/deleteClassroom/${id}`)
     }
+
 }
