@@ -12,8 +12,6 @@ import AddClass from "../../Components/Modals/AddClass";
 class PersonalPage extends React.Component {
     componentDidMount() {
         M.Modal.init(this.Modal, {})
-        M.FormSelect.init(this.FormSelect, {})
-        M.FormSelect.init(this.FormSelect1, {})
     }
 
     state = {

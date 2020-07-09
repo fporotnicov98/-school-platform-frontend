@@ -16,10 +16,10 @@ export const authAPI = {
         return instanse.post(`/auth/teacherReg`, {fio, login, email, mobileNumber, subject, password})
     },
     login(login, password) {
-        return instanse.post(`/auth/login`, { login, password })
+        return instanse.post(`/auth/login`, {login, password})
     },
     getAuth(token) {
-        return instanse.get(`/auth/me`, { headers: { "Authorization": `Bearer ${token}` } })
+        return instanse.get(`/auth/me`, {headers: {"Authorization": `Bearer ${token}`}})
     },
 }
 
@@ -44,5 +44,17 @@ export const userAPI = {
     },
     updateModerator(id, fio, login) {
         return instanse.put(`/users/updateModerator/${id}`, {fio, login})
+    }
+}
+
+export const classAPI = {
+    getClasses() {
+        return instanse.get(`/classroom/classrooms`)
+    },
+    addClassroom(classNumber) {
+        return instanse.post(`/classroom/setClassroom`, {classNumber})
+    },
+    deleteClassroom(id) {
+        return instanse.delete(`/classroom/deleteClassroom/${id}`)
     }
 }

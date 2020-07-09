@@ -51,9 +51,9 @@ const authReducer = (state = initial, action) => {
 export default authReducer;
 
 export const setOnReg = (flag) => ({type: SET_ON_REG, payload: flag})
-export const setAuthData = (fio,login,email,role,mobileNumber,classroom,subject,isAuth) => ({
+export const setAuthData = (fio,login,role,email,mobileNumber,classroom,subject,isAuth) => ({
     type: SET_AUTH_DATA,
-    payload: {fio,login,email,mobileNumber,classroom,subject,role, isAuth}
+    payload: {fio,login,role,email,mobileNumber,classroom,subject,isAuth}
 })
 
 
