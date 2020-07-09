@@ -8,10 +8,11 @@ import HeaderContainer from "./Components/Header/Header";
 import ProfilePageContainer from "./Pages/ProfilePage/ProfilePage";
 import JournalPage from "./Pages/JournalPage/JournalPage";
 import SchedulePage from "./Pages/SchedulePage/SchedulePage";
-import Users from "./Pages/Users/Users";
+import Classes from "./Pages/Users/Classes";
 import Students from "./Pages/Users/Students";
 import Teachers from "./Pages/Users/Teachers";
 import Moderators from "./Pages/Users/Moderators";
+import ClassroomItem from "./Pages/Users/ClassroomItem/ClassroomItem";
 
 function App() {
     return (
@@ -24,7 +25,8 @@ function App() {
                     <Route path='/schedule' render={() => <SchedulePage/>}/>
                     <Route path='/profile' render={() => <ProfilePageContainer/>}/>
                     <Route path='/personal' exact render={() => <PersonalPageContainer/>}/>
-                    <Route path='/users' exact render={() => <Users/>}/>
+                    <Route path='/classroom' exact render={() => <Classes/>}/>
+                    <Route path='/classroom:classroomId?'  render={() => <ClassroomItem/>}/>
                     <Route path='/students' exact render={() => <Students/>}/>
                     <Route path='/teachers' exact render={() => <Teachers/>}/>
                     <Route path='/moderators' exact render={() => <Moderators/>}/>

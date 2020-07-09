@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import M from "materialize-css";
 import {connect} from "react-redux";
-import {addClassroom} from "../../Redux/classReducer";
+import {addClassroom} from "../../../Redux/classReducer";
 import Select from "react-select";
 
 const number = [
@@ -47,20 +47,25 @@ class AddClass extends Component {
         const { selectedOption1, selectedOption2 } = this.state;
 
         return (
-            <div className="modal-content">
-                <h4>Добавить класс</h4>
-                <Select
-                    value={selectedOption1}
-                    onChange={this.handleChange1}
-                    options={number}
-                />
-                <Select
-                    value={selectedOption2}
-                    onChange={this.handleChange2}
-                    options={letter}
-                />
-                <a href="#!" onClick={() => this.props.addClassroom(this.state.selectedOption1.label + this.state.selectedOption2.label)}
-                   className="center modal-close waves-effect waves-light btn-flat cyan darken-2 white-text">Добавить</a>
+            <div className="login">
+                <div className="card blue-grey lighten-4">
+                    <div  className="card-content date-text">
+                        <span className="card-title center">Добавить класс</span>
+                        <Select
+                            value={selectedOption1}
+                            onChange={this.handleChange1}
+                            options={number}
+                        />
+                        <Select
+                            value={selectedOption2}
+                            onChange={this.handleChange2}
+                            options={letter}
+                        />
+                        <a href="#!" onClick={() => this.props.addClassroom(this.state.selectedOption1.label + this.state.selectedOption2.label)}
+                           className="center modal-close waves-effect waves-light btn-flat cyan darken-2 white-text">Добавить</a>
+                    </div>
+                </div>
+
 
             </div>
         );

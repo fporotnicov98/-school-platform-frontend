@@ -22,26 +22,45 @@
         flex: 0 0 93%;
         display: flex;
         align-items: center;
+        .id-class {
+          margin: 0 10px;
+          text-align: center;
+          width: 50%;
+        }
+        .number-class {
+          margin: 0 10px;
+          text-align: center;
+          width: 50%;
+          .number {
+            font-size: 1.5em;
+            margin-left: 20px;
+          }
+        }
         span {
           width: 20px;
           margin-right: 10px;
         }
         .fio {
+          margin: 0 10px;
           flex: 1 1 auto;
         }
         .login {
+          margin: 0 10px;
           text-align: center;
           width: 250px;
         }
         .role {
+          margin: 0 10px;
           text-align: center;
           width: 250px;
         }
         .email {
+          margin: 0 10px;
           text-align: center;
           width: 250px;
         }
         .mobileNumber {
+          margin: 0 10px;
           text-align: center;
           width: 150px;
         }

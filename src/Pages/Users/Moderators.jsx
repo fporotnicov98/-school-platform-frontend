@@ -3,7 +3,7 @@ import M from "materialize-css";
 import {connect} from "react-redux";
 import {getModerator, deleteUser, updateUser, updateModerator} from "../../Redux/userReducer";
 import {Redirect} from "react-router-dom";
-import './Users.scss'
+import './Classes.scss'
 
 class Moderators extends Component {
     componentDidMount() {
@@ -45,7 +45,7 @@ class Moderators extends Component {
                     <ul ref={Collapsible => {
                         this.Collapsible = Collapsible;
                     }} className="collapsible popout">
-                        <li>
+                        <li className='active'>
                             <div className="collapsible-header card-title blue-grey lighten-4">Модераторы</div>
                             <div className="collapsible-body">
                                 {

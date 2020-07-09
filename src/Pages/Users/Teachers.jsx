@@ -62,7 +62,7 @@ class Teachers extends Component {
                 <ul ref={Collapsible => {
                     this.Collapsible = Collapsible;
                 }} className="collapsible popout">
-                    <li>
+                    <li className='active'>
                         <div className="collapsible-header blue-grey lighten-4">Учителя</div>
                         <div className="collapsible-body">
                             {

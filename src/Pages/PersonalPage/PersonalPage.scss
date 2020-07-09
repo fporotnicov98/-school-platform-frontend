@@ -46,10 +46,9 @@
     width: 50%;
 
     .card-content {
-      padding: 0 24px !important;
+      padding: 24px 24px !important;
 
       .card-title {
-        padding-top: 10px;
       }
     }
 
@@ -70,6 +69,18 @@
   position: relative;
   box-sizing: border-box;
   margin-bottom: 20px;
+}
+
+.waves-effect {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
+  transition: .3s ease-out;
 }
 
 

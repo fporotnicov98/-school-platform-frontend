@@ -7,7 +7,7 @@ import {RegisterModeratorFormiks} from "../../Components/Form/RegisterForm/Regis
 import {RegisterTeacherFormiks} from "../../Components/Form/RegisterForm/RegisterFormTeacher";
 import {NavLink, Redirect} from "react-router-dom";
 import M from "materialize-css";
-import AddClass from "../../Components/Modals/AddClass";
+import AddClass from "../../Components/Form/RegisterForm/AddClass";
 
 class PersonalPage extends React.Component {
     componentDidMount() {
@@ -18,16 +18,20 @@ class PersonalPage extends React.Component {
         isToggleModerator: false,
         isToggleStudent: false,
         isToggleTeacher: false,
+        isToggleClasses: false,
     }
 
     addModerator = () => {
-        this.setState({isToggleModerator: true, isToggleStudent: false, isToggleTeacher: false})
+        this.setState({isToggleModerator: true, isToggleStudent: false, isToggleTeacher: false, isToggleClasses: false})
     }
     addStudent = () => {
-        this.setState({isToggleStudent: true, isToggleTeacher: false, isToggleModerator: false})
+        this.setState({isToggleStudent: true, isToggleTeacher: false, isToggleModerator: false, isToggleClasses: false})
     }
     addTeacher = () => {
-        this.setState({isToggleTeacher: true, isToggleModerator: false, isToggleStudent: false})
+        this.setState({isToggleTeacher: true, isToggleModerator: false, isToggleStudent: false, isToggleClasses: false})
+    }
+    addClasses = () => {
+        this.setState({isToggleClasses: true, isToggleTeacher: false, isToggleModerator: false, isToggleStudent: false})
     }
 
     render() {
@@ -38,8 +42,8 @@ class PersonalPage extends React.Component {
                 <div className='moderator'>
                     <div className='control-panel'>
                         <div className='add-user card blue-grey lighten-4'>
-                            <NavLink to='/users'><span>Класс</span></NavLink>
-                            <a data-target="modal1"
+                            <NavLink to='/classroom'><span>Класс</span></NavLink>
+                            <a onClick={this.addClasses}
                                className="btn modal-trigger btn-floating btn-small waves-effect waves-light yellow darken-2"><i
                                 className="material-icons">add</i></a>
                         </div>
@@ -72,11 +76,9 @@ class PersonalPage extends React.Component {
                     {
                         this.state.isToggleTeacher && <RegisterTeacherFormiks teacherReg={this.props.teacherReg}/>
                     }
-                    <div id="modal1" className="modal" ref={Modal => {
-                        this.Modal = Modal
-                    }}>
-                        <AddClass />
-                    </div>
+                    {
+                        this.state.isToggleClasses && <AddClass/>
+                    }
                 </div>
             </div>
         );
