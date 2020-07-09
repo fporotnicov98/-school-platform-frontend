@@ -88,7 +88,8 @@ export const RegisterStudentFormiks = withFormik({
             password: password || ''
         }
     },
-    handleSubmit(formData, {props}) {
+    handleSubmit(formData, {props, resetForm}) {
         props.studentReg(formData.fio, formData.login, formData.email, formData.mobileNumber, formData.password);
+        setTimeout(() => resetForm({formData: ""}),2000)
     }
 })(RegisterFormStudent)

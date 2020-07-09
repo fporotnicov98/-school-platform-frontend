@@ -47,15 +47,15 @@ class Header extends React.Component {
                         <a href="#s"><span className="black-text name">Зубенко Михайил Петрович</span></a>
                         <a href="#s"><span className="black-text email">zubenkoMP@gmail.com</span></a>
                         <NavLink to='/profile'
-                                 className="side-btn waves-effect waves-light btn white-text cyan darken-2">Профиль</NavLink>
+                                 className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Профиль</NavLink>
                         <NavLink to='/journal'
-                                 className="side-btn waves-effect waves-light btn white-text cyan darken-2">Журнал</NavLink>
+                                 className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Журнал</NavLink>
                         <NavLink to='/schedule'
-                                 className="side-btn waves-effect waves-light btn white-text cyan darken-2">Расписание</NavLink>
+                                 className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Расписание</NavLink>
                         <NavLink to=''
-                                 className="side-btn waves-effect waves-light btn white-text cyan darken-2">Класс</NavLink>
+                                 className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Класс</NavLink>
                         <NavLink to=''
-                                 className="side-btn waves-effect waves-light btn white-text cyan darken-2">Задания</NavLink>
+                                 className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Задания</NavLink>
                     </div>
                 </div>
             </>

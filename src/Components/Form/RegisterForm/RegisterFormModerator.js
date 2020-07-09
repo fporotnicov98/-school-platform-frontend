@@ -51,7 +51,7 @@ class RegisterFormModerator extends React.Component {
                          </div>
                     </div>
                     <div className="card-action">
-                        <button className='btn cyan darken-2'>Добавить ученика</button>
+                        <button className='btn cyan darken-2'>Добавить модератора</button>
                     </div>
                 </div>
             </Form>
@@ -67,7 +67,8 @@ export const RegisterModeratorFormiks = withFormik({
             password: password || ''
         }
     },
-    handleSubmit(formData, {props}) {
-        props.moderatorReg(formData.fio, formData.login, formData.password);
+    handleSubmit(formData, {props, resetForm}) {
+        props.moderatorReg(formData.fio, formData.login, formData.password)
+        setTimeout(() => resetForm({formData: ""}),2000)
     }
 })(RegisterFormModerator)

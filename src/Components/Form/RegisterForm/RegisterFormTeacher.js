@@ -100,7 +100,8 @@ export const RegisterTeacherFormiks = withFormik({
             password: password || ''
         }
     },
-    handleSubmit(formData, {props}) {
+    handleSubmit(formData, {props, resetForm}) {
         props.teacherReg(formData.fio, formData.login, formData.email, formData.mobileNumber, formData.subject, formData.password);
+        setTimeout(() => resetForm({formData: ""}),2000)
     }
 })(RegisterFormTeacher)
