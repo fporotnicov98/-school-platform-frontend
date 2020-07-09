@@ -51,12 +51,20 @@ const authReducer = (state = initial, action) => {
 export default authReducer;
 
 export const setOnReg = (flag) => ({type: SET_ON_REG, payload: flag})
-export const setAuthData = (role, isAuth) => ({
+export const setAuthData = (fio,login,email,role,mobileNumber,classroom,subject,isAuth) => ({
     type: SET_AUTH_DATA,
-    payload: {role, isAuth}
+    payload: {fio,login,email,mobileNumber,classroom,subject,role, isAuth}
 })
 
 
+export const getAuth = (token) => dispatch => {
+    authAPI.getAuth(token)
+        .then(response => {
+            if (response.data.fio){
+                dispatch(setAuthData(response.data.fio,response.data.login,response.data.role, response.data.email,response.data.mobileNumber,response.data.classroom,response.data.subject,true))
+            } else regError(response.data.message)
+        })
+}
 export const moderatorReg = (fio, login, password) => dispatch => {
     authAPI.moderatorRegist(fio, login, password)
         .then(response => {
@@ -88,7 +96,7 @@ export const login = (login, password) => dispatch => {
     authAPI.login(login, password)
         .then(response => {
             if (response.data.token) {
-                dispatch(setAuthData(response.data.role, true))
+                dispatch(getAuth(response.data.token))
                 authSuccess()
             } else authError(response.data.message)
         })

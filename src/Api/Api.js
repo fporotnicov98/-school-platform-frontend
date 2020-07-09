@@ -19,7 +19,7 @@ export const authAPI = {
         return instanse.post(`/auth/login`, { login, password })
     },
     getAuth(token) {
-        return instanse.get(`...`, { headers: { "Authorization": `Bearer ${token}` } })
+        return instanse.get(`/auth/me`, { headers: { "Authorization": `Bearer ${token}` } })
     },
 }
 
