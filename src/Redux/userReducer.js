@@ -1,4 +1,5 @@
 import {userAPI} from "../Api/Api";
+import {regSuccess} from "../Components/ConfirmForm/SuccessConfirm";
 
 const SET_STUDENTS = 'SET_STUDENTS'
 const SET_TEACHERS = 'SET_TEACHERS'
@@ -71,16 +72,17 @@ export const deleteUser = (id) => dispatch => {
             dispatch(getStudent())
             dispatch(getModerator())
             dispatch(getTeacher())
+            regSuccess(response.data.message)
         })
 }
-export const updateStudent = (id) => dispatch => {
-    userAPI.updateStudent(id)
+export const updateStudent = (id, fio, login, role, email, mobileNumber) => dispatch => {
+    userAPI.updateStudent(id, fio, login, role, email, mobileNumber)
         .then(response => {
             dispatch(getStudent())
         })
 }
-export const updateTeacher = (id) => dispatch => {
-    userAPI.updateTeacher(id)
+export const updateTeacher = (id, fio, login, role, email, mobileNumber, subject) => dispatch => {
+    userAPI.updateTeacher(id, fio, login, role, email, mobileNumber, subject)
         .then(response => {
             dispatch(getTeacher())
         })

@@ -36,13 +36,13 @@ export const userAPI = {
     deleteUser(id) {
         return instanse.delete(`/users/deleteUser/${id}`)
     },
-    updateStudent(id, fio, login, role, email, mobileNumber, subject) {
-        return instanse.put(`/users/updateStudent/${id}`, {fio, login, role, email, mobileNumber, subject})
+    updateStudent(id, fio, login, email, mobileNumber) {
+        return instanse.put(`/users/updateStudent/${id}`, {fio, login, email, mobileNumber})
     },
-    updateTeacher(id, fio, login, role, email, mobileNumber) {
-        return instanse.put(`/users/updateTeacher/${id}`, {fio, login, role, email, mobileNumber})
+    updateTeacher(id, fio, login, email, mobileNumber, subject) {
+        return instanse.put(`/users/updateTeacher/${id}`, {fio, login, email, mobileNumber, subject})
     },
-    updateModerator(id, fio, login, role) {
-        return instanse.put(`/users/updateModerator/${id}`, {fio, login, role})
+    updateModerator(id, fio, login) {
+        return instanse.put(`/users/updateModerator/${id}`, {fio, login})
     }
 }

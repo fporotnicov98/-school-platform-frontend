@@ -15,7 +15,6 @@ class Moderators extends Component {
         updateId: [],
         newFio: this.props.moderators.fio,
         newLogin: this.props.moderators.login,
-        newRole: this.props.moderators.role,
     }
 
     setUpdateId = (id) => {
@@ -30,17 +29,11 @@ class Moderators extends Component {
     updateLogin = (e) => {
         this.setState({newLogin: e.currentTarget.value})
     }
-    updateRole = (e) => {
-        this.setState({newRole: e.currentTarget.value})
-    }
     setFio = (fio) => {
         this.setState({newFio: fio})
     }
     setLogin = (login) => {
         this.setState({newLogin: login})
-    }
-    setRole = (role) => {
-        this.setState({newRole: role})
     }
 
 
@@ -64,13 +57,11 @@ class Moderators extends Component {
                                                         <span>{index + 1}.</span>
                                                         <input type="text" onChange={this.updateFio} value={this.state.newFio}/>
                                                         <input type="text" onChange={this.updateLogin} value={this.state.newLogin}/>
-                                                        <input type="text" onChange={this.updateRole} value={this.state.newRole}/>
                                                     </div>
                                                     : <div className='info'>
                                                         <span>{index + 1}.</span>
                                                         <div className='fio'>{item.fio}</div>
-                                                        <div className='login'>{item.role}</div>
-                                                        <div className='role'>{item.login}</div>
+                                                        <div className='login'>{item.login}</div>
                                                     </div>
                                             }
                                             <div className='buttons'>
@@ -78,7 +69,7 @@ class Moderators extends Component {
                                                     this.state.updateId.some(id => id === item._id)
                                                         ? <a className='edit' onClick={() => {
                                                             this.removeUpdateId(item._id)
-                                                            this.props.updateModerator(item._id, this.state.newFio, this.state.newLogin, this.state.newRole)
+                                                            this.props.updateModerator(item._id, this.state.newFio, this.state.newLogin)
                                                         }} href="#s">
                                                             <i className="material-icons">check</i>
                                                         </a>
@@ -86,7 +77,6 @@ class Moderators extends Component {
                                                             this.setUpdateId(item._id)
                                                             this.setFio(item.fio)
                                                             this.setLogin(item.login)
-                                                            this.setRole(item.role)
                                                         }} href="#s">
                                                             <i className="material-icons">edit</i>
                                                         </a>

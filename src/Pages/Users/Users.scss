@@ -19,7 +19,7 @@
       padding: 12px;
       .info {
         font-size: 1em;
-        flex: 1 1 auto;
+        flex: 0 0 93%;
         display: flex;
         align-items: center;
         span {
@@ -31,11 +31,19 @@
         }
         .login {
           text-align: center;
-          width: 120px;
+          width: 250px;
         }
         .role {
           text-align: center;
-          width: 120px;
+          width: 250px;
+        }
+        .email {
+          text-align: center;
+          width: 250px;
+        }
+        .mobileNumber {
+          text-align: center;
+          width: 150px;
         }
       }
       .buttons {
