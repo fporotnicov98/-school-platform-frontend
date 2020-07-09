@@ -1,58 +1,72 @@
-.card-action {
-    display: flex;
-    justify-content: center;
-}
+
 .btn {
-    width: 250px;
+  width: 250px;
 }
+
 .wrapper {
-    padding: 45px 0;
-    min-height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .login {
-        width: 50%;
-    }
-}
-.card-content {
-    padding: 0 24px !important;
-}
-.card-title {
-    padding-top: 10px;
-}
+  padding: 45px 0;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-.error{
-    color: white;
-    font-size: 18px;
-}
+  .modal {
+    width: 25%;
+  }
 
-.modal .modal-content {
+  .modal .modal-content {
     padding: 24px;
     display: flex;
     flex-direction: column;
+    // ADD CLASS
+    .number-class {
+      width: 100%;
+    }
+
+    .letter-class {
+      width: 100%;
+    }
+
+    .dropdown-content li {
+      clear: both;
+      color: rgba(0, 0, 0, 0.87);
+      cursor: pointer;
+      min-height: 20px;
+      width: 100%;
+      text-align: left;
+    }
+
+    .dropdown-content li > span {
+      padding: 5px 5px;
+    }
+  }
+
+  .login {
+    width: 50%;
+
+    .card-content {
+      padding: 0 24px !important;
+
+      .card-title {
+        padding-top: 10px;
+      }
+    }
+
+    .card-action {
+      display: flex;
+      justify-content: center;
+    }
+  }
 }
 
-.number-class {
-    width: 100%;
-}
-.letter-class {
-    width: 100%;
-}
 
-.dropdown-content li {
-    clear: both;
-    color: rgba(0, 0, 0, 0.87);
-    cursor: pointer;
-    min-height: 20px;
-    width: 100%;
-    text-align: left;
+.error {
+  color: white;
+  font-size: 18px;
 }
 
 
-.dropdown-content li > span {
-    padding: 5px 5px;
-}
-.modal {
-    width: 25%;
-}
+
+
+
+

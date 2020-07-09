@@ -4,19 +4,56 @@
 
 .users {
   margin-top: 30px;
+  .collapsible-body {
+    display: none;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    padding: 1rem;
+    .z-depth-1-half, {
+      box-shadow: inset 0 3px 3px 0 rgba(0, 0, 0, 0.14),  0 1px 7px 0 rgba(0, 0, 0, 0.12), inset 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+    }
+    .items {
+      margin: 10px;
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      .info {
+        font-size: 1em;
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        span {
+          width: 20px;
+          margin-right: 10px;
+        }
+        .fio {
+          flex: 1 1 auto;
+        }
+        .login {
+          text-align: center;
+          width: 120px;
+        }
+        .role {
+          text-align: center;
+          width: 120px;
+        }
+      }
+      .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 7%;
+        font-size: 30px;
+        .edit {
+          margin: 0 10px ;
+        }
+        .delete {
+        }
+      }
 
-}
-
-.collapsible-body {
-  display: none;
-  border-bottom: 1px solid #ddd;
-  box-sizing: border-box;
-  padding: 1rem;
-}
-
-.items {
-  margin: 10px;
-  span {
-    margin-right: 10px;
+    }
   }
 }
+
+
+

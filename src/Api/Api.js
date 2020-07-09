@@ -33,4 +33,16 @@ export const userAPI = {
     getModerators() {
         return instanse.get('/users/moderators')
     },
+    deleteUser(id) {
+        return instanse.delete(`/users/deleteUser/${id}`)
+    },
+    updateStudent(id, fio, login, role, email, mobileNumber, subject) {
+        return instanse.put(`/users/updateStudent/${id}`, {fio, login, role, email, mobileNumber, subject})
+    },
+    updateTeacher(id, fio, login, role, email, mobileNumber) {
+        return instanse.put(`/users/updateTeacher/${id}`, {fio, login, role, email, mobileNumber})
+    },
+    updateModerator(id, fio, login, role) {
+        return instanse.put(`/users/updateModerator/${id}`, {fio, login, role})
+    }
 }

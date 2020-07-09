@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import M from "materialize-css";
 import {connect} from "react-redux";
-import {getModerator, getStudent, getTeacher} from "../../Redux/userReducer";
+import {getModerator, deleteUser, updateUser, updateModerator} from "../../Redux/userReducer";
 import {Redirect} from "react-router-dom";
+import './Users.scss'
 
 class Moderators extends Component {
     componentDidMount() {
@@ -10,27 +11,100 @@ class Moderators extends Component {
         M.Collapsible.init(this.Collapsible, {accordion: false});
     }
 
+    state = {
+        updateId: [],
+        newFio: this.props.moderators.fio,
+        newLogin: this.props.moderators.login,
+        newRole: this.props.moderators.role,
+    }
+
+    setUpdateId = (id) => {
+        this.setState({updateId: [this.state.updateId, id]})
+    }
+    removeUpdateId = (id) => {
+        this.setState({updateId: [...this.state.updateId.filter(o => o !== id)]})
+    }
+    updateFio = (e) => {
+        this.setState({newFio: e.currentTarget.value})
+    }
+    updateLogin = (e) => {
+        this.setState({newLogin: e.currentTarget.value})
+    }
+    updateRole = (e) => {
+        this.setState({newRole: e.currentTarget.value})
+    }
+    setFio = (fio) => {
+        this.setState({newFio: fio})
+    }
+    setLogin = (login) => {
+        this.setState({newLogin: login})
+    }
+    setRole = (role) => {
+        this.setState({newRole: role})
+    }
+
+
     render() {
         if (!this.props.isAuth) return <Redirect to='/'></Redirect>
         return (
-            <div className='users'>
-                <ul ref={Collapsible => {
-                    this.Collapsible = Collapsible;
-                }} className="collapsible popout">
-                    <li>
-                        <div className="collapsible-header blue-grey lighten-4">Модераторы</div>
-                        <div className="collapsible-body">
-                            {
-                                this.props.moderators.map((item, index) =>
-                                    <div className='items'>
-                                        <div className='text-darken-1'><span>{index + 1}.</span>{item.fio}</div>
-                                    </div>
-                                )
-                            }
-                        </div>
-                    </li>
-                </ul>
+            <div className='row'>
+                <div className='users'>
+                    <ul ref={Collapsible => {
+                        this.Collapsible = Collapsible;
+                    }} className="collapsible popout">
+                        <li>
+                            <div className="collapsible-header card-title blue-grey lighten-4">Модераторы</div>
+                            <div className="collapsible-body">
+                                {
+                                    this.props.moderators.map((item, index) =>
+                                        <div className='items white z-depth-1-half'>
+                                            {
+                                                this.state.updateId.some(id => id === item._id)
+                                                    ? <div className='info'>
+                                                        <span>{index + 1}.</span>
+                                                        <input type="text" onChange={this.updateFio} value={this.state.newFio}/>
+                                                        <input type="text" onChange={this.updateLogin} value={this.state.newLogin}/>
+                                                        <input type="text" onChange={this.updateRole} value={this.state.newRole}/>
+                                                    </div>
+                                                    : <div className='info'>
+                                                        <span>{index + 1}.</span>
+                                                        <div className='fio'>{item.fio}</div>
+                                                        <div className='login'>{item.role}</div>
+                                                        <div className='role'>{item.login}</div>
+                                                    </div>
+                                            }
+                                            <div className='buttons'>
+                                                {
+                                                    this.state.updateId.some(id => id === item._id)
+                                                        ? <a className='edit' onClick={() => {
+                                                            this.removeUpdateId(item._id)
+                                                            this.props.updateModerator(item._id, this.state.newFio, this.state.newLogin, this.state.newRole)
+                                                        }} href="#s">
+                                                            <i className="material-icons">check</i>
+                                                        </a>
+                                                        : <a className='edit' onClick={() => {
+                                                            this.setUpdateId(item._id)
+                                                            this.setFio(item.fio)
+                                                            this.setLogin(item.login)
+                                                            this.setRole(item.role)
+                                                        }} href="#s">
+                                                            <i className="material-icons">edit</i>
+                                                        </a>
+                                                }
+                                                <a className='delete' onClick={() => this.props.deleteUser(item._id)}
+                                                   href="#s">
+                                                    <i className="material-icons">delete</i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
+
         );
     }
 }
@@ -42,4 +116,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {getModerator})(Moderators);
+export default connect(mapStateToProps, {getModerator, deleteUser, updateModerator})(Moderators);

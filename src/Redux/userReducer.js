@@ -47,7 +47,6 @@ export const setModerators = (moderator) => ({
     payload: moderator
 })
 
-
 export const getStudent = () => dispatch => {
     userAPI.getStudents()
         .then(response => {
@@ -64,5 +63,31 @@ export const getModerator = () => dispatch => {
     userAPI.getModerators()
         .then(response => {
             dispatch(setModerators(response.data))
+        })
+}
+export const deleteUser = (id) => dispatch => {
+    userAPI.deleteUser(id)
+        .then(response => {
+            dispatch(getStudent())
+            dispatch(getModerator())
+            dispatch(getTeacher())
+        })
+}
+export const updateStudent = (id) => dispatch => {
+    userAPI.updateStudent(id)
+        .then(response => {
+            dispatch(getStudent())
+        })
+}
+export const updateTeacher = (id) => dispatch => {
+    userAPI.updateTeacher(id)
+        .then(response => {
+            dispatch(getTeacher())
+        })
+}
+export const updateModerator = (id, fio, login, role) => dispatch => {
+    userAPI.updateModerator(id, fio, login, role)
+        .then(response => {
+            dispatch(getModerator())
         })
 }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import M from "materialize-css";
 import {connect} from "react-redux";
-import {getModerator, getStudent, getTeacher} from "../../Redux/userReducer";
+import {deleteUser, getModerator, getStudent, getTeacher} from "../../Redux/userReducer";
 import {Redirect} from "react-router-dom";
 
 class Students extends Component {
@@ -23,7 +23,8 @@ class Students extends Component {
                             {
                                 this.props.students.map((item, index) =>
                                     <div className='items'>
-                                        <div className='text-darken-1'><span>{index + 1}.</span>{item.fio}</div>
+                                        <span>{index + 1}.</span>{item.fio}
+                                        <a onClick={() => this.props.deleteUser(item._id)} href="#s"><i className="material-icons">delete</i></a>
                                     </div>
                                 )
                             }
@@ -43,4 +44,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {getStudent})(Students);
+export default connect(mapStateToProps, {getStudent, deleteUser})(Students);
