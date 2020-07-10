@@ -13,6 +13,7 @@ import Students from "./Pages/Users/Students";
 import Teachers from "./Pages/Users/Teachers";
 import Moderators from "./Pages/Users/Moderators";
 import ClassroomItem from "./Pages/Users/ClassroomItem/ClassroomItem";
+import DialogsPageContainer from "./Pages/DialogsPage/DialogsPage";
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                     <Route path='/students' exact render={() => <Students/>}/>
                     <Route path='/teachers' exact render={() => <Teachers/>}/>
                     <Route path='/moderators' exact render={() => <Moderators/>}/>
+                    <Route path='/dialogs' exact render={() => <DialogsPageContainer/>}/>
                 </Switch>
             </div>
         </BrowserRouter>

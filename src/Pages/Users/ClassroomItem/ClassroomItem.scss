@@ -1,0 +1,95 @@
+.classroom {
+  .class-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .class-teacher {
+      a {
+        margin-left: 25px;
+      }
+    }
+  }
+  .class-student {
+    box-shadow: none !important;
+
+  }
+  margin-top: 30px;
+  .z-depth-1-half, {
+    box-shadow: inset 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), inset 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+  }
+  .items {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    .info {
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      width: 100%;
+
+      .id-class {
+        margin: 0 10px;
+        text-align: center;
+        width: 50%;
+      }
+
+      .number-class {
+        margin: 0 10px;
+        text-align: center;
+        width: 50%;
+
+        .number {
+          font-size: 1.5em;
+          margin-left: 20px;
+        }
+      }
+
+      span {
+        width: 20px;
+        margin-right: 10px;
+      }
+
+      .fio {
+        margin: 0 10px;
+        flex: 1 1 auto;
+      }
+
+      .login {
+        margin: 0 10px;
+        text-align: center;
+        width: 250px;
+      }
+
+      .role {
+        margin: 0 10px;
+        text-align: center;
+        width: 250px;
+      }
+
+      .email {
+        margin: 0 10px;
+        text-align: center;
+        width: 250px;
+      }
+
+      .mobileNumber {
+        margin: 0 10px;
+        text-align: center;
+        width: 150px;
+      }
+    }
+  }
+  .add-student {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    a {
+      margin-left: 25px;
+    }
+  }
+  .students {
+
+  }
+}

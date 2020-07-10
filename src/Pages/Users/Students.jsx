@@ -9,7 +9,6 @@ class Students extends Component {
         this.props.getStudent();
         M.Collapsible.init(this.Collapsible, {accordion: false});
     }
-
     state = {
         updateId: [],
         newFio: this.props.students.fio,

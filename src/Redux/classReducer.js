@@ -22,6 +22,11 @@ const classReducer = (state = initial, action) => {
                 ...state,
                 classroom: action.payload
             }
+        case SET_CLASS_INFO:
+            return {
+                ...state,
+                ...action.payload
+            }
         default:
             return state;
     }
@@ -33,13 +38,9 @@ export const setClasses = (classes) => ({
     type: SET_CLASS,
     payload: classes
 })
-export const setClassData = (classes) => ({
-    type: SET_CLASS,
-    payload: classes
-})
-export const setClassInfo = (classNumber,classId) => ({
+export const setClassInfo = (classNumber, classId) => ({
     type: SET_CLASS_INFO,
-    payload: {classNumber,classId}
+    payload: {classNumber, classId}
 })
 
 export const getClasses = () => dispatch => {
@@ -51,7 +52,7 @@ export const getClasses = () => dispatch => {
 export const getClassroom = (id) => dispatch => {
     classAPI.getClassroom(id)
         .then(response => {
-            dispatch(setClassInfo(response.data.classNumber,response.data._id))
+            dispatch(setClassInfo(response.data.classNumber, response.data._id))
         })
 }
 export const addClassroom = (classNumber) => dispatch => {
