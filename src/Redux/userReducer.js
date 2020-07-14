@@ -81,8 +81,8 @@ export const updateStudent = (id, fio, login, role, email, mobileNumber, classro
             dispatch(getStudent())
         })
 }
-export const updateTeacher = (id, fio, login, role, email, mobileNumber, subject) => dispatch => {
-    userAPI.updateTeacher(id, fio, login, role, email, mobileNumber, subject)
+export const updateTeacher = (id, fio, login, role, email, mobileNumber, subject, classroom) => dispatch => {
+    userAPI.updateTeacher(id, fio, login, role, email, mobileNumber, subject, classroom)
         .then(response => {
             dispatch(getTeacher())
         })

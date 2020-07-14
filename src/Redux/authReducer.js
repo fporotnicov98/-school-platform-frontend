@@ -5,11 +5,9 @@ import {authSuccess, regSuccess} from "../Components/ConfirmForm/SuccessConfirm"
 const SET_ON_AUTH = 'SET_ON_AUTH'
 const SET_AUTH_DATA = 'SET_AUTH_DATA'
 const SET_ON_REG = 'SET_ON_REG'
-const CHOOSE_STUDENT = 'CHOOSE_STUDENT'
-const CHOOSE_TEACHER = 'CHOOSE_TEACHER'
-const CHOOSE_MODERATOR = 'CHOOSE_MODERATOR'
 
 let initial = {
+    id: null,
     fio: null,
     login: null,
     email: null,
@@ -51,9 +49,9 @@ const authReducer = (state = initial, action) => {
 export default authReducer;
 
 export const setOnReg = (flag) => ({type: SET_ON_REG, payload: flag})
-export const setAuthData = (fio, login, role, email, mobileNumber, classroom, subject, isAuth) => ({
+export const setAuthData = (id, fio, login, role, email, mobileNumber, classroom, subject, isAuth) => ({
     type: SET_AUTH_DATA,
-    payload: {fio, login, role, email, mobileNumber, classroom, subject, isAuth}
+    payload: {id, fio, login, role, email, mobileNumber, classroom, subject, isAuth}
 })
 
 
@@ -61,7 +59,7 @@ export const getAuth = (token) => dispatch => {
     authAPI.getAuth(token)
         .then(response => {
             if (response.data.fio) {
-                dispatch(setAuthData(response.data.fio, response.data.login, response.data.role, response.data.email, response.data.mobileNumber, response.data.classroom, response.data.subject, true))
+                dispatch(setAuthData(response.data._id, response.data.fio, response.data.login, response.data.role, response.data.email, response.data.mobileNumber, response.data.classroom, response.data.subject, true))
             } else regError(response.data.message)
         })
 }

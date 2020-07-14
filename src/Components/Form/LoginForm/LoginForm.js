@@ -42,7 +42,7 @@ class LoginForm extends React.Component {
 }
 
 export const LoginFormiks = withFormik({
-    mapPropsToValues({fio, login, email, mobileNumber, role, password}) {
+    mapPropsToValues({login, password}) {
         return {
             login: login || '',
             password: password || ''

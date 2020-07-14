@@ -39,8 +39,8 @@ export const userAPI = {
     updateStudent(id, fio, login, email, mobileNumber, classroom) {
         return instanse.put(`/users/updateStudent/${id}`, {fio, login, email, mobileNumber, classroom})
     },
-    updateTeacher(id, fio, login, email, mobileNumber, subject) {
-        return instanse.put(`/users/updateTeacher/${id}`, {fio, login, email, mobileNumber, subject})
+    updateTeacher(id, fio, login, email, mobileNumber, subject, classroom) {
+        return instanse.put(`/users/updateTeacher/${id}`, {fio, login, email, mobileNumber, subject, classroom})
     },
     updateModerator(id, fio, login) {
         return instanse.put(`/users/updateModerator/${id}`, {fio, login})
@@ -51,14 +51,26 @@ export const classAPI = {
     getClasses() {
         return instanse.get(`/classroom/classrooms`)
     },
-    getClassroom(id){
+    getClassroom(id) {
         return instanse.get(`/classroom/classrooms/${id}`)
     },
     addClassroom(classNumber) {
-        return instanse.post(`/classroom/setClassroom`, {classNumber})
+        return instanse.post(`/classroom/addClassroom`, {classNumber})
     },
     deleteClassroom(id) {
         return instanse.delete(`/classroom/deleteClassroom/${id}`)
-    }
+    },
+    addStudentToClass(id, studentId, fio) {
+        return instanse.post(`/classroom/classrooms/${id}/addStudent`, {studentId, fio})
+    },
+    addTeacherToClass(id, teacherId, fio) {
+        return instanse.put(`/classroom/classrooms/${id}/addTeacher`, {teacherId, fio})
+    },
+    deleteStudentToClass(classId, studentId) {
+        return instanse.delete(`/classroom/classrooms/${classId}/deleteStudent/${studentId}`)
+    },
+    addMessage(classId, authorId, date, message) {
+        return instanse.post(`/classroom/classrooms/${classId}/addMessage`, {authorId, date, message})
+    },
 
 }

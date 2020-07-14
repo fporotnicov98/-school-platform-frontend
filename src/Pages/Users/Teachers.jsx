@@ -72,20 +72,20 @@ class Teachers extends Component {
                                             this.state.updateId.some(id => id === item._id)
                                                 ? <div className='info'>
                                                     <span>{index + 1}.</span>
-                                                    <input type="text" onChange={this.updateFio} value={this.state.newFio}/>
-                                                    <input type="text" onChange={this.updateLogin}
+                                                    <input className='fio' type="text" onChange={this.updateFio} value={this.state.newFio}/>
+                                                    <input className='login' type="text" onChange={this.updateLogin}
                                                            value={this.state.newLogin}/>
-                                                    <input type="text" onChange={this.updateEmail}
+                                                    <input className='email' type="text" onChange={this.updateEmail}
                                                            value={this.state.newEmail}/>
-                                                    <input type="text" onChange={this.updateMobileNumber}
+                                                    <input className='mobileNumber' type="text" onChange={this.updateMobileNumber}
                                                            value={this.state.newMobileNumber}/>
-                                                    <input type="text" onChange={this.updateSubject}
+                                                    <input className='subject' type="text" onChange={this.updateSubject}
                                                            value={this.state.newSubject}/>
                                                 </div>
                                                 : <div className='info'>
                                                     <span>{index + 1}.</span>
                                                     <div className='fio'>{item.fio}</div>
-                                                    <div className='role'>{item.login}</div>
+                                                    <div className='login'>{item.login}</div>
                                                     <div className='email'>{item.email}</div>
                                                     <div className='mobileNumber'>{item.mobileNumber}</div>
                                                     <div className='subject'>{item.subject}</div>
