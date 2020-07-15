@@ -4,10 +4,12 @@ import {regSuccess} from "../Components/ConfirmForm/SuccessConfirm";
 import {regError} from "../Components/ConfirmForm/ErrorConfirm";
 
 const SET_CLASS = 'SET_CLASS'
+const SET_CLASSROOM = 'SET_CLASSROOM'
 const SET_CLASS_INFO = 'SET_CLASS_INFO'
 
 let initial = {
     classroom: [],
+    class: null,
     classNumber: null,
     classId: null,
 }
@@ -24,6 +26,11 @@ const classReducer = (state = initial, action) => {
                 ...state,
                 ...action.payload
             }
+        case SET_CLASSROOM:
+            return {
+                ...state,
+                class: action.payload
+            }
         default:
             return state;
     }
@@ -34,6 +41,10 @@ export default classReducer;
 export const setClasses = (classes) => ({
     type: SET_CLASS,
     payload: classes
+})
+export const setClass = (classroom) => ({
+    type: SET_CLASSROOM,
+    payload: classroom
 })
 
 export const setClassInfo = (classNumber, classId) => ({
@@ -51,7 +62,7 @@ export const getClasses = () => dispatch => {
 export const getClassroom = (id) => dispatch => {
     classAPI.getClassroom(id)
         .then(response => {
-            dispatch(setClassInfo(response.data.classNumber, response.data._id, response.data.classTeacher, response.data.students))
+            dispatch(setClass(response.data))
         })
 }
 

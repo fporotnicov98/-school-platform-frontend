@@ -2,21 +2,23 @@ import React, {Component} from 'react';
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import './DialogsPage.scss'
-import {addMessage} from "../../Redux/classReducer";
+import {addMessage, getClassroom} from "../../Redux/classReducer";
 import {Field, Form, withFormik} from "formik";
 
 class DialogsPage extends Component {
+    componentDidMount() {
+        this.props.getClassroom(this.props.auth.classroom)
+    }
+
     render() {
         if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
         return (
             <div className='dialogs'>
                 <div className='users-dialogs'>
                     <div className='teacher cyan darken-3 white-text'>
-                        {/*{*/}
-                        {/*    this.props.classroom.map(item => {*/}
-                        {/*        item._id === this.props.classId*/}
-                        {/*    })*/}
-                        {/*}*/}
+                        {
+                            this.props.class.classTeacher
+                        }
                     </div>
                     <div className='students'></div>
                 </div>
@@ -35,18 +37,16 @@ class DialogsPage extends Component {
                                 </div>
                             </li>
                             {
-                                this.props.classroom.map(item => {
-                                    item.classForumMessages.map(message =>
-                                        <li className="me">
-                                            <div className="entete">
-                                                {/*<span>{this.props.auth.fio}</span>*/}
-                                            </div>
-                                            <div className="message white">
-                                                {message.message}
-                                            </div>
-                                        </li>
-                                    )
-                                })
+                                this.props.class.classForumMessages.map(item =>
+                                    <li className="me">
+                                        <div className="entete">
+                                            {/*<span>{this.props.auth.fio}</span>*/}
+                                        </div>
+                                        <div className="message white">
+                                            {item.message}
+                                        </div>
+                                    </li>
+                                )
                             }
 
                         </ul>
@@ -61,7 +61,8 @@ class DialogsPage extends Component {
                                 </Field>
                             </div>
                             <button className="btn waves-effect waves-light cyan darken-2" type="submit"
-                               name="action">Отправить</button>
+                                    name="action">Отправить
+                            </button>
                         </Form>
                     </div>
 
@@ -87,8 +88,8 @@ const mapStateToProps = state => {
     return {
         classId: state.classroom.classId,
         auth: state.auth,
-        classroom: state.classroom.classroom
+        class: state.classroom.class
     }
 }
 
-export default connect(mapStateToProps, {addMessage})(DialogsFormik);
+export default connect(mapStateToProps, {addMessage, getClassroom})(DialogsFormik);
