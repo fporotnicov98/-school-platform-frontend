@@ -7,9 +7,9 @@ import {Field, Form, withFormik} from "formik";
 
 class DialogsPage extends Component {
     componentDidMount() {
+
         this.props.getClassroom(this.props.auth.classroom)
     }
-
     render() {
         if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
         return (

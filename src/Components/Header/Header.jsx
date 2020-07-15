@@ -51,7 +51,7 @@ class Header extends React.Component {
                                  className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Журнал</NavLink>
                         <NavLink to='/schedule'
                                  className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Расписание</NavLink>
-                        <NavLink to='/dialogs'
+                        <NavLink to={'/dialogs/' + this.props.auth.classroom}
                                  className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Класс</NavLink>
                         <NavLink to=''
                                  className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Задания</NavLink>

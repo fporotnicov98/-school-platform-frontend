@@ -31,7 +31,7 @@ function App() {
                     <Route path='/students' exact render={() => <Students/>}/>
                     <Route path='/teachers' exact render={() => <Teachers/>}/>
                     <Route path='/moderators' exact render={() => <Moderators/>}/>
-                    <Route path='/dialogs' exact render={() => <DialogsPageContainer/>}/>
+                    <Route path='/dialogs/:classId?' render={() => <DialogsPageContainer/>}/>
                 </Switch>
             </div>
         </BrowserRouter>

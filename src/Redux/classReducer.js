@@ -62,6 +62,7 @@ export const getClasses = () => dispatch => {
 export const getClassroom = (id) => dispatch => {
     classAPI.getClassroom(id)
         .then(response => {
+            dispatch(setClassInfo(response.data.classNumber, response.data._id, response.data.classTeacher, response.data.students))
             dispatch(setClass(response.data))
         })
 }

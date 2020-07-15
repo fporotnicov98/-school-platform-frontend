@@ -104,7 +104,7 @@ class ClassroomItem extends Component {
                         <div className='students'>
                             {this.state.isClick &&
                             this.props.students.map((item, index) =>
-                                item.classroom === 'none'
+                                !item.classroom
                                     ?
                                     <div key={index} className='items white z-depth-1-half'>
                                         <div className='info'>
