@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {getModerator, getStudent, getTeacher} from "../../Redux/userReducer";
+import {getModerator, getStudent, getTeacher, updateStudent, updateTeacher} from "../../Redux/userReducer";
 import {NavLink, Redirect} from "react-router-dom";
 import M from "materialize-css";
 import './Classes.scss'
@@ -31,12 +31,25 @@ class Classes extends Component {
                                     this.props.classroom.map((item) =>
                                         <div className='items white z-depth-1-half'>
                                             <div className='info'>
-                                                <div className='number-class'>Класс: <NavLink to={'/classroom/' + item._id}><span className='number '>{item.classNumber}</span></NavLink></div>
+                                                <div className='number-class'>Класс: <NavLink
+                                                    to={'/classroom/' + item._id}><span
+                                                    className='number '>{item.classNumber}</span></NavLink></div>
                                                 <div className='id-class'>ID класса: {item._id}</div>
                                             </div>
                                             <div className='buttons'>
                                                 <a className='delete'
-                                                   onClick={() => this.props.deleteClassroom(item._id)}
+                                                   onClick={() => {
+                                                       this.props.deleteClassroom(item._id)
+                                                       this.props.students.map(student => {
+                                                           student.classroom === item._id
+                                                           && this.props.updateStudent(student._id, student.fio, student.login, student.email, student.mobileNumber, null)
+                                                       })
+                                                       this.props.teachers.map(teacher => {
+                                                           teacher.classroom === item._id
+                                                           && this.props.updateTeacher(teacher._id, teacher.fio, teacher.login, teacher.email, teacher.mobileNumber, teacher.subject, null)
+                                                       })
+                                                   }
+                                                   }
                                                    href="#s">
                                                     <i className="material-icons">delete</i>
                                                 </a>
@@ -60,8 +73,10 @@ const mapStateToProps = state => {
         students: state.users.students,
         teachers: state.users.teachers,
         moderators: state.users.moderators,
-        classroom: state.classroom.classroom
+        classroom: state.classroom.classroom,
+        classId: state.classroom.classId,
     }
 }
 
-export default connect(mapStateToProps, {getStudent, getTeacher, getModerator, getClasses, deleteClassroom})(Classes);
+export default connect(mapStateToProps,
+    {getStudent, getTeacher, getModerator, getClasses, deleteClassroom, updateStudent, updateTeacher})(Classes);

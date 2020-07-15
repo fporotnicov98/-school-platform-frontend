@@ -60,11 +60,11 @@ export const classAPI = {
     deleteClassroom(id) {
         return instanse.delete(`/classroom/deleteClassroom/${id}`)
     },
-    addStudentToClass(id, studentId, fio) {
-        return instanse.post(`/classroom/classrooms/${id}/addStudent`, {studentId, fio})
+    addStudentToClass(id, studentId, fio, login, email, mobileNumber) {
+        return instanse.post(`/classroom/classrooms/${id}/addStudent`, {studentId, fio, login, email, mobileNumber})
     },
-    addTeacherToClass(id, teacherId, fio) {
-        return instanse.put(`/classroom/classrooms/${id}/addTeacher`, {teacherId, fio})
+    addTeacherToClass(id, teacherId, fio, login, email, mobileNumber, subject) {
+        return instanse.put(`/classroom/classrooms/${id}/addTeacher`, {teacherId, fio, login, email, mobileNumber, subject})
     },
     deleteStudentToClass(classId, studentId) {
         return instanse.delete(`/classroom/classrooms/${classId}/deleteStudent/${studentId}`)

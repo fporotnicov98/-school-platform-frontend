@@ -6,6 +6,7 @@ import {addStudentToClass, addTeacherToClass, deleteStudentToClass, getClassroom
 import {getStudent, getTeacher, updateStudent, updateTeacher} from "../../../Redux/userReducer";
 import './ClassroomItem.scss'
 import M from "materialize-css";
+import Preloader from "../../../Assets/Commons/Preloader";
 
 class ClassroomItem extends Component {
 
@@ -14,6 +15,7 @@ class ClassroomItem extends Component {
         if (!classId) {
             alert('404')
         }
+        // this.props.getClassroom(this.props.auth.classroom)
         this.props.getClassroom(classId)
         this.props.getStudent()
         this.props.getTeacher()
@@ -29,7 +31,8 @@ class ClassroomItem extends Component {
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={'/'}></Redirect>
+        if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+        if (!this.props.class) return <Preloader/>
         return (
             <div className="classroom">
                 <div className="card blue-grey lighten-4">
@@ -38,69 +41,58 @@ class ClassroomItem extends Component {
                             <span className="card-title">{this.props.classNumber}</span>
                             <span className='class-teacher'>Классный руководитель:
                                 {
-                                    this.props.classroom.map(item =>
-                                        item._id === this.props.classId
-                                            ? item.classTeacher.fio
-                                            ? <div>
-                                                <span>{item.classTeacher.fio}</span>
-                                                <a onClick={() => {
-                                                    this.props.updateTeacher(item.classTeacher.teacherId, item.fio, item.login, item.email, item.mobileNumber, item.subject, "")
-                                                    this.props.addTeacherToClass(this.props.classId, "", "")
-                                                }}
-                                                   href="#s"><i className='material-icons'>remove_circle_outline</i></a>
-                                            </div>
-                                            : <a ref={Dropdown => {
-                                                this.Dropdown = Dropdown;
-                                            }} data-target="dropdown1"
-                                                 className="btn-floating btn-small waves-effect waves-light cyan darken-2"><i
-                                                className="material-icons">add</i></a>
-                                            : null
-                                    )
+                                    this.props.class.classTeacher.fio
+                                        ? <div>
+                                            <span>{this.props.class.classTeacher.fio}</span>
+                                            <a href="#s" onClick={() => {
+                                                this.props.addTeacherToClass(this.props.classId, "", "")
+                                                this.props.updateTeacher(this.props.class.classTeacher.teacherId, this.props.class.classTeacher.fio, this.props.class.classTeacher.login, this.props.class.classTeacher.email, this.props.class.classTeacher.mobileNumber, this.props.class.classTeacher.subject, null)
+                                                this.props.getClassroom(this.props.classId)
+                                            }}><i className='material-icons'>remove_circle_outline</i></a>
+                                        </div>
+                                        : <a data-target="dropdown1"
+                                             className="btn-floating btn-small waves-effect waves-light cyan darken-2"
+                                             ref={Dropdown => {
+                                                 this.Dropdown = Dropdown;
+                                             }}><i className="material-icons">add</i></a>
                                 }
-                            </span>
+                                        </span>
                             <ul id="dropdown1" className="dropdown-content">
                                 {
                                     this.props.teachers.map((item, index) =>
-                                        <li onClick={() => {
-                                            this.props.addTeacherToClass(this.props.classId, item._id, item.fio)
+                                        <li key={index} onClick={() => {
+                                            this.props.addTeacherToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber, item.subject)
                                             this.props.updateTeacher(item._id, item.fio, item.login, item.email, item.mobileNumber, item.subject, this.props.classId)
-                                        }}
-                                            key={index}><a href="#!">{item.fio}</a></li>
+                                            this.props.getClassroom(this.props.classId)
+                                        }}><a href="#">{item.fio}</a></li>
                                     )
                                 }
                             </ul>
                         </div>
                         {
-                            this.props.classroom.map(item =>
-                                item.students.length > 0 && <span>Учащиеся: </span>
-                            )
+                            this.props.class.students.length > 0 && <span>Учащиеся: </span>
                         }
                         {
-                            this.props.classroom.map(item =>
-                                item._id === this.props.classId
-                                    ? item.students.map((student, index) =>
-                                        <div key={index} className='items white z-depth-1-half'>
-                                            <div className='info'>
-                                                <span>{index + 1}.</span>
-                                                <div className='fio'>{student.fio}</div>
-                                                <a onClick={() => {
-                                                    this.props.updateStudent(student.studentId, item.fio, item.login, item.email, item.mobileNumber, null)
-                                                    this.props.deleteStudentToClass(this.props.classId, student.studentId)
-
-                                                }}
-                                                   href="#s"><i className='material-icons'>remove_circle_outline</i></a>
-                                            </div>
-                                        </div>
-                                    )
-                                    : null
+                            this.props.class.students.map((student, index) =>
+                                <div key={index} className='items white z-depth-1-half'>
+                                    <div className='info'>
+                                        <span>{index + 1}.</span>
+                                        <div className='fio'>{student.fio}</div>
+                                        <a href="#" onClick={() => {
+                                            this.props.deleteStudentToClass(this.props.classId, student.studentId)
+                                            this.props.updateStudent(student.studentId, student.fio, student.login, student.email, student.mobileNumber, null)
+                                            this.props.getClassroom(this.props.classId)
+                                        }}><i className='material-icons'>remove_circle_outline</i></a>
+                                    </div>
+                                </div>
                             )
                         }
                         <span className='add-student'>Добавить ученика:
-                            <a onClick={() => this.handleStudents()}
-                               className="btn-floating btn-small waves-effect waves-light cyan darken-2">
-                                <i className="material-icons">add</i>
-                            </a>
-                        </span>
+                                    <a onClick={() => this.handleStudents()}
+                                       className="btn-floating btn-small waves-effect waves-light cyan darken-2">
+                                    <i className="material-icons">add</i>
+                                    </a>
+                                    </span>
                         <div className='students'>
                             {this.state.isClick &&
                             this.props.students.map((item, index) =>
@@ -112,8 +104,9 @@ class ClassroomItem extends Component {
                                             <div className='fio'>{item.fio}</div>
                                             <div className='login'>{item.login}</div>
                                             <a onClick={() => {
-                                                this.props.addStudentToClass(this.props.classId, item._id, item.fio)
+                                                this.props.addStudentToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber)
                                                 this.props.updateStudent(item._id, item.fio, item.login, item.email, item.mobileNumber, this.props.classId)
+                                                this.props.getClassroom(this.props.classId)
                                             }
                                             }
                                                href="#s"><i className='material-icons'>add_circle_outline</i></a>
@@ -132,12 +125,13 @@ class ClassroomItem extends Component {
 
 const mapStateToProps = state => {
     return {
-        isAuth: state.auth.isAuth,
+        auth: state.auth,
         classNumber: state.classroom.classNumber,
         classId: state.classroom.classId,
         students: state.users.students,
         teachers: state.users.teachers,
-        classroom: state.classroom.classroom
+        classroom: state.classroom.classroom,
+        class: state.classroom.class,
     }
 }
 

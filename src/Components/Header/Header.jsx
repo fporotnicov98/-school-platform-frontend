@@ -39,22 +39,29 @@ class Header extends React.Component {
                             <li className='role-user name black-text'>Я модератор</li>
                         }
                         {
-                            (this.props.auth.role === 'student') && <li className='role-user name black-text'>Я ученик</li>
+                            (this.props.auth.role === 'student') &&
+                            <li className='role-user name black-text'>Я ученик</li>
                         }
                         {
-                            (this.props.auth.role === 'teacher') && <li className='role-user name black-text'>Я учитель</li>
+                            (this.props.auth.role === 'teacher') &&
+                            <li className='role-user name black-text'>Я учитель</li>
                         }
                         <a href="#s"><span className="black-text name">{this.props.auth.fio}</span></a>
                         <NavLink to='/profile'
                                  className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Профиль</NavLink>
-                        <NavLink to='/journal'
-                                 className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Журнал</NavLink>
-                        <NavLink to='/schedule'
-                                 className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Расписание</NavLink>
-                        <NavLink to={'/dialogs/' + this.props.auth.classroom}
-                                 className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Класс</NavLink>
-                        <NavLink to=''
-                                 className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Задания</NavLink>
+                        {
+                            (this.props.auth.role === 'teacher' || this.props.auth.role === 'student') &&
+                            <>
+                                <NavLink to='/journal'
+                                         className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Журнал</NavLink>
+                                <NavLink to='/schedule'
+                                         className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Расписание</NavLink>
+                                <NavLink to={'/dialogs/' + this.props.auth.classroom}
+                                         className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Класс</NavLink>
+                                <NavLink to=''
+                                         className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Задания</NavLink>
+                            </>
+                        }
                     </div>
                 </div>
             </>
