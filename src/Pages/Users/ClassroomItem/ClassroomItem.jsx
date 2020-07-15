@@ -84,7 +84,7 @@ class ClassroomItem extends Component {
                                                 <span>{index + 1}.</span>
                                                 <div className='fio'>{student.fio}</div>
                                                 <a onClick={() => {
-                                                    this.props.updateStudent(student.studentId, item.fio, item.login, item.email, item.mobileNumber, "none")
+                                                    this.props.updateStudent(student.studentId, item.fio, item.login, item.email, item.mobileNumber, null)
                                                     this.props.deleteStudentToClass(this.props.classId, student.studentId)
 
                                                 }}

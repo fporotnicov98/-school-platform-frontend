@@ -1,26 +1,34 @@
 import React, {Component} from 'react';
-import {Redirect} from "react-router-dom";
-import {connect} from "react-redux";
+import {Redirect, withRouter} from "react-router-dom";
 import './DialogsPage.scss'
-import {addMessage, getClassroom} from "../../Redux/classReducer";
 import {Field, Form, withFormik} from "formik";
+import {compose} from "redux";
+import {connect} from "react-redux";
+import {addMessage, getClasses, getClassroom} from "../../Redux/classReducer";
+import Preloader from "../../Assets/Commons/Preloader";
 
 class DialogsPage extends Component {
-    componentDidMount() {
 
+    componentDidMount() {
         this.props.getClassroom(this.props.auth.classroom)
     }
+
     render() {
         if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+        if (!this.props.class) return <Preloader />
         return (
             <div className='dialogs'>
                 <div className='users-dialogs'>
                     <div className='teacher cyan darken-3 white-text'>
                         {
-                            this.props.class.classTeacher
+                            this.props.class.classTeacher.fio
                         }
                     </div>
-                    <div className='students'></div>
+                    {
+                        this.props.class.students.map(item =>
+                            <div className='students'></div>
+                        )
+                    }
                 </div>
                 <div className='messages'>
                     <div className='message-area'>
@@ -80,6 +88,7 @@ export const DialogsFormik = withFormik({
         }
     },
     handleSubmit(formData, {props}) {
+        props.getClassroom(props.auth.classroom)
         props.addMessage(props.auth.classroom, props.auth.id, null, formData.message);
     }
 })(DialogsPage)
@@ -92,4 +101,7 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {addMessage, getClassroom})(DialogsFormik);
+export default compose(
+    withRouter,
+    connect(mapStateToProps, {addMessage, getClassroom})
+)(DialogsFormik);
