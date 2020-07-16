@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {Redirect, withRouter} from "react-router-dom";
+import React, { Component } from 'react';
+import { Redirect, withRouter } from "react-router-dom";
 import './DialogsPage.scss'
-import {Field, Form, withFormik} from "formik";
-import {compose} from "redux";
-import {connect} from "react-redux";
-import {addMessage, getClasses, getClassroom} from "../../Redux/classReducer";
+import { Field, Form, withFormik } from "formik";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { addMessage, getClasses, getClassroom } from "../../Redux/classReducer";
 import Preloader from "../../Assets/Commons/Preloader";
 
 class DialogsPage extends Component {
@@ -26,7 +26,7 @@ class DialogsPage extends Component {
                     </div>
                     {
                         this.props.class.students.map(item =>
-                            <div className='students'></div>
+                            <div className='students'>{item.fio}</div>
                         )
                     }
                 </div>
@@ -48,7 +48,7 @@ class DialogsPage extends Component {
                                 this.props.class.classForumMessages.map(item =>
                                     <li className="me">
                                         <div className="entete">
-                                            {/*<span>{this.props.auth.fio}</span>*/}
+                                            <span>{this.props.auth.fio}</span>
                                         </div>
                                         <div className="message white">
                                             {item.message}
@@ -69,7 +69,7 @@ class DialogsPage extends Component {
                                 </Field>
                             </div>
                             <button className="btn waves-effect waves-light cyan darken-2" type="submit"
-                                    name="action">Отправить
+                                name="action">Отправить
                             </button>
                         </Form>
                     </div>
@@ -82,12 +82,12 @@ class DialogsPage extends Component {
 
 
 export const DialogsFormik = withFormik({
-    mapPropsToValues({message}) {
+    mapPropsToValues({ message }) {
         return {
             message: message || ''
         }
     },
-    handleSubmit (formData, {props})  {
+    handleSubmit(formData, { props }) {
         props.addMessage(props.auth.classroom, props.auth.id, null, formData.message)
         setTimeout(() => props.getClassroom(props.auth.classroom), 300)
     }
@@ -103,5 +103,5 @@ const mapStateToProps = state => {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {addMessage, getClassroom})
+    connect(mapStateToProps, { addMessage, getClassroom })
 )(DialogsFormik);
