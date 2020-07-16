@@ -87,9 +87,9 @@ export const DialogsFormik = withFormik({
             message: message || ''
         }
     },
-    handleSubmit(formData, {props}) {
-        props.getClassroom(props.auth.classroom)
-        props.addMessage(props.auth.classroom, props.auth.id, null, formData.message);
+    handleSubmit (formData, {props})  {
+        props.addMessage(props.auth.classroom, props.auth.id, null, formData.message)
+        setTimeout(() => props.getClassroom(props.auth.classroom), 300)
     }
 })(DialogsPage)
 
