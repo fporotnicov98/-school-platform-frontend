@@ -114,7 +114,4 @@ export const addTeacherToClass = (classId, teacherId, fio, login, email, mobileN
 
 export const  addMessage = (classId, authorId, date, message) => dispatch => {
     classAPI.addMessage(classId, authorId, date, message)
-        .then (response => {
-            regSuccess(response.data.message)
-        })
 }
