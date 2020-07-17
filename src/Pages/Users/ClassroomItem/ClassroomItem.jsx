@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {compose} from "redux";
-import {Redirect, withRouter} from "react-router-dom";
-import {connect} from "react-redux";
-import {addStudentToClass, addTeacherToClass, deleteStudentToClass, getClassroom} from "../../../Redux/classReducer";
-import {getStudent, getTeacher, updateStudent, updateTeacher} from "../../../Redux/userReducer";
+import React, { Component } from 'react';
+import { compose } from "redux";
+import { Redirect, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { addStudentToClass, addTeacherToClass, deleteStudentToClass, getClassroom } from "../../../Redux/classReducer";
+import { getStudent, getTeacher, updateStudent, updateTeacher } from "../../../Redux/userReducer";
 import './ClassroomItem.scss'
 import M from "materialize-css";
 import Preloader from "../../../Assets/Commons/Preloader";
@@ -27,12 +27,12 @@ class ClassroomItem extends Component {
     }
 
     handleStudents = () => {
-        this.setState({isClick: !this.state.isClick})
+        this.setState({ isClick: !this.state.isClick })
     }
 
     render() {
         if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
-        if (!this.props.class) return <Preloader/>
+        if (!this.props.class) return <Preloader />
         return (
             <div className="classroom">
                 <div className="card blue-grey lighten-4">
@@ -51,12 +51,12 @@ class ClassroomItem extends Component {
                                             }}><i className='material-icons'>remove_circle_outline</i></a>
                                         </div>
                                         : <a data-target="dropdown1"
-                                             className="btn-floating btn-small waves-effect waves-light cyan darken-2"
-                                             ref={Dropdown => {
-                                                 this.Dropdown = Dropdown;
-                                             }}><i className="material-icons">add</i></a>
+                                            className="btn-floating btn-small waves-effect waves-light cyan darken-2"
+                                            ref={Dropdown => {
+                                                this.Dropdown = Dropdown;
+                                            }}><i className="material-icons">add</i></a>
                                 }
-                                        </span>
+                            </span>
                             <ul id="dropdown1" className="dropdown-content">
                                 {
                                     this.props.teachers.map((item, index) =>
@@ -88,32 +88,32 @@ class ClassroomItem extends Component {
                             )
                         }
                         <span className='add-student'>Добавить ученика:
-                                    <a onClick={() => this.handleStudents()}
-                                       className="btn-floating btn-small waves-effect waves-light cyan darken-2">
-                                    <i className="material-icons">add</i>
-                                    </a>
-                                    </span>
+                            <a onClick={() => this.handleStudents()}
+                                className="btn-floating btn-small waves-effect waves-light cyan darken-2">
+                                <i className="material-icons">add</i>
+                            </a>
+                        </span>
                         <div className='students'>
                             {this.state.isClick &&
-                            this.props.students.map((item, index) =>
-                                !item.classroom
-                                    ?
-                                    <div key={index} className='items white z-depth-1-half'>
-                                        <div className='info'>
-                                            <span>{index + 1}.</span>
-                                            <div className='fio'>{item.fio}</div>
-                                            <div className='login'>{item.login}</div>
-                                            <a onClick={() => {
-                                                this.props.addStudentToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber)
-                                                this.props.updateStudent(item._id, item.fio, item.login, item.email, item.mobileNumber, this.props.classId)
-                                                this.props.getClassroom(this.props.classId)
-                                            }
-                                            }
-                                               href="#s"><i className='material-icons'>add_circle_outline</i></a>
+                                this.props.students.map((item, index) =>
+                                    !item.classroom
+                                        ?
+                                        <div key={index} className='items white z-depth-1-half'>
+                                            <div className='info'>
+                                                <span>{index + 1}.</span>
+                                                <div className='fio'>{item.fio}</div>
+                                                <div className='login'>{item.login}</div>
+                                                <a onClick={() => {
+                                                    this.props.addStudentToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber)
+                                                    this.props.updateStudent(item._id, item.fio, item.login, item.email, item.mobileNumber, this.props.classId)
+                                                    this.props.getClassroom(this.props.classId)
+                                                }
+                                                }
+                                                    href="#s"><i className='material-icons'>add_circle_outline</i></a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    : null
-                            )
+                                        : null
+                                )
                             }
                         </div>
                     </div>

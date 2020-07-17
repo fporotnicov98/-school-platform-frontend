@@ -34,29 +34,27 @@ class DialogsPage extends Component {
                     <div className='message-area'>
                         <div className='message-header cyan darken-2 white-text'>{this.props.auth.fio}</div>
                         <ul className="chat">
-                            <li className="you">
-                                <div className="entete">
-                                    <span className="status"></span>
-                                    <span>Lolek</span>
-                                </div>
-                                <div className="message cyan darken-2 white-text">
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                    dolor.
-                                </div>
-                            </li>
                             {
                                 this.props.class.classForumMessages.map(item =>
-                                    <li className="me">
-                                        <div className="entete">
-                                            <span>{this.props.auth.fio}</span>
-                                        </div>
-                                        <div className="message white">
-                                            {item.message}
-                                        </div>
-                                    </li>
+                                    this.props.auth.id === item.authorId
+                                        ? <li className="me">
+                                            <div className="entete">
+                                                <span>{this.props.auth.fio}</span>
+                                            </div>
+                                            <div className="message white">
+                                                {item.message}
+                                            </div>
+                                        </li>
+                                        : <li className="you">
+                                            <div className="entete">
+                                                <span>{this.props.auth.fio}</span>
+                                            </div>
+                                            <div className="message cyan darken-2 white-text">
+                                                {item.message}
+                                            </div>
+                                        </li>
                                 )
                             }
-
                         </ul>
                         <Form className='message-submit'>
                             <div className='input-field s10'>
@@ -87,9 +85,10 @@ export const DialogsFormik = withFormik({
             message: message || ''
         }
     },
-    handleSubmit(formData, { props }) {
+    handleSubmit(formData, { props, resetForm }) {
         props.addMessage(props.auth.classroom, props.auth.id, null, formData.message)
         setTimeout(() => props.getClassroom(props.auth.classroom), 300)
+        setTimeout(() => resetForm({ formData: "" }), 500)
     }
 })(DialogsPage)
 
