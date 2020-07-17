@@ -68,9 +68,17 @@ export const classAPI = {
     },
     deleteStudentToClass(classId, studentId) {
         return instanse.delete(`/classroom/classrooms/${classId}/deleteStudent/${studentId}`)
-    },
-    addMessage(classId, authorId, date, message) {
-        return instanse.post(`/classroom/classrooms/${classId}/addMessage`, {authorId, date, message})
-    },
+    }
+}
 
+export const messageAPI = {
+    addMessage(classId, authorFio, authorId, date, message) {
+        return instanse.post(`/classroom/classrooms/${classId}/addMessage`, {authorFio, authorId, date, message})
+    },
+    deleteMessage(classId, messageId) {
+        return instanse.delete(`/classroom/classrooms/${classId}/deleteMessage/${messageId}`)
+    },
+    updateMessage(classId, messageId, message) {
+        return instanse.put(`/classroom/classrooms/${classId}/updateMessage/${messageId}`, {message})
+    }
 }

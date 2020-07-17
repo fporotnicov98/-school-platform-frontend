@@ -7,7 +7,7 @@ import PersonalPageContainer from "./Pages/PersonalPage/PersonalPage";
 import HeaderContainer from "./Components/Header/Header";
 import ProfilePageContainer from "./Pages/ProfilePage/ProfilePage";
 import JournalPage from "./Pages/JournalPage/JournalPage";
-import SchedulePage from "./Pages/SchedulePage/SchedulePage";
+import SchedulePageContainer from "./Pages/SchedulePage/SchedulePage";
 import Classes from "./Pages/Users/Classes";
 import Students from "./Pages/Users/Students";
 import Teachers from "./Pages/Users/Teachers";
@@ -23,7 +23,7 @@ function App() {
                 <Switch>
                     <Route path='/' exact render={() => <AuthPageContainer/>}/>
                     <Route path='/journal' render={() => <JournalPage/>}/>
-                    <Route path='/schedule' render={() => <SchedulePage/>}/>
+                    <Route path='/schedule' render={() => <SchedulePageContainer/>}/>
                     <Route path='/profile' render={() => <ProfilePageContainer/>}/>
                     <Route path='/personal' exact render={() => <PersonalPageContainer/>}/>
                     <Route path='/classroom' exact render={() => <Classes/>}/>

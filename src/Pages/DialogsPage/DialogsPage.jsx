@@ -1,21 +1,42 @@
-import React, { Component } from 'react';
-import { Redirect, withRouter } from "react-router-dom";
+import React, {Component} from 'react';
+import {Redirect, withRouter} from "react-router-dom";
 import './DialogsPage.scss'
-import { Field, Form, withFormik } from "formik";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { addMessage, getClasses, getClassroom } from "../../Redux/classReducer";
+import {Field, Form, withFormik} from "formik";
+import {compose} from "redux";
+import {connect} from "react-redux";
+import {getClassroom} from "../../Redux/classReducer";
 import Preloader from "../../Assets/Commons/Preloader";
+import {addMessage, deleteMessage, updateMessage} from "../../Redux/dialogsReducer";
 
 class DialogsPage extends Component {
+
+    state = {
+        newsText: null,
+        updateId: null,
+    }
 
     componentDidMount() {
         this.props.getClassroom(this.props.auth.classroom)
     }
 
+    setUpdateId = (id) => {
+        this.setState({updateId: id})
+    }
+    removeUpdateId = (id) => {
+        this.setState({updateId: null})
+    }
+
+    setText = (text) => {
+        this.setState({newsText: text})
+    }
+
+    updateText = (e) => {
+        this.setState({newsText: e.currentTarget.value})
+    }
+
     render() {
         if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
-        if (!this.props.class) return <Preloader />
+        if (!this.props.class) return <Preloader/>
         return (
             <div className='dialogs'>
                 <div className='users-dialogs'>
@@ -32,25 +53,48 @@ class DialogsPage extends Component {
                 </div>
                 <div className='messages'>
                     <div className='message-area'>
-                        <div className='message-header cyan darken-2 white-text'>{this.props.auth.fio}</div>
+                        <div className='message-header cyan darken-2 white-text'>
+                            {this.props.auth.fio}
+                        </div>
                         <ul className="chat">
                             {
                                 this.props.class.classForumMessages.map(item =>
                                     this.props.auth.id === item.authorId
                                         ? <li className="me">
                                             <div className="entete">
-                                                <span>{this.props.auth.fio}</span>
+                                                <span>
+                                                    {item.authorFio}
+                                                    {
+                                                        <div className='icons'>
+                                                            {
+                                                                <i onClick={() => {
+                                                                    {
+                                                                        this.setText(item.message)
+                                                                        this.setUpdateId(item._id)
+                                                                    }
+                                                                }} className='material-icons'>mode_edit</i>
+
+                                                            }
+
+                                                            <i onClick={() => {
+                                                                this.props.deleteMessage(this.props.auth.classroom, item._id)
+                                                                setTimeout(() => this.props.getClassroom(this.props.auth.classroom), 300)
+                                                            }} className='material-icons'>delete</i>
+                                                        </div>
+
+                                                    }
+                                                </span>
                                             </div>
                                             <div className="message white">
-                                                {item.message}
+                                                <span>{item.message}</span>
                                             </div>
                                         </li>
                                         : <li className="you">
                                             <div className="entete">
-                                                <span>{this.props.auth.fio}</span>
+                                                <span>{item.authorFio}</span>
                                             </div>
                                             <div className="message cyan darken-2 white-text">
-                                                {item.message}
+                                                <span>{item.message}</span>
                                             </div>
                                         </li>
                                 )
@@ -58,17 +102,44 @@ class DialogsPage extends Component {
                         </ul>
                         <Form className='message-submit'>
                             <div className='input-field s10'>
-                                <Field
-                                    as='textarea'
-                                    id="message"
-                                    name='message'
-                                    className="materialize-textarea"
-                                    placeholder='Введите сообщение'>
-                                </Field>
+                                {
+                                    this.props.class.classForumMessages.some(item => item._id === this.state.updateId)
+                                        ? <Field
+                                            as='textarea'
+                                            id="message"
+                                            name='message'
+                                            className="materialize-textarea"
+                                            placeholder='Введите сообщение'
+                                            onChange={this.updateText}
+                                            value={this.state.newsText}>
+                                        </Field>
+                                        : <Field
+                                            as='textarea'
+                                            id="message"
+                                            name='message'
+                                            className="materialize-textarea"
+                                            placeholder='Введите сообщение'>
+                                        </Field>
+                                }
                             </div>
-                            <button className="btn waves-effect waves-light cyan darken-2" type="submit"
-                                name="action">Отправить
-                            </button>
+                            {
+                                this.props.class.classForumMessages.some(item => item._id === this.state.updateId)
+                                    ? <button onClick={() => {
+                                        {
+                                            this.removeUpdateId(this.state.updateId)
+                                            this.props.updateMessage(this.props.auth.classroom, this.state.updateId, this.state.newsText)
+                                            setTimeout(() => this.props.getClassroom(this.props.auth.classroom), 300)
+
+                                        }
+                                    }} className="btn waves-effect waves-light cyan darken-2" type="submit"
+                                              name="action">Изменить
+                                    </button>
+                                    : <button className="btn waves-effect waves-light cyan darken-2" type="submit"
+                                              name="action">Отправить
+                                    </button>
+                            }
+
+
                         </Form>
                     </div>
 
@@ -80,15 +151,15 @@ class DialogsPage extends Component {
 
 
 export const DialogsFormik = withFormik({
-    mapPropsToValues({ message }) {
+    mapPropsToValues({message}) {
         return {
             message: message || ''
         }
     },
-    handleSubmit(formData, { props, resetForm }) {
-        props.addMessage(props.auth.classroom, props.auth.id, null, formData.message)
+    handleSubmit(formData, {props, resetForm}) {
+        props.addMessage(props.auth.classroom, props.auth.fio, props.auth.id, null, formData.message)
         setTimeout(() => props.getClassroom(props.auth.classroom), 300)
-        setTimeout(() => resetForm({ formData: "" }), 500)
+        setTimeout(() => resetForm({formData: ""}), 500)
     }
 })(DialogsPage)
 
@@ -102,5 +173,5 @@ const mapStateToProps = state => {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, { addMessage, getClassroom })
+    connect(mapStateToProps, {addMessage, deleteMessage, updateMessage, getClassroom})
 )(DialogsFormik);
