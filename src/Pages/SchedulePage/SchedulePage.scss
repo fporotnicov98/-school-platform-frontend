@@ -1,9 +1,54 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .schedule-title {
   font-size: 2em;
-
   margin-left: 10px;
   margin-bottom: 20px;
   span {
     margin: 0 10px 0 20px;
+  }
+}
+.schedule {
+  display: flex;
+  width: 100%;
+  padding: 0 0.5em;
+
+  .card {
+    margin: 0 0.5em;
+    width: 33.333%;
+    p {
+      font-size: 2em;
+    }
+    .lessons {
+      box-shadow: inset 0 0 2px #000;
+      min-height: 20px;
+      .lesson {
+        font-size: 0.6em;
+        border-bottom: 1px solid #a7a7a7;
+        display: flex;
+        .add-class {
+          padding: 0 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .btn-floating {
+            margin-left: 10px;
+          }
+        }
+        span {
+          text-align: center;
+          border-right: 1px solid #a7a7a7;
+          width: 25%;
+          padding: 15px 7px;
+        }
+      }
+      .submit-schedule {
+        display: flex;
+        align-items: center;
+      }
+    }
   }
 }
