@@ -36,15 +36,15 @@ class DialogsPage extends Component {
 
     render() {
         if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+        if (!this.props.auth.classroom) return <Preloader />
         if (!this.props.class) return <Preloader/>
         return (
             <div className='dialogs'>
                 <div className='users-dialogs'>
                     <div className='teacher cyan darken-3 white-text'>
-                        {
-                            this.props.class.classTeacher.fio
-                        }
+                           <div>Классный руководитель:</div>{this.props.class.classTeacher.fio}
                     </div>
+                    <div>Ученики:</div>
                     {
                         this.props.class.students.map(item =>
                             <div className='students'>{item.fio}</div>

@@ -60,11 +60,14 @@ class ClassroomItem extends Component {
                             <ul id="dropdown1" className="dropdown-content">
                                 {
                                     this.props.teachers.map((item, index) =>
+                                        !item.classroom
+                                        ?
                                         <li key={index} onClick={() => {
                                             this.props.addTeacherToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber, item.subject)
                                             this.props.updateTeacher(item._id, item.fio, item.login, item.email, item.mobileNumber, item.subject, this.props.classId)
                                             this.props.getClassroom(this.props.classId)
                                         }}><a href="#">{item.fio}</a></li>
+                                        : null
                                     )
                                 }
                             </ul>
