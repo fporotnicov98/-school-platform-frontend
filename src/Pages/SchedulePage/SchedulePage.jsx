@@ -1,6 +1,6 @@
 import React from 'react';
 import './SchedulePage.scss'
-import { Redirect } from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import M from "materialize-css";
 import Preloader from "../../Assets/Commons/Preloader";
 // import Select from "react-select";
@@ -26,8 +26,9 @@ class SchedulePage extends React.Component {
     //     this.setState({selectedDay});
     // };
     handleChange = (e) => {
-        this.setState({ teacherInfo: e.target.value })
+        this.setState({teacherInfo: e.target.value})
     }
+
     componentDidMount() {
         M.Dropdown.init(this.Dropdown, {})
         M.FormSelect.init(this.FormSelect, {})
@@ -41,8 +42,8 @@ class SchedulePage extends React.Component {
 
     render() {
         if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
-        if (!this.props.scheduleItem) return <Preloader />
-        const { selectedDay } = this.state;
+        if (!this.props.scheduleItem) return <Preloader/>
+        const {selectedDay} = this.state;
         return (
             <div className='wrapper-schedule'>
                 <div className='schedule-title'>
@@ -109,10 +110,10 @@ class SchedulePage extends React.Component {
                                                 id: 'teacherInfo',
                                             }}
                                         >
-                                            <option value="" disabled selected>Добавить предмет12</option>
                                             {
                                                 this.props.teacherInfo.map(item =>
-                                                    <option value = {`${item.subject} (${item.fio})`}>{`${item.subject} (${item.fio})`}</option>
+                                                    <option
+                                                        value={`${item.subject} (${item.fio})`}>{`${item.subject} (${item.fio})`}</option>
                                                 )
                                             }
                                         </Select>
