@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {compose} from "redux";
-import {Redirect, withRouter} from "react-router-dom";
+import {NavLink, Redirect, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {addStudentToClass, addTeacherToClass, deleteStudentToClass, getClassroom} from "../../../Redux/classReducer";
-import {getStudent, getTeacher, updateStudent, updateTeacher} from "../../../Redux/userReducer";
+import {getStudent, getTeacher, getTeachersInfo, updateStudent, updateTeacher} from "../../../Redux/userReducer";
 import './ClassroomItem.scss'
 import M from "materialize-css";
 import Preloader from "../../../Assets/Commons/Preloader";
+import SchedulePage from "../../SchedulePage/SchedulePage";
+import {addSchedule, getScheduleItem} from "../../../Redux/scheduleReducer";
 
 class ClassroomItem extends Component {
 
@@ -15,10 +17,11 @@ class ClassroomItem extends Component {
         if (!classId) {
             alert('404')
         }
-        // this.props.getClassroom(this.props.auth.classroom)
         this.props.getClassroom(classId)
         this.props.getStudent()
         this.props.getTeacher()
+        this.props.getScheduleItem(classId)
+        this.props.getTeachersInfo()
         M.Dropdown.init(this.Dropdown, {})
     }
 
@@ -39,6 +42,7 @@ class ClassroomItem extends Component {
                     <div className="card-content">
                         <div className='class-header'>
                             <span className="card-title">{this.props.classNumber}</span>
+                            <span className='add-schedule' onClick={() => this.props.addSchedule(this.props.classNumber, this.props.classId)}>Добавить расписание</span>
                             <span className='class-teacher'>Классный руководитель:
                                 {
                                     this.props.class.classTeacher.fio
@@ -121,6 +125,7 @@ class ClassroomItem extends Component {
                         </div>
                     </div>
                 </div>
+                <SchedulePage teacherInfo={this.props.teacherInfo} auth={this.props.auth} scheduleItem={this.props.scheduleItem}  />
             </div>
         );
     }
@@ -135,6 +140,8 @@ const mapStateToProps = state => {
         teachers: state.users.teachers,
         classroom: state.classroom.classroom,
         class: state.classroom.class,
+        scheduleItem: state.schedule.scheduleItem,
+        teacherInfo: state.users.teacherInfo
     }
 }
 
@@ -148,6 +155,9 @@ export default compose(
         addTeacherToClass,
         deleteStudentToClass,
         updateStudent,
-        updateTeacher
+        updateTeacher,
+        getScheduleItem,
+        addSchedule,
+        getTeachersInfo
     })
 )(ClassroomItem);

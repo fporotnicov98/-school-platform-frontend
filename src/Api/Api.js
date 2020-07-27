@@ -44,6 +44,9 @@ export const userAPI = {
     },
     updateModerator(id, fio, login) {
         return instanse.put(`/users/updateModerator/${id}`, {fio, login})
+    },
+    getTeacherInfo() {
+        return instanse.get(`/users/teachersSubjects`)
     }
 }
 
@@ -80,5 +83,17 @@ export const messageAPI = {
     },
     updateMessage(classId, messageId, message) {
         return instanse.put(`/classroom/classrooms/${classId}/updateMessage/${messageId}`, {message})
+    }
+}
+
+export const scheduleAPI = {
+    getSchedule() {
+        return instanse.get(`/schedule/getSchedules`)
+    },
+    getScheduleItem(id) {
+        return instanse.get(`/schedule/getSchedule/${id}`)
+    },
+    addSchedule(classNumber, classId) {
+        return instanse.post(`/schedule/addSchedule`, {classNumber, classId})
     }
 }

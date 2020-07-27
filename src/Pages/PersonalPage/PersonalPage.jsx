@@ -43,7 +43,9 @@ class PersonalPage extends React.Component {
                     <div className='control-panel'>
                         <div className='add-user card blue-grey lighten-4'>
                             <NavLink to='/classroom'><span>Класс</span></NavLink>
-                            <a onClick={this.addClasses}
+                            <a onClick={
+                                this.addClasses
+                            }
                                className="btn-floating btn-small waves-effect waves-light yellow darken-2"><i
                                 className="material-icons">add</i></a>
                         </div>

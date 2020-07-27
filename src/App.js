@@ -23,7 +23,7 @@ function App() {
                 <Switch>
                     <Route path='/' exact render={() => <AuthPageContainer/>}/>
                     <Route path='/journal' render={() => <JournalPage/>}/>
-                    <Route path='/schedule' render={() => <SchedulePageContainer/>}/>
+                    <Route path='/schedule/:classId?' render={() => <SchedulePageContainer/>}/>
                     <Route path='/profile' render={() => <ProfilePageContainer/>}/>
                     <Route path='/personal' exact render={() => <PersonalPageContainer/>}/>
                     <Route path='/classroom' exact render={() => <Classes/>}/>

@@ -4,11 +4,13 @@ import {regSuccess} from "../Components/ConfirmForm/SuccessConfirm";
 const SET_STUDENTS = 'SET_STUDENTS'
 const SET_TEACHERS = 'SET_TEACHERS'
 const SET_MODERATORS = 'SET_MODERATORS'
+const SET_TEACHERS_INFO = 'SET_TEACHERS_INFO'
 
 let initial = {
     students: [],
     teachers: [],
-    moderators: []
+    moderators: [],
+    teacherInfo: []
 }
 
 const userReducer = (state = initial, action) => {
@@ -28,6 +30,11 @@ const userReducer = (state = initial, action) => {
                 ...state,
                 moderators: action.payload
             }
+        case SET_TEACHERS_INFO:
+            return {
+                ...state,
+                teacherInfo: action.payload
+            }
         default:
             return state;
     }
@@ -46,6 +53,10 @@ export const setTeachers = (teacher) => ({
 export const setModerators = (moderator) => ({
     type: SET_MODERATORS,
     payload: moderator
+})
+export const setTeacherInfo = (teacherInfo) => ({
+    type: SET_TEACHERS_INFO,
+    payload: teacherInfo
 })
 
 export const getStudent = () => dispatch => {
@@ -91,5 +102,12 @@ export const updateModerator = (id, fio, login, role) => dispatch => {
     userAPI.updateModerator(id, fio, login, role)
         .then(response => {
             dispatch(getModerator())
+        })
+}
+
+export const getTeachersInfo = () => dispatch => {
+    userAPI.getTeacherInfo()
+        .then(response => {
+            dispatch(setTeacherInfo(response.data))
         })
 }
