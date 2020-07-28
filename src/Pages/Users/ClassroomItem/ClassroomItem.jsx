@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import {compose} from "redux";
-import {NavLink, Redirect, withRouter} from "react-router-dom";
-import {connect} from "react-redux";
-import {addStudentToClass, addTeacherToClass, deleteStudentToClass, getClassroom} from "../../../Redux/classReducer";
-import {getStudent, getTeacher, getTeachersInfo, updateStudent, updateTeacher} from "../../../Redux/userReducer";
+import React, { Component } from 'react';
+import { compose } from "redux";
+import { NavLink, Redirect, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { addStudentToClass, addTeacherToClass, deleteStudentToClass, getClassroom } from "../../../Redux/classReducer";
+import { getStudent, getTeacher, getTeachersInfo, updateStudent, updateTeacher } from "../../../Redux/userReducer";
 import './ClassroomItem.scss'
 import M from "materialize-css";
 import Preloader from "../../../Assets/Commons/Preloader";
 import SchedulePage from "../../SchedulePage/SchedulePage";
-import {addSchedule, getScheduleItem, updateSchedule} from "../../../Redux/scheduleReducer";
+import { addSchedule, getScheduleItem, updateSchedule } from "../../../Redux/scheduleReducer";
 
 class ClassroomItem extends Component {
 
@@ -30,19 +30,22 @@ class ClassroomItem extends Component {
     }
 
     handleStudents = () => {
-        this.setState({isClick: !this.state.isClick})
+        this.setState({ isClick: !this.state.isClick })
     }
 
     render() {
         if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
-        if (!this.props.class) return <Preloader/>
+        if (!this.props.class) return <Preloader />
         return (
             <div className="classroom">
                 <div className="card blue-grey lighten-4">
                     <div className="card-content">
                         <div className='class-header'>
                             <span className="card-title">{this.props.classNumber}</span>
-                            <span className='add-schedule' onClick={() => this.props.addSchedule(this.props.classNumber, this.props.classId)}>Добавить расписание</span>
+                            <span className='add-schedule' onClick={() => {
+                                this.props.addSchedule(this.props.classNumber, this.props.classId)
+                                setTimeout(() => this.props.getScheduleItem(this.props.classId), 500)
+                            }}>Добавить расписание</span>
                             <span className='class-teacher'>Классный руководитель:
                                 {
                                     this.props.class.classTeacher.fio
@@ -55,10 +58,10 @@ class ClassroomItem extends Component {
                                             }}><i className='material-icons'>remove_circle_outline</i></a>
                                         </div>
                                         : <a data-target="dropdown1"
-                                             className="btn-floating btn-small waves-effect waves-light cyan darken-2"
-                                             ref={Dropdown => {
-                                                 this.Dropdown = Dropdown;
-                                             }}><i className="material-icons">add</i></a>
+                                            className="btn-floating btn-small waves-effect waves-light cyan darken-2"
+                                            ref={Dropdown => {
+                                                this.Dropdown = Dropdown;
+                                            }}><i className="material-icons">add</i></a>
                                 }
                             </span>
                             <ul id="dropdown1" className="dropdown-content">
@@ -96,36 +99,39 @@ class ClassroomItem extends Component {
                         }
                         <span className='add-student'>Добавить ученика:
                             <a onClick={() => this.handleStudents()}
-                               className="btn-floating btn-small waves-effect waves-light cyan darken-2">
+                                className="btn-floating btn-small waves-effect waves-light cyan darken-2">
                                 <i className="material-icons">add</i>
                             </a>
                         </span>
                         <div className='students'>
                             {this.state.isClick &&
-                            this.props.students.map((item, index) =>
-                                !item.classroom
-                                    ?
-                                    <div key={index} className='items white z-depth-1-half'>
-                                        <div className='info'>
-                                            <span>{index + 1}.</span>
-                                            <div className='fio'>{item.fio}</div>
-                                            <div className='login'>{item.login}</div>
-                                            <a onClick={() => {
-                                                this.props.addStudentToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber)
-                                                this.props.updateStudent(item._id, item.fio, item.login, item.email, item.mobileNumber, this.props.classId)
-                                                this.props.getClassroom(this.props.classId)
-                                            }
-                                            }
-                                               href="#s"><i className='material-icons'>add_circle_outline</i></a>
+                                this.props.students.map((item, index) =>
+                                    !item.classroom
+                                        ?
+                                        <div key={index} className='items white z-depth-1-half'>
+                                            <div className='info'>
+                                                <span>{index + 1}.</span>
+                                                <div className='fio'>{item.fio}</div>
+                                                <div className='login'>{item.login}</div>
+                                                <a onClick={() => {
+                                                    this.props.addStudentToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber)
+                                                    this.props.updateStudent(item._id, item.fio, item.login, item.email, item.mobileNumber, this.props.classId)
+                                                    this.props.getClassroom(this.props.classId)
+                                                }
+                                                }
+                                                    href="#s"><i className='material-icons'>add_circle_outline</i></a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    : null
-                            )
+                                        : null
+                                )
                             }
                         </div>
                     </div>
                 </div>
-                <SchedulePage getScheduleItem = {this.props.getScheduleItem} teacherInfo={this.props.teacherInfo} auth={this.props.auth} scheduleItem={this.props.scheduleItem} updateSchedule={this.props.updateSchedule} classId = {this.props.classId} />
+                {this.props.scheduleItem.length > 0
+                    ? <SchedulePage getScheduleItem={this.props.getScheduleItem} teacherInfo={this.props.teacherInfo} auth={this.props.auth} scheduleItem={this.props.scheduleItem} updateSchedule={this.props.updateSchedule} classId={this.props.classId} />
+                    : null
+                }
             </div>
         );
     }

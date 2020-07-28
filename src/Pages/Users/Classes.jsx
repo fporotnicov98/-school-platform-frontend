@@ -5,6 +5,7 @@ import {NavLink, Redirect} from "react-router-dom";
 import M from "materialize-css";
 import './Classes.scss'
 import {deleteClassroom, getClasses} from "../../Redux/classReducer";
+import { deleteSchedule } from "../../Redux/scheduleReducer";
 
 class Classes extends Component {
     componentDidMount() {
@@ -39,6 +40,7 @@ class Classes extends Component {
                                             <div className='buttons'>
                                                 <a className='delete'
                                                    onClick={() => {
+                                                       this.props.deleteSchedule(item._id)
                                                        this.props.deleteClassroom(item._id)
                                                        this.props.students.map(student => {
                                                            student.classroom === item._id
@@ -79,4 +81,4 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps,
-    {getStudent, getTeacher, getModerator, getClasses, deleteClassroom, updateStudent, updateTeacher})(Classes);
+    {getStudent, getTeacher, getModerator, getClasses, deleteClassroom, updateStudent, updateTeacher, deleteSchedule})(Classes);

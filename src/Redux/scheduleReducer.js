@@ -50,9 +50,19 @@ export const getScheduleItem = (id) => dispatch => {
             dispatch(setScheduleItem(response.data))
         })
 }
+export const deleteSchedule = (id) => dispatch => {
+    scheduleAPI.deleteSchedule(id)
+        .then(response => {
+            dispatch(getSchedule())
+        })
+}
 
-export const addSchedule = (classNumber, classId) => dispatch => {
-    scheduleAPI.addSchedule(classNumber, classId)
+export const addSchedule = (classNumber,classId) => dispatch => {
+    scheduleAPI.addSchedule(classNumber,classId)
+        .then(response => {
+            regSuccess(response.data.message)
+            dispatch(getSchedule())
+        })
 }
 export const updateSchedule = (id, day, subjects) => dispatch => {
     scheduleAPI.updateSchedule(id, day, subjects)

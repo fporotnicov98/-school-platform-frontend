@@ -93,10 +93,13 @@ export const scheduleAPI = {
     getScheduleItem(id) {
         return instanse.get(`/schedule/getSchedule/${id}`)
     },
-    addSchedule(classNumber, classId) {
-        return instanse.post(`/schedule/addSchedule`, {classNumber, classId})
+    addSchedule(classNumber,classId) {
+        return instanse.post(`/schedule/addSchedule`, {classNumber,classId})
     },
     updateSchedule(id,day,subjects){
         return instanse.put(`/schedule/updateSchedule/${id}`,{day,subjects})
+    },
+    deleteSchedule(id){
+        return instanse.delete(`/schedule/deleteSchedule/${id}`)
     }
 }
