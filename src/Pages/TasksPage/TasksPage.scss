@@ -1,0 +1,48 @@
+.wrapper {
+  .tasks {
+    padding: 20px;
+    width: 80%;
+    min-height: 76vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .class {
+      .class-block {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .btn {
+          width: 400px;
+          margin: 20px;
+        }
+      }
+    }
+
+
+    // AddTasks
+    .class-number {
+      width: 50%;
+      display: flex;
+      margin-bottom: 20px;
+      font-size: 18px;
+      span {
+        width: 40%;
+        margin-right: 20px;
+      }
+      .class {
+        width: 30%;
+      }
+    }
+    .subject {
+      width: 50%;
+      display: flex;
+      font-size: 18px;
+      span {
+        width: 40%;
+        margin-right: 20px;
+      }
+    }
+  }
+}

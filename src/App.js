@@ -14,6 +14,10 @@ import Teachers from "./Pages/Users/Teachers";
 import Moderators from "./Pages/Users/Moderators";
 import ClassroomItem from "./Pages/Users/ClassroomItem/ClassroomItem";
 import DialogsPageContainer from "./Pages/DialogsPage/DialogsPage";
+import TasksPageContainer from "./Pages/TasksPage/TasksPage";
+import AddTasks from "./Pages/TasksPage/addTasks/AddTasks";
+import ShowTasks from "./Pages/TasksPage/showTasks/ShowTasks";
+import CheckTasks from "./Pages/TasksPage/checkTasks/CheckTasks";
 
 function App() {
     return (
@@ -32,6 +36,10 @@ function App() {
                     <Route path='/teachers' exact render={() => <Teachers/>}/>
                     <Route path='/moderators' exact render={() => <Moderators/>}/>
                     <Route path='/dialogs/:classId?' render={() => <DialogsPageContainer/>}/>
+                    <Route path='/tasks' exact render={() => <TasksPageContainer/>}/>
+                    <Route path='/tasks/addTasks' render={() => <AddTasks/>}/>
+                    <Route path='/tasks/showTasks' render={() => <ShowTasks/>}/>
+                    <Route path='/tasks/checkTasks' render={() => <CheckTasks/>}/>
                 </Switch>
             </div>
         </BrowserRouter>
