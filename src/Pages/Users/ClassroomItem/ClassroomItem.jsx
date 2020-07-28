@@ -8,7 +8,7 @@ import './ClassroomItem.scss'
 import M from "materialize-css";
 import Preloader from "../../../Assets/Commons/Preloader";
 import SchedulePage from "../../SchedulePage/SchedulePage";
-import {addSchedule, getScheduleItem} from "../../../Redux/scheduleReducer";
+import {addSchedule, getScheduleItem, updateSchedule} from "../../../Redux/scheduleReducer";
 
 class ClassroomItem extends Component {
 
@@ -125,7 +125,7 @@ class ClassroomItem extends Component {
                         </div>
                     </div>
                 </div>
-                <SchedulePage teacherInfo={this.props.teacherInfo} auth={this.props.auth} scheduleItem={this.props.scheduleItem}  />
+                <SchedulePage getScheduleItem = {this.props.getScheduleItem} teacherInfo={this.props.teacherInfo} auth={this.props.auth} scheduleItem={this.props.scheduleItem} updateSchedule={this.props.updateSchedule} classId = {this.props.classId} />
             </div>
         );
     }
@@ -141,7 +141,7 @@ const mapStateToProps = state => {
         classroom: state.classroom.classroom,
         class: state.classroom.class,
         scheduleItem: state.schedule.scheduleItem,
-        teacherInfo: state.users.teacherInfo
+        teacherInfo: state.users.teacherInfo,
     }
 }
 
@@ -158,6 +158,7 @@ export default compose(
         updateTeacher,
         getScheduleItem,
         addSchedule,
-        getTeachersInfo
+        getTeachersInfo,
+        updateSchedule
     })
 )(ClassroomItem);

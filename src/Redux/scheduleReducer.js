@@ -1,4 +1,5 @@
-import {scheduleAPI} from "../Api/Api";
+import { scheduleAPI } from "../Api/Api";
+import { regSuccess } from "../Components/ConfirmForm/SuccessConfirm";
 
 const SET_SCHEDULE = 'SET_SCHEDULE'
 const SET_SCHEDULE_ITEM = 'SET_SCHEDULE_ITEM'
@@ -52,4 +53,12 @@ export const getScheduleItem = (id) => dispatch => {
 
 export const addSchedule = (classNumber, classId) => dispatch => {
     scheduleAPI.addSchedule(classNumber, classId)
+}
+export const updateSchedule = (id, day, subjects) => dispatch => {
+    scheduleAPI.updateSchedule(id, day, subjects)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                regSuccess(response.data.message)
+            }
+        })
 }

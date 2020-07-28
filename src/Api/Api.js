@@ -95,5 +95,8 @@ export const scheduleAPI = {
     },
     addSchedule(classNumber, classId) {
         return instanse.post(`/schedule/addSchedule`, {classNumber, classId})
+    },
+    updateSchedule(id,day,subjects){
+        return instanse.put(`/schedule/updateSchedule/${id}`,{day,subjects})
     }
 }
