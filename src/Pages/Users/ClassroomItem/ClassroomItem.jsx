@@ -54,7 +54,7 @@ class ClassroomItem extends Component {
                                             <span>{this.props.class.classTeacher.fio}</span>
                                             <a href="#s" onClick={() => {
                                                 this.props.addTeacherToClass(this.props.classId, "", "")
-                                                this.props.updateTeacher(this.props.class.classTeacher.teacherId, this.props.class.classTeacher.fio, this.props.class.classTeacher.login, this.props.class.classTeacher.email, this.props.class.classTeacher.mobileNumber, this.props.class.classTeacher.subject, null)
+                                                this.props.updateTeacher(this.props.class.classTeacher.teacherId, this.props.class.classTeacher.fio, this.props.class.classTeacher.login, this.props.class.classTeacher.email, this.props.class.classTeacher.mobileNumber, this.props.class.classTeacher.subject, "","")
                                                 this.props.getClassroom(this.props.classId)
                                             }}><i className='material-icons'>remove_circle_outline</i></a>
                                         </div>
@@ -71,8 +71,8 @@ class ClassroomItem extends Component {
                                         !item.classroom
                                             ?
                                             <li key={index} onClick={() => {
-                                                this.props.addTeacherToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber, item.subject, this.props.classNumber)
-                                                this.props.updateTeacher(item._id, item.fio, item.login, item.email, item.mobileNumber, item.subject, this.props.classId)
+                                                this.props.addTeacherToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber, item.subject)
+                                                this.props.updateTeacher(item._id, item.fio, item.login, item.email, item.mobileNumber, item.subject, this.props.classId, this.props.classNumber)
                                                 this.props.getClassroom(this.props.classId)
                                             }}><a href="#">{item.fio}</a></li>
                                             : null
