@@ -14,6 +14,8 @@ let initial = {
     mobileNumber: null,
     role: null,
     password: null,
+    classId: null,
+    classNumber: null,
     onReg: false,
     isAuth: null,
 
@@ -49,9 +51,9 @@ const authReducer = (state = initial, action) => {
 export default authReducer;
 
 export const setOnReg = (flag) => ({type: SET_ON_REG, payload: flag})
-export const setAuthData = (id, fio, login, role, email, mobileNumber, classroom, subject, isAuth) => ({
+export const setAuthData = (id, fio, login, role, email, mobileNumber, classId, classNumber, subject, isAuth) => ({
     type: SET_AUTH_DATA,
-    payload: {id, fio, login, role, email, mobileNumber, classroom, subject, isAuth}
+    payload: {id, fio, login, role, email, mobileNumber, classId, classNumber, subject, isAuth}
 })
 
 
@@ -59,7 +61,7 @@ export const getAuth = (token) => dispatch => {
     authAPI.getAuth(token)
         .then(response => {
             if (response.data.fio) {
-                dispatch(setAuthData(response.data._id, response.data.fio, response.data.login, response.data.role, response.data.email, response.data.mobileNumber, response.data.classroom, response.data.subject, true))
+                dispatch(setAuthData(response.data._id, response.data.fio, response.data.login, response.data.role, response.data.email, response.data.mobileNumber, response.data.classId, response.data.classNumber, response.data.subject, true))
             } else regError(response.data.message)
         })
 }

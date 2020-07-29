@@ -84,8 +84,8 @@ export const deleteClassroom = (id) => dispatch => {
         })
 }
 
-export const addStudentToClass = (id, studentId, fio, login, email, mobileNumber) => dispatch => {
-    classAPI.addStudentToClass(id, studentId, fio, login, email, mobileNumber)
+export const addStudentToClass = (id, studentId, fio, login, email, mobileNumber, classNumber) => dispatch => {
+    classAPI.addStudentToClass(id, studentId, fio, login, email, mobileNumber, classNumber)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getClassroom(id))
@@ -102,8 +102,8 @@ export const deleteStudentToClass = (classId, studentId) => dispatch => {
         })
 }
 
-export const addTeacherToClass = (classId, teacherId, fio, login, email, mobileNumber, subject) => dispatch => {
-    classAPI.addTeacherToClass(classId, teacherId, fio, login, email, mobileNumber, subject)
+export const addTeacherToClass = (classId, teacherId, fio, login, email, mobileNumber, subject, classNumber) => dispatch => {
+    classAPI.addTeacherToClass(classId, teacherId, fio, login, email, mobileNumber, subject, classNumber)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getClassroom(classId))

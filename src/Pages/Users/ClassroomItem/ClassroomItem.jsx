@@ -7,7 +7,7 @@ import { getStudent, getTeacher, getTeachersInfo, updateStudent, updateTeacher }
 import './ClassroomItem.scss'
 import M from "materialize-css";
 import Preloader from "../../../Assets/Commons/Preloader";
-import SchedulePage from "../../SchedulePage/SchedulePage";
+import ScheduleModerator from "../../SchedulePage/ScheduleModerator";
 import { addSchedule, getScheduleItem, updateSchedule } from "../../../Redux/scheduleReducer";
 
 class ClassroomItem extends Component {
@@ -71,7 +71,7 @@ class ClassroomItem extends Component {
                                         !item.classroom
                                             ?
                                             <li key={index} onClick={() => {
-                                                this.props.addTeacherToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber, item.subject)
+                                                this.props.addTeacherToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber, item.subject, this.props.classNumber)
                                                 this.props.updateTeacher(item._id, item.fio, item.login, item.email, item.mobileNumber, item.subject, this.props.classId)
                                                 this.props.getClassroom(this.props.classId)
                                             }}><a href="#">{item.fio}</a></li>
@@ -115,7 +115,7 @@ class ClassroomItem extends Component {
                                                 <div className='fio'>{item.fio}</div>
                                                 <div className='login'>{item.login}</div>
                                                 <a onClick={() => {
-                                                    this.props.addStudentToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber)
+                                                    this.props.addStudentToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber, this.props.classNumber)
                                                     this.props.updateStudent(item._id, item.fio, item.login, item.email, item.mobileNumber, this.props.classId)
                                                     this.props.getClassroom(this.props.classId)
                                                 }
@@ -130,7 +130,7 @@ class ClassroomItem extends Component {
                     </div>
                 </div>
                 {this.props.scheduleItem.length > 0
-                    ? <SchedulePage getScheduleItem={this.props.getScheduleItem} teacherInfo={this.props.teacherInfo} auth={this.props.auth} scheduleItem={this.props.scheduleItem} updateSchedule={this.props.updateSchedule} classId={this.props.classId} />
+                    ? <ScheduleModerator teacherInfo={this.props.teacherInfo} auth={this.props.auth} scheduleItem={this.props.scheduleItem} updateSchedule={this.props.updateSchedule} classId={this.props.classId} />
                     : null
                 }
             </div>

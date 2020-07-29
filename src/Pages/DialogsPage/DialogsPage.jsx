@@ -16,7 +16,7 @@ class DialogsPage extends Component {
     }
 
     componentDidMount() {
-        this.props.getClassroom(this.props.auth.classroom)
+        this.props.getClassroom(this.props.auth.classId)
     }
 
     setUpdateId = (id) => {
@@ -36,7 +36,7 @@ class DialogsPage extends Component {
 
     render() {
         if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
-        if (!this.props.auth.classroom) return <Preloader />
+        if (!this.props.auth.classId) return <Preloader />
         if (!this.props.class) return <Preloader/>
         return (
             <div className='dialogs'>
@@ -77,8 +77,8 @@ class DialogsPage extends Component {
                                                             }
 
                                                             <i onClick={() => {
-                                                                this.props.deleteMessage(this.props.auth.classroom, item._id)
-                                                                setTimeout(() => this.props.getClassroom(this.props.auth.classroom), 300)
+                                                                this.props.deleteMessage(this.props.auth.classId, item._id)
+                                                                setTimeout(() => this.props.getClassroom(this.props.auth.classId), 300)
                                                             }} className='material-icons'>delete</i>
                                                         </div>
 
@@ -127,8 +127,8 @@ class DialogsPage extends Component {
                                     ? <button onClick={() => {
                                         {
                                             this.removeUpdateId(this.state.updateId)
-                                            this.props.updateMessage(this.props.auth.classroom, this.state.updateId, this.state.newsText)
-                                            setTimeout(() => this.props.getClassroom(this.props.auth.classroom), 500)
+                                            this.props.updateMessage(this.props.auth.classId, this.state.updateId, this.state.newsText)
+                                            setTimeout(() => this.props.getClassroom(this.props.auth.classId), 500)
 
                                         }
                                     }} className="btn waves-effect waves-light cyan darken-2" type="submit"
@@ -157,8 +157,8 @@ export const DialogsFormik = withFormik({
         }
     },
     handleSubmit(formData, {props, resetForm}) {
-        props.addMessage(props.auth.classroom, props.auth.fio, props.auth.id, null, formData.message)
-        setTimeout(() => props.getClassroom(props.auth.classroom), 500)
+        props.addMessage(props.auth.classId, props.auth.fio, props.auth.id, null, formData.message)
+        setTimeout(() => props.getClassroom(props.auth.classId), 500)
         setTimeout(() => resetForm({formData: ""}), 500)
     }
 })(DialogsPage)

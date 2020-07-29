@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import Preloader from "../../Assets/Commons/Preloader";
 import Select from '@material-ui/core/Select'
 
-class SchedulePage extends React.Component {
+class ScheduleModerator extends React.Component {
     state = {
         selectedDay: null,
         firstSubject: null,
@@ -14,8 +14,8 @@ class SchedulePage extends React.Component {
         fifthSubject: null,
         sixthSubject:null
     }
-    setDay = (e) => this.setState({ selectedDay: e.target.value });
 
+    setDay = (e) => this.setState({ selectedDay: e.target.value });
     setFirstSubject = (e) => this.setState({ firstSubject: e.target.value })
     setSecondSubject = (e) => this.setState({ secondSubject: e.target.value })
     setThirdSubject = (e) => this.setState({ thirdSubject: e.target.value })
@@ -24,7 +24,7 @@ class SchedulePage extends React.Component {
     setSixthSubject = (e) => this.setState({ sixthSubject: e.target.value })
 
     render() {
-        if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+        // if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
         if (!this.props.scheduleItem) return <Preloader />
         return (
             <div className='wrapper-schedule'>
@@ -258,4 +258,4 @@ class SchedulePage extends React.Component {
     }
 };
 
-export default SchedulePage
+export default ScheduleModerator
