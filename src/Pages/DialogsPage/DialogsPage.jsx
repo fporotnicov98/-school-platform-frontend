@@ -13,6 +13,7 @@ class DialogsPage extends Component {
     state = {
         newsText: null,
         updateId: null,
+        modifyText: false
     }
 
     componentDidMount() {
@@ -33,16 +34,20 @@ class DialogsPage extends Component {
     updateText = (e) => {
         this.setState({newsText: e.currentTarget.value})
     }
+    modifyText = () => {
+        this.setState({modifyText: true})
+    }
 
     render() {
         if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
-        if (!this.props.auth.classId) return <Preloader />
+        if (!this.props.auth.classId) return <Preloader/>
         if (!this.props.class) return <Preloader/>
         return (
             <div className='dialogs'>
                 <div className='users-dialogs'>
                     <div className='teacher cyan darken-3 white-text'>
-                           <div>Классный руководитель:</div>{this.props.class.classTeacher.fio}
+                        <div>Классный руководитель:</div>
+                        {this.props.class.classTeacher.fio}
                     </div>
                     <div>Ученики:</div>
                     {
@@ -73,20 +78,21 @@ class DialogsPage extends Component {
                                                                         this.setUpdateId(item._id)
                                                                     }
                                                                 }} className='material-icons'>mode_edit</i>
-
                                                             }
-
                                                             <i onClick={() => {
                                                                 this.props.deleteMessage(this.props.auth.classId, item._id)
                                                                 setTimeout(() => this.props.getClassroom(this.props.auth.classId), 300)
                                                             }} className='material-icons'>delete</i>
                                                         </div>
-
                                                     }
                                                 </span>
                                             </div>
                                             <div className="message white">
-                                                <span>{item.message}</span>
+                                                {
+                                                    item.edited === '1'
+                                                        ? <span>{`${item.message} (изменено)`}</span>
+                                                        : <span>{item.message}</span>
+                                                }
                                             </div>
                                         </li>
                                         : <li className="you">
@@ -94,7 +100,7 @@ class DialogsPage extends Component {
                                                 <span>{item.authorFio}</span>
                                             </div>
                                             <div className="message cyan darken-2 white-text">
-                                                <span>{item.message}</span>
+                                                :<span>{item.message}</span>
                                             </div>
                                         </li>
                                 )
@@ -127,6 +133,7 @@ class DialogsPage extends Component {
                                     ? <button onClick={() => {
                                         {
                                             this.removeUpdateId(this.state.updateId)
+                                            this.modifyText()
                                             this.props.updateMessage(this.props.auth.classId, this.state.updateId, this.state.newsText)
                                             setTimeout(() => this.props.getClassroom(this.props.auth.classId), 500)
 
@@ -138,8 +145,6 @@ class DialogsPage extends Component {
                                               name="action">Отправить
                                     </button>
                             }
-
-
                         </Form>
                     </div>
 

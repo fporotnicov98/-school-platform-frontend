@@ -37,10 +37,16 @@ class ProfilePage extends React.Component {
                                 <span>Номер телефона:</span>
                                 <input type="text" className="validate" value={this.props.auth.mobileNumber}/>
                             </div>
-                            <div className="input-field">
-                                <span>Класс:</span>
-                                <input type="text" className="validate" value={this.props.auth.classroom}/>
-                            </div>
+                            {
+                                this.props.classroom.map(item =>
+                                    item._id === this.props.auth.classId
+                                        ? <div className="input-field">
+                                            <span>Класс: </span>
+                                            <input type="text" className="validate" value={item.classNumber}/>
+                                        </div>
+                                        : null
+                                )
+                            }
                         </div>
                     </div>
                 }
@@ -97,7 +103,6 @@ class ProfilePage extends React.Component {
                                         : null
                                 )
                             }
-
                             <div className="input-field">
                                 <span>Предметы:</span>
                                 <input type="text" className="validate" value={this.props.auth.subject}/>
