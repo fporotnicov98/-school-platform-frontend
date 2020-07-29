@@ -130,7 +130,7 @@ class ClassroomItem extends Component {
                     </div>
                 </div>
                 {this.props.scheduleItem.length > 0
-                    ? <ScheduleModerator teacherInfo={this.props.teacherInfo} auth={this.props.auth} scheduleItem={this.props.scheduleItem} updateSchedule={this.props.updateSchedule} classId={this.props.classId} />
+                    ? <ScheduleModerator getScheduleItem={this.props.getScheduleItem} teacherInfo={this.props.teacherInfo} auth={this.props.auth} scheduleItem={this.props.scheduleItem} updateSchedule={this.props.updateSchedule} classId={this.props.classId} />
                     : null
                 }
             </div>
