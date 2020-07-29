@@ -40,6 +40,12 @@ const AddTasks = (props) => {
                 <div className='subject'>Предмет:
                     <span className='subject-text'>{props.auth.subject}</span>
                 </div>
+                <div className='topic'>
+                    <div className="input-field col s6">
+                        <input id="topic" type="text" className="validate"/>
+                            <label htmlFor="topic">Тема задания</label>
+                    </div>
+                </div>
                 <div className='date'>Дата публикации:
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
@@ -66,7 +72,7 @@ const AddTasks = (props) => {
                 </div>
                 <div className='description'>Описание задания
                     <div className="input-field col s12">
-                        <textarea id="textarea1" className="materialize-textarea"></textarea>
+                        <textarea id="textarea1"></textarea>
                         <label htmlFor="textarea1">Textarea</label>
                     </div>
                 </div>
@@ -75,14 +81,14 @@ const AddTasks = (props) => {
                 </button>
             </div>
         </div>
-    );
+);
 };
 
 const mapStateToProps = state => {
     return {
-        auth: state.auth,
-        classroom: state.classroom.classroom,
-    }
+    auth: state.auth,
+    classroom: state.classroom.classroom,
+}
 }
 
 export default connect(mapStateToProps, {})(AddTasks)
