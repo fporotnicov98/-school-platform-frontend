@@ -36,6 +36,7 @@ class ClassroomItem extends Component {
     render() {
         if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
         if (!this.props.class) return <Preloader />
+        if (!this.props.scheduleItem) return <Preloader />
         return (
             <div className="classroom">
                 <div className="card blue-grey lighten-4">
