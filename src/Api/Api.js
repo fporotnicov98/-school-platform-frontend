@@ -39,8 +39,8 @@ export const userAPI = {
     updateStudent(id, fio, login, email, mobileNumber, classId) {
         return instanse.put(`/users/updateStudent/${id}`, {fio, login, email, mobileNumber, classId})
     },
-    updateTeacher(id, fio, login, email, mobileNumber, subject, classId) {
-        return instanse.put(`/users/updateTeacher/${id}`, {fio, login, email, mobileNumber, subject, classId})
+    updateTeacher(id, fio, login, email, mobileNumber, subject, classId,classNumber) {
+        return instanse.put(`/users/updateTeacher/${id}`, {fio, login, email, mobileNumber, subject, classId,classNumber})
     },
     updateModerator(id, fio, login) {
         return instanse.put(`/users/updateModerator/${id}`, {fio, login})
