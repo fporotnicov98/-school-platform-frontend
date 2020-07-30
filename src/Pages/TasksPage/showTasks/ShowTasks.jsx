@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
+import React, { useEffect } from 'react';
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -9,8 +9,13 @@ import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import withStyles from "@material-ui/core/styles/withStyles";
+import { getTasks } from '../../../Redux/taskReducer'
 
 const ShowTasks = (props) => {
+
+    useEffect(() => {
+        props.getTasks()
+    }, [props.tasks])
 
     const StyledTableRow = withStyles((theme) => ({
         root: {
@@ -47,16 +52,23 @@ const ShowTasks = (props) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row, index) => (
-                            <StyledTableRow key={row.subject}>
-                                <TableCell component="th" scope="row">
-                                    {row.subject}
-                                </TableCell>
-                                <TableCell align="right">{row.theme}</TableCell>
-                                <TableCell align="right">{row.classroom}</TableCell>
-                                <TableCell align="right">{row.deadline}</TableCell>
-                                <TableCell align="right">{row.update}</TableCell>
-                            </StyledTableRow>
+                        {props.tasks.map((task, index) => (
+                            <>
+                                {
+                                    task.teacher === props.auth.fio
+                                        ?
+                                        <StyledTableRow key={index}>
+                                            <TableCell component="th" scope="row">
+                                                {task.subject}
+                                            </TableCell>
+                                            <TableCell align="left">{task.taskTitle}</TableCell>
+                                            <TableCell align="left">{task.classNumber}</TableCell>
+                                            <TableCell align="left">{task.deadlineDate}</TableCell>
+                                            <TableCell align="left">{task.editedDate}</TableCell>
+                                        </StyledTableRow>
+                                        : null
+                                }
+                            </>
                         ))}
                     </TableBody>
                 </Table>
@@ -69,7 +81,8 @@ const ShowTasks = (props) => {
 const mapStateToProps = state => {
     return {
         auth: state.auth,
+        tasks: state.task.tasks
     }
 }
 
-export default connect(mapStateToProps, {})(ShowTasks)
+export default connect(mapStateToProps, { getTasks })(ShowTasks)

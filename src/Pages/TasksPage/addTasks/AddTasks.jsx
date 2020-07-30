@@ -36,6 +36,17 @@ const AddTasks = (props) => {
         setDesc(e.target.value)
     }
 
+    let resetForms = val => {
+        setClass(val)
+        setDay(val)
+        setMonth(val)
+        setYear(val)
+        setTitle(val)
+        setDesc(val)
+    }
+    
+
+
 
     if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
     return (
@@ -47,6 +58,7 @@ const AddTasks = (props) => {
                             <span>Выбрать класс: </span>
                             <Select
                                 className='class'
+                                native
                                 onChange={handleClass}
                                 value={classNumber}
                             >
@@ -155,7 +167,10 @@ const AddTasks = (props) => {
                             </div>
                         </div>
                         <button className="btn waves-effect waves-light cyan darken-2" type="submit"
-                            name="action" onClick = {() => props.addTask(classNumber,date(),`${day} ${month} ${year}`,props.auth.subject,props.auth.fio,title,description)}>Опубликовать задание 
+                            name="action" onClick = {() => {
+                                props.addTask(classNumber,date(),`${day} ${month} ${year}`,props.auth.subject,props.auth.fio,title,description)
+                                resetForms("")
+                                }}>Опубликовать задание 
                                 <i className="material-icons right">send</i>
                         </button>
                     </div>
