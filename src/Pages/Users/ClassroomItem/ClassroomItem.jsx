@@ -39,6 +39,13 @@ class ClassroomItem extends Component {
         if (!this.props.scheduleItem) return <Preloader/>
         return (
             <div className="classroom">
+                <nav className='blue-grey lighten-4'>
+                    <div className="nav-wrapper">
+                        <NavLink to="/personal" className="breadcrumb">Личный кабинет</NavLink>
+                        <NavLink to="/classroom" className="breadcrumb">Классы</NavLink>
+                        <a href="#!" className='breadcrumb'>{this.props.classNumber}</a>
+                    </div>
+                </nav>
                 <div className="card blue-grey lighten-4">
                     <div className="card-content">
                         <div className='class-header'>

@@ -5,15 +5,18 @@ import {NavLink, Redirect} from "react-router-dom";
 import M from "materialize-css";
 import './Classes.scss'
 import {deleteClassroom, getClasses} from "../../Redux/classReducer";
-import { deleteSchedule } from "../../Redux/scheduleReducer";
+import {deleteSchedule} from "../../Redux/scheduleReducer";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Link from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
 
 class Classes extends Component {
+
     componentDidMount() {
         this.props.getClasses()
         this.props.getStudent();
         this.props.getModerator();
         this.props.getTeacher();
-        M.Collapsible.init(this.Collapsible1, {accordion: false});
         M.Collapsible.init(this.Collapsible, {accordion: false});
     }
 
@@ -22,6 +25,12 @@ class Classes extends Component {
         return (
             <div className='row'>
                 <div className='users'>
+                    <nav className='blue-grey lighten-4'>
+                        <div className="nav-wrapper">
+                            <NavLink to="/personal" className="breadcrumb">Личный кабинет</NavLink>
+                            <a href="#!" className="breadcrumb">Классы</a>
+                        </div>
+                    </nav>
                     <ul ref={Collapsible => {
                         this.Collapsible = Collapsible;
                     }} className="collapsible popout">
@@ -81,4 +90,13 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps,
-    {getStudent, getTeacher, getModerator, getClasses, deleteClassroom, updateStudent, updateTeacher, deleteSchedule})(Classes);
+    {
+        getStudent,
+        getTeacher,
+        getModerator,
+        getClasses,
+        deleteClassroom,
+        updateStudent,
+        updateTeacher,
+        deleteSchedule
+    })(Classes);

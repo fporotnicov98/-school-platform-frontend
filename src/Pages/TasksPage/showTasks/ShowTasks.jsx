@@ -7,7 +7,7 @@ class ShowTasks extends Component {
         if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
         return (
             <div>
-
+                
             </div>
         );
     }
