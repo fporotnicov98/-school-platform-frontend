@@ -117,7 +117,7 @@ export const scheduleAPI = {
     deleteSchedule(id) {
         return instanse.delete(`/schedule/deleteSchedule/${id}`)
     }
-},
+}
 
 export const taskAPI = {
     getTasks(){

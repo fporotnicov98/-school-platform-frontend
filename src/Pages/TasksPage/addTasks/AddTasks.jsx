@@ -16,22 +16,22 @@ const AddTasks = (props) => {
     let [title, setTitle] = useState('')
     let [description, setDesc] = useState('')
 
-    const handleDay = (e) => {
+    let handleDay = (e) => {
         setDay(e.target.value)
     }
-    const handleMonth = (e) => {
+    let handleMonth = (e) => {
         setMonth(e.target.value)
     }
-    const handleYear = (e) => {
+    let handleYear = (e) => {
         setYear(e.target.value)
     }
-    const setClass = (classNumber) => {
+    let handleClass = (classNumber) => {
         setClass(classNumber)
     }
-    const handleTitle = (e) => {
+    let handleTitle = (e) => {
         setTitle(e.target.value)
     }
-    const handleDesc = (e) => {
+    let handleDesc = (e) => {
         setDesc(e.target.value)
     }
 
@@ -46,7 +46,7 @@ const AddTasks = (props) => {
                             <span>Выбрать класс: </span>
                             <Select
                                 className='class'
-                                onChange={this.setClass}
+                                onChange={handleClass}
                                 value={classNumber}
                             >
                                 {

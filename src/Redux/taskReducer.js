@@ -9,12 +9,12 @@ let initial = {
 
 const taskReducer = (state = initial, action) => {
     switch (action.type) {
-        case SET_TASKS:
+        case "SET_TASKS":
             return {
                 ...state,
                 tasks: action.payload
             }
-        case SET_TASK_ITEM:
+        case "SET_TASK_ITEM":
             return {
                 ...state,
                 taskItem: action.payload
@@ -27,11 +27,11 @@ const taskReducer = (state = initial, action) => {
 export default taskReducer;
 
 export const setTasks = (tasks) => ({
-    type: SET_TASKS,
+    type: "SET_TASKS",
     payload: tasks
 })
 export const setTaskItem = (task) => ({
-    type: SET_TASK_ITEM,
+    type: "SET_TASK_ITEM",
     payload: task
 })
 
