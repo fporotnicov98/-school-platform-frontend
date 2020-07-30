@@ -5,13 +5,15 @@ import userReducer from "./userReducer";
 import classReducer from "./classReducer";
 import dialogsReducer from "./dialogsReducer";
 import scheduleReducer from "./scheduleReducer";
+import taskReducer from "./taskReducer";
 
 let reducers = combineReducers({
     auth: authReducer,
     users: userReducer,
     classroom: classReducer,
     dialogs: dialogsReducer,
-    schedule: scheduleReducer
+    schedule: scheduleReducer,
+    task: taskReducer,
 })
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware))

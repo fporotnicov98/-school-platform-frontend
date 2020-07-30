@@ -117,4 +117,22 @@ export const scheduleAPI = {
     deleteSchedule(id) {
         return instanse.delete(`/schedule/deleteSchedule/${id}`)
     }
+},
+
+export const taskAPI = {
+    getTasks(){
+        return instanse.get('/task/getTasks')
+    },
+    getTaskItem(taskId){
+        return instanse.get(`/task/${taskId}`)
+    },
+    updateTask(taskId,taskTitle,taskText,editedDate){
+        return instanse.put(`/task/updateTask/${taskId}`,{taskTitle,taskText,editedDate})
+    },
+    addTask(classNumber,publicDate,deadlineDate,subject,teacher,taskTitle,taskText){
+        return instanse.post(`/task/addTask`,{classNumber,publicDate,deadlineDate,subject,teacher,taskTitle,taskText})
+    },
+    deleteTask(taskId){
+        return instanse.delete(`/task/deleteTask/${taskId}`)
+    }
 }
