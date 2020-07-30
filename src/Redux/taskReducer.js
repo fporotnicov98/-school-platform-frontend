@@ -1,5 +1,5 @@
-import { taskAPI } from "../Api/Api";
-import { regSuccess } from "../Components/ConfirmForm/SuccessConfirm";
+import {taskAPI} from "../Api/Api";
+import {regSuccess} from "../Components/ConfirmForm/SuccessConfirm";
 
 
 let initial = {
@@ -54,15 +54,15 @@ export const deleteTask = (id) => dispatch => {
         })
 }
 
-export const addTask = (classNumber,publicDate,deadlineDate,subject,teacher,taskTitle,taskText) => dispatch => {
-    taskAPI.addTask(classNumber,publicDate,deadlineDate,subject,teacher,taskTitle,taskText)
+export const addTask = (classNumber, publicDate, deadlineDate, subject, teacher, taskTitle, taskText) => dispatch => {
+    taskAPI.addTask(classNumber, publicDate, deadlineDate, subject, teacher, taskTitle, taskText)
         .then(response => {
             regSuccess(response.data.message)
             dispatch(getTasks())
         })
 }
-export const updateTask = (taskId,taskTitle,taskText,editedDate) => dispatch => {
-    taskAPI.updateTask(taskId,taskTitle,taskText,editedDate)
+export const updateTask = (taskId, taskTitle, taskText, editedDate) => dispatch => {
+    taskAPI.updateTask(taskId, taskTitle, taskText, editedDate)
         .then(response => {
             if (response.data.resultCode === 0) {
                 regSuccess(response.data.message)

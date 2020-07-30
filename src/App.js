@@ -18,6 +18,7 @@ import TasksPageContainer from "./Pages/TasksPage/TasksPage";
 import AddTasks from "./Pages/TasksPage/addTasks/AddTasks";
 import ShowTasks from "./Pages/TasksPage/showTasks/ShowTasks";
 import CheckTasks from "./Pages/TasksPage/checkTasks/CheckTasks";
+import TaskItemContainer from "./Pages/TasksPage/TaskItem/TaskItem";
 
 function App() {
     return (
@@ -38,7 +39,8 @@ function App() {
                     <Route path='/dialogs/:classId?' render={() => <DialogsPageContainer/>}/>
                     <Route path='/tasks' exact render={() => <TasksPageContainer/>}/>
                     <Route path='/tasks/addTasks' render={() => <AddTasks/>}/>
-                    <Route path='/tasks/showTasks' render={() => <ShowTasks/>}/>
+                    <Route path='/tasks/showTasks' exact render={() => <ShowTasks/>}/>
+                    <Route path='/tasks/showTasks/:tasksId?' render={() => <TaskItemContainer/>}/>
                     <Route path='/tasks/checkTasks' render={() => <CheckTasks/>}/>
                 </Switch>
             </div>
