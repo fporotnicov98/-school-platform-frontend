@@ -1,20 +1,20 @@
-import React, {Component, useState} from 'react';
+import React, {useState} from 'react';
 import {connect} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
 import './../TasksPage.scss';
 import Select from "@material-ui/core/Select";
 import DateFnsUtils from '@date-io/date-fns';
-import {
-    KeyboardDatePicker,
-    MuiPickersUtilsProvider,
-} from '@material-ui/pickers';
-
+import {  KeyboardDatePicker,MuiPickersUtilsProvider} from '@material-ui/pickers';
+import date from '../../../Assets/Other/date'
 
 const AddTasks = (props) => {
-    const [selectedDate, setSelectedDate] = React.useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(date());   
+
+
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
+
     if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
     return (
         <div className='wrapper'>
@@ -52,7 +52,7 @@ const AddTasks = (props) => {
                             margin="normal"
                             id="date-picker-dialog"
                             format="dd/MM/yyyy"
-                            value={selectedDate}
+                            value={date()}
                         />
                     </MuiPickersUtilsProvider>
                 </div>
