@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import M from "materialize-css";
 import {connect} from "react-redux";
 import {deleteUser, getStudent, updateStudent} from "../../Redux/userReducer";
-import {Redirect} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 class Students extends Component {
     componentDidMount() {
@@ -51,6 +51,12 @@ class Students extends Component {
         if (!this.props.isAuth) return <Redirect to='/'></Redirect>
         return (
             <div className='users'>
+                <nav className='blue-grey lighten-4'>
+                    <div className="nav-wrapper">
+                        <NavLink to="/personal" className="breadcrumb">Личный кабинет</NavLink>
+                        <a href="#!" className="breadcrumb">Ученики</a>
+                    </div>
+                </nav>
                 <ul ref={Collapsible => {
                     this.Collapsible = Collapsible;
                 }} className="collapsible popout">

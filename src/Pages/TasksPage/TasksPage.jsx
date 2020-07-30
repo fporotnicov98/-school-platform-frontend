@@ -11,10 +11,11 @@ class TasksPage extends React.Component {
         showTasks: false,
         checkTasks: false
     }
+
     componentDidMount() {
         this.props.getClasses()
-        M.Dropdown.init(this.Dropdown, {})
     }
+
     addTasks = () => {
         this.setState({addTasks: true, showTasks: false, checkTasks: false})
     }
@@ -40,9 +41,12 @@ class TasksPage extends React.Component {
                         <div className='z-depth-2 tasks blue-grey lighten-4'>
                             <div className='class'>
                                 <div className='class-block'>
-                                    <NavLink to='/tasks/addTasks' className='white-text btn small cyan darken-2'>Добавить задание</NavLink>
-                                    <NavLink to='/tasks/showTasks' className='white-text btn small cyan darken-2'>Посмотреть все задания</NavLink>
-                                    <NavLink to='/tasks/checkTasks' className='white-text btn small cyan darken-2'>Проверка заданий</NavLink>
+                                    <NavLink to='/tasks/addTasks' className='white-text btn small cyan darken-2'>Добавить
+                                        задание</NavLink>
+                                    <NavLink to='/tasks/showTasks' className='white-text btn small cyan darken-2'>Посмотреть
+                                        все задания</NavLink>
+                                    <NavLink to='/tasks/checkTasks' className='white-text btn small cyan darken-2'>Проверка
+                                        заданий</NavLink>
                                 </div>
                             </div>
                         </div>

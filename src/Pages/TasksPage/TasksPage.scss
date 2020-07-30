@@ -1,4 +1,7 @@
 .wrapper {
+  .modal {
+    height: 70vh;
+  }
   .tasks {
     padding: 20px;
     width: 80%;
@@ -7,42 +10,121 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     .class {
       .class-block {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
+
         .btn {
           width: 400px;
           margin: 20px;
         }
       }
     }
+  }
+}
 
+// AddTasks
 
-    // AddTasks
+.add-tasks {
+  width: 80%;
+  min-height: 76vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .tasks-body {
+    width: 90%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    align-items: center;
     .class-number {
-      width: 50%;
+      width: 100%;
       display: flex;
+      justify-content: space-between;
       margin-bottom: 20px;
-      font-size: 18px;
-      span {
-        width: 40%;
-        margin-right: 20px;
-      }
+      align-items: center;
+      min-height: 54px;
       .class {
         width: 30%;
       }
     }
+
     .subject {
-      width: 50%;
+      min-height: 54px;
+      width: 100%;
       display: flex;
-      font-size: 18px;
-      span {
-        width: 40%;
-        margin-right: 20px;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+
+    .topic {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      align-items: center;
+      .input-field {
+        width: 60%;
+        margin: 0 !important;
       }
     }
+
+    .date {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      align-items: center;
+      input {
+        text-align: right;
+        width: 60%;
+      }
+    }
+
+    .deadline {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      align-items: center;
+      .deadline-day {
+
+      }
+      .deadline-month {
+
+      }
+      .deadline-year {
+
+      }
+    }
+
+    .description {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      align-items: center;
+      .input-field {
+        width: 60%;
+        margin: 0 !important;
+      }
+    }
+    .btn {
+      width: 70%;
+    }
+    textarea.materialize-textarea {
+      line-height: normal;
+      overflow-y: hidden;
+      padding: .8rem .8rem .8rem .8rem;
+      min-height: 3rem;
+      box-sizing: border-box;
+    }
   }
+
 }
