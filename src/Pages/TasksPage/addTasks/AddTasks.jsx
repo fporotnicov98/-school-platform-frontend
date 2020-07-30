@@ -6,6 +6,7 @@ import Select from "@material-ui/core/Select";
 import date from '../../../Assets/Other/date'
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
+import { addTask } from "../../../Redux/taskReducer";
 
 const AddTasks = (props) => {
 
@@ -25,8 +26,8 @@ const AddTasks = (props) => {
     let handleYear = (e) => {
         setYear(e.target.value)
     }
-    let handleClass = (classNumber) => {
-        setClass(classNumber)
+    let handleClass = (e) => {
+        setClass(e.target.value)
     }
     let handleTitle = (e) => {
         setTitle(e.target.value)
@@ -49,6 +50,8 @@ const AddTasks = (props) => {
                                 onChange={handleClass}
                                 value={classNumber}
                             >
+
+                                <option value="" disabled selected>Выбрать класс</option>
                                 {
                                     props.classroom.map(item =>
                                         <option
@@ -62,7 +65,7 @@ const AddTasks = (props) => {
                         </div>
                         <div className='topic'>Тема задания:
                                 <div className="input-field">
-                                <input id="topic" type="text" className="validate" value = {title} onChange = {handleTitle} placeholder = "Введите тему задания"/>
+                                <input id="topic" type="text" className="validate" value={title} onChange={handleTitle} placeholder="Введите тему задания" />
                             </div>
                         </div>
                         <div className='date'>Дата публикации:
@@ -148,11 +151,11 @@ const AddTasks = (props) => {
                         </div>
                         <div className='description'>Описание задания
                                 <div className="input-field">
-                                <textarea className='materialize-textarea' value = {description} onChange = {handleDesc}></textarea>
+                                <textarea className='materialize-textarea' value={description} onChange={handleDesc}></textarea>
                             </div>
                         </div>
                         <button className="btn waves-effect waves-light cyan darken-2" type="submit"
-                            name="action">Опубликовать задание
+                            name="action" onClick = {() => props.addTask(classNumber,date(),`${day} ${month} ${year}`,props.auth.subject,props.auth.fio,title,description)}>Опубликовать задание 
                                 <i className="material-icons right">send</i>
                         </button>
                     </div>
@@ -168,10 +171,11 @@ const mapStateToProps = state => {
     return {
         auth: state.auth,
         classroom: state.classroom.classroom,
+        addTask: state.task.addTask
     }
 }
 
-export default connect(mapStateToProps, {})(AddTasks)
+export default connect(mapStateToProps, {addTask})(AddTasks)
 
 
 
