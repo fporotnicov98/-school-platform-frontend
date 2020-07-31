@@ -4,18 +4,12 @@ import date from "../../../Assets/Other/date";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {getTaskItem, updateTask} from "../../../Redux/taskReducer";
+import Preloader from "../../../Assets/Commons/Preloader";
 
 const TaskItem = (props) => {
 
-    useEffect(() => {
-        if (!props.match.params.taskId) {
-            alert('404')
-        }
-        props.getTaskItem(props.match.params.taskId)
-    }, [props.match.params.taskId])
-
-    let [title, setTitle] = useState(props.task.taskTitle)
-    let [description, setDesc] = useState(props.task.taskText)
+    let [title, setTitle] = useState(props.taskItem.taskTitle)
+    let [description, setDesc] = useState(props.taskItem.taskText)
 
     let handleTitle = (e) => {
         setTitle(e.target.value)
@@ -25,6 +19,7 @@ const TaskItem = (props) => {
     }
 
     if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+    if (!props.taskItem) return <Preloader />
     return (
         <>
             <div className='wrapper'>
@@ -32,7 +27,7 @@ const TaskItem = (props) => {
                     <div className='tasks-body'>
                         <div className='class-number'>
                             <span>Класс: </span>
-                            <span>{props.task.classNumber}</span>
+                            <span>{props.taskItem.classNumber}</span>
                         </div>
                         <div className='subject'>Предмет:
                             <span className='subject-text'>{props.auth.subject}</span>
@@ -44,20 +39,20 @@ const TaskItem = (props) => {
                             </div>
                         </div>
                         <div className='date'>Дата публикации:
-                            <input type="text" value={props.task.publicDate}/>
+                            <input type="text" value={props.taskItem.publicDate}/>
                         </div>
                         <div className='deadline'>Срок сдачи:
-                            {props.task.deadlineDate}
+                            {props.taskItem.deadlineDate}
                         </div>
                         <div className='description'>Описание задания
                             <div className="input-field">
                                     <textarea className='materialize-textarea' value={description}
-                                              onChange={handleDesc}></textarea>
+                                              onChange={handleDesc}/>
                             </div>
                         </div>
                         <button className="btn waves-effect waves-light cyan darken-2" type="submit"
                                 name="action"
-                                onClick={() => props.updateTask(props.task._id, title, description, date())}>Изменить
+                                onClick={() => props.updateTask(props.taskItem._id, title, description, date())}>Изменить
                             задание
                             <i className="material-icons right">send</i>
                         </button>
@@ -69,14 +64,5 @@ const TaskItem = (props) => {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        task: state.task.taskItem,
-        auth: state.auth,
-    }
-}
 
-export default compose(
-    withRouter,
-    connect(mapStateToProps, {getTaskItem, updateTask})
-)(TaskItem)
+export default TaskItem
