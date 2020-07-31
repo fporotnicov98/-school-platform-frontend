@@ -98,7 +98,7 @@ class ClassroomItem extends Component {
                                         <div className='fio'>{student.fio}</div>
                                         <a href="#" onClick={() => {
                                             this.props.deleteStudentToClass(this.props.classId, student.studentId)
-                                            this.props.updateStudent(student.studentId, student.fio, student.login, student.email, student.mobileNumber, null)
+                                            this.props.updateStudent(student.studentId, student.fio, student.login, student.email, student.mobileNumber, null, null)
                                             this.props.getClassroom(this.props.classId)
                                         }}><i className='material-icons'>remove_circle_outline</i></a>
                                     </div>
@@ -114,7 +114,7 @@ class ClassroomItem extends Component {
                         <div className='students'>
                             {this.state.isClick &&
                             this.props.students.map((item, index) =>
-                                !item.classroom
+                                !item.classId
                                     ?
                                     <div key={index} className='items white z-depth-1-half'>
                                         <div className='info'>
