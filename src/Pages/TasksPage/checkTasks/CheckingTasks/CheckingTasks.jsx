@@ -69,7 +69,7 @@ const CheckingTasks = (props) => {
                             <MenuItem value={'5'}>5</MenuItem>
                         </Select>
                     </div>
-                    <button className="btn waves-effect waves-light cyan darken-2" type="submit" name="action">
+                    <button className="btn waves-effect waves-light cyan darken-2" type="submit" name="action" onClick = {() => props.setMark(props.homeworkItem._id, rating, notation)}>
                         Отправить результат првоерки
                     </button>
                 </div>

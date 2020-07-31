@@ -144,8 +144,8 @@ export const homeworkAPI = {
     getHomeworkItem(id){
         return instanse.get(`/homework/${id}`)
     },
-    setMark(id,teacherDesc){
-        return instanse.put(`/homework/setMark/${id}`,{teacherDesc})
+    setMark(id,mark,teacherDesc){
+        return instanse.put(`/homework/setMark/${id}`,{mark,teacherDesc})
     },
     addHomework(classNumber,taskId, student, publicDate, subject, teacher,answerToTask, deadlineDate, taskTitle){
         return instanse.post(`/homework/addHomework`,{classNumber,taskId, student, publicDate, subject, teacher,answerToTask, deadlineDate,taskTitle})

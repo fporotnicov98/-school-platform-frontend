@@ -55,8 +55,8 @@ export const addHomework = (classNumber,taskId, student, publicDate, subject, te
             dispatch(getHomeworks())
         })
 }
-export const setMark = (id, teacherDesc) => dispatch => {
-    homeworkAPI.setMark(id, teacherDesc)
+export const setMark = (id, mark, teacherDesc) => dispatch => {
+    homeworkAPI.setMark(id, mark, teacherDesc)
         .then(response => {
             if (response.data.resultCode === 0) {
                 regSuccess(response.data.message)

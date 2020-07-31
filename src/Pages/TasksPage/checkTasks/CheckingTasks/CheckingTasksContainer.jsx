@@ -4,7 +4,7 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import CheckingTasks from "./CheckingTasks";
 import Preloader from '../../../../Assets/Commons/Preloader'
-import { getHomeworkItem,setHomeworkItem } from "../../../../Redux/homeworkReducer";
+import { getHomeworkItem,setHomeworkItem,setMark } from "../../../../Redux/homeworkReducer";
 
 const CheckingTasksContainer = (props) => {
 
@@ -32,5 +32,5 @@ const mapStateToProps = state => {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {getHomeworkItem,setHomeworkItem})
+    connect(mapStateToProps, {getHomeworkItem,setHomeworkItem,setMark})
 )(CheckingTasksContainer);
