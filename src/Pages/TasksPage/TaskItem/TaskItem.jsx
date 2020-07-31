@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect,useState} from 'react';
 import {withRouter, Redirect} from "react-router-dom";
 import date from "../../../Assets/Other/date";
 import {connect} from "react-redux";
@@ -7,22 +7,23 @@ import {getTaskItem, updateTask} from "../../../Redux/taskReducer";
 
 const TaskItem = (props) => {
 
+    let [title, setTitle] = useState('')
+    let [description, setDesc] = useState('')
+
     useEffect(() => {
-        if (!props.match.params.taskId) {
-            alert('404')
-        }
-        props.getTaskItem(props.match.params.taskId)
-    }, [props.match.params.taskId])
+        props.getTaskItem(props.match.params.tasksId)
+    }, [])
 
-    let [title, setTitle] = useState(props.task.taskTitle)
-    let [description, setDesc] = useState(props.task.taskText)
-
+    
     let handleTitle = (e) => {
         setTitle(e.target.value)
     }
     let handleDesc = (e) => {
         setDesc(e.target.value)
     }
+
+   
+    
 
     if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
     return (
@@ -32,26 +33,26 @@ const TaskItem = (props) => {
                     <div className='tasks-body'>
                         <div className='class-number'>
                             <span>Класс: </span>
-                            <span>{props.task.classNumber}</span>
+                            <span>{props.task && props.task.classNumber}</span>
                         </div>
                         <div className='subject'>Предмет:
                             <span className='subject-text'>{props.auth.subject}</span>
                         </div>
                         <div className='topic'>Тема задания:
                             <div className="input-field">
-                                <input id="topic" type="text" className="validate" value={title}
+                                <input id="topic" type="text" className="validate" value={props.task && props.task.taskTitle}
                                        onChange={handleTitle} placeholder="Введите тему задания"/>
                             </div>
                         </div>
                         <div className='date'>Дата публикации:
-                            <input type="text" value={props.task.publicDate}/>
+                            <input type="text" value={props.task && props.task.publicDate}/>
                         </div>
                         <div className='deadline'>Срок сдачи:
-                            {props.task.deadlineDate}
+                            {props.task && props.task.deadlineDate}
                         </div>
                         <div className='description'>Описание задания
                             <div className="input-field">
-                                    <textarea className='materialize-textarea' value={description}
+                                    <textarea className='materialize-textarea' value={props.task && props.task.taskText}
                                               onChange={handleDesc}></textarea>
                             </div>
                         </div>

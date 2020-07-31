@@ -42,7 +42,7 @@ export const getTasks = () => dispatch => {
         })
 }
 export const getTaskItem = (id) => dispatch => {
-    taskAPI.getTasks(id)
+    taskAPI.getTaskItem(id)
         .then(response => {
             dispatch(setTaskItem(response.data))
         })

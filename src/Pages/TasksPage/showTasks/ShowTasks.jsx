@@ -15,7 +15,7 @@ const ShowTasks = (props) => {
 
     useEffect(() => {
         props.getTasks()
-    }, [props.tasks])
+    }, [])
 
     const StyledTableRow = withStyles((theme) => ({
         root: {
