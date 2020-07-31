@@ -25,6 +25,7 @@ const CheckingTasksContainer = (props) => {
 
 const mapStateToProps = state => {
     return {
+        auth: state.auth,
         homeworkItem: state.homework.homeworkItem
     }
 }

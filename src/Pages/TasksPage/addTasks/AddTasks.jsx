@@ -46,7 +46,7 @@ const AddTasks = (props) => {
         }
 
 
-        if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+        if (!props.auth.isAuth) return <Redirect to={'/'}/>
         return (
             <>
                 <div className='wrapper'>
@@ -168,7 +168,7 @@ const AddTasks = (props) => {
                             <div className='description'>Описание задания
                                 <div className="input-field">
                                     <textarea className='materialize-textarea' value={description}
-                                              onChange={handleDesc}></textarea>
+                                              onChange={handleDesc}/>
                                 </div>
                             </div>
                             <button className="btn waves-effect waves-light cyan darken-2" type="submit"
