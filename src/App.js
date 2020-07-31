@@ -19,6 +19,7 @@ import AddTasks from "./Pages/TasksPage/addTasks/AddTasks";
 import ShowTasks from "./Pages/TasksPage/showTasks/ShowTasks";
 import CheckTasks from "./Pages/TasksPage/checkTasks/CheckTasks";
 import TaskItemContainer from "./Pages/TasksPage/TaskItem/TaskItemContainer";
+import CheckingTasksContainer from "./Pages/TasksPage/checkTasks/CheckingTasks/CheckingTasksContainer";
 
 function App() {
     return (
@@ -42,6 +43,7 @@ function App() {
                     <Route path='/tasks/showTasks' exact render={() => <ShowTasks/>}/>
                     <Route path='/tasks/showTasks/:tasksId?' render={() => <TaskItemContainer/>}/>
                     <Route path='/tasks/checkTasks' render={() => <CheckTasks/>}/>
+                    <Route path='/tasks/checkTasks/:tasksId?' render={() => <CheckingTasksContainer/>}/>
                 </Switch>
             </div>
         </BrowserRouter>
