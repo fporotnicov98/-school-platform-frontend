@@ -1,18 +1,20 @@
+<<<<<<< HEAD
 import React, {useEffect,useState} from 'react';
 import {withRouter, Redirect} from "react-router-dom";
+=======
+import React, {useEffect, useState} from 'react';
+import {withRouter, Redirect, NavLink} from "react-router-dom";
+>>>>>>> dcf839b3748bb70927a93456c583a6fae3226b25
 import date from "../../../Assets/Other/date";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {getTaskItem, updateTask} from "../../../Redux/taskReducer";
+import Preloader from "../../../Assets/Commons/Preloader";
 
 const TaskItem = (props) => {
 
-    let [title, setTitle] = useState('')
-    let [description, setDesc] = useState('')
-
-    useEffect(() => {
-        props.getTaskItem(props.match.params.tasksId)
-    }, [])
+    let [title, setTitle] = useState(props.taskItem.taskTitle)
+    let [description, setDesc] = useState(props.taskItem.taskText)
 
     
     let handleTitle = (e) => {
@@ -26,14 +28,22 @@ const TaskItem = (props) => {
     
 
     if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+    if (!props.taskItem) return <Preloader/>
     return (
         <>
             <div className='wrapper'>
+                <nav className='blue-grey lighten-4'>
+                    <div className="nav-wrapper">
+                        <NavLink to="/tasks" className="breadcrumb">Задания</NavLink>
+                        <NavLink to="/tasks/showTasks" className="breadcrumb">Все задания</NavLink>
+                        <a href="#!" className="breadcrumb">Изменить задание</a>
+                    </div>
+                </nav>
                 <div className='z-depth-2 add-tasks blue-grey lighten-4'>
                     <div className='tasks-body'>
                         <div className='class-number'>
                             <span>Класс: </span>
-                            <span>{props.task && props.task.classNumber}</span>
+                            <span>{props.taskItem.classNumber}</span>
                         </div>
                         <div className='subject'>Предмет:
                             <span className='subject-text'>{props.auth.subject}</span>
@@ -45,20 +55,20 @@ const TaskItem = (props) => {
                             </div>
                         </div>
                         <div className='date'>Дата публикации:
-                            <input type="text" value={props.task && props.task.publicDate}/>
+                            <input type="text" value={props.taskItem.publicDate}/>
                         </div>
                         <div className='deadline'>Срок сдачи:
-                            {props.task && props.task.deadlineDate}
+                            <input type='text' value={props.taskItem.deadlineDate}/>
                         </div>
                         <div className='description'>Описание задания
                             <div className="input-field">
-                                    <textarea className='materialize-textarea' value={props.task && props.task.taskText}
-                                              onChange={handleDesc}></textarea>
+                                    <textarea className='materialize-textarea' value={description}
+                                              onChange={handleDesc}/>
                             </div>
                         </div>
                         <button className="btn waves-effect waves-light cyan darken-2" type="submit"
                                 name="action"
-                                onClick={() => props.updateTask(props.task._id, title, description, date())}>Изменить
+                                onClick={() => props.updateTask(props.taskItem._id, title, description, date())}>Изменить
                             задание
                             <i className="material-icons right">send</i>
                         </button>
@@ -70,14 +80,5 @@ const TaskItem = (props) => {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        task: state.task.taskItem,
-        auth: state.auth,
-    }
-}
 
-export default compose(
-    withRouter,
-    connect(mapStateToProps, {getTaskItem, updateTask})
-)(TaskItem)
+export default TaskItem

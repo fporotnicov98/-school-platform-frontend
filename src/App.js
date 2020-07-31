@@ -18,7 +18,7 @@ import TasksPageContainer from "./Pages/TasksPage/TasksPage";
 import AddTasks from "./Pages/TasksPage/addTasks/AddTasks";
 import ShowTasks from "./Pages/TasksPage/showTasks/ShowTasks";
 import CheckTasks from "./Pages/TasksPage/checkTasks/CheckTasks";
-import TaskItemContainer from "./Pages/TasksPage/TaskItem/TaskItem";
+import TaskItemContainer from "./Pages/TasksPage/TaskItem/TaskItemContainer";
 
 function App() {
     return (
