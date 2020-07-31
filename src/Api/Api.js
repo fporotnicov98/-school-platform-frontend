@@ -36,8 +36,8 @@ export const userAPI = {
     deleteUser(id) {
         return instanse.delete(`/users/deleteUser/${id}`)
     },
-    updateStudent(id, fio, login, email, mobileNumber, classId) {
-        return instanse.put(`/users/updateStudent/${id}`, {fio, login, email, mobileNumber, classId})
+    updateStudent(id, fio, login, email, mobileNumber, classId,classNumber) {
+        return instanse.put(`/users/updateStudent/${id}`, {fio, login, email, mobileNumber, classId, classNumber})
     },
     updateTeacher(id, fio, login, email, mobileNumber, subject, classId,classNumber) {
         return instanse.put(`/users/updateTeacher/${id}`, {fio, login, email, mobileNumber, subject, classId,classNumber})

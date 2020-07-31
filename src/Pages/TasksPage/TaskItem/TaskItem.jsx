@@ -12,6 +12,7 @@ const TaskItem = (props) => {
     let [description, setDesc] = useState(props.taskItem.taskText)
 
     
+    
     let handleTitle = (e) => {
         setTitle(e.target.value)
     }
@@ -45,7 +46,7 @@ const TaskItem = (props) => {
                         </div>
                         <div className='topic'>Тема задания:
                             <div className="input-field">
-                                <input id="topic" type="text" className="validate" value={props.task && props.task.taskTitle}
+                                <input id="topic" type="text" className="validate" value={title}
                                        onChange={handleTitle} placeholder="Введите тему задания"/>
                             </div>
                         </div>

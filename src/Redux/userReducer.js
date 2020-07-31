@@ -86,8 +86,8 @@ export const deleteUser = (id) => dispatch => {
             regSuccess(response.data.message)
         })
 }
-export const updateStudent = (id, fio, login, role, email, mobileNumber, classroom) => dispatch => {
-    userAPI.updateStudent(id, fio, login, role, email, mobileNumber, classroom)
+export const updateStudent = (id, fio, login, role, email, mobileNumber, classId, classNumber) => dispatch => {
+    userAPI.updateStudent(id, fio, login, role, email, mobileNumber, classId,classNumber)
         .then(response => {
             dispatch(getStudent())
         })

@@ -75,7 +75,7 @@ class ClassroomItem extends Component {
                             <ul id="dropdown1" className="dropdown-content">
                                 {
                                     this.props.teachers.map((item, index) =>
-                                        !item.classroom
+                                        !item.classNumber
                                             ?
                                             <li key={index} onClick={() => {
                                                 this.props.addTeacherToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber, item.subject)
@@ -123,7 +123,7 @@ class ClassroomItem extends Component {
                                             <div className='login'>{item.login}</div>
                                             <a onClick={() => {
                                                 this.props.addStudentToClass(this.props.classId, item._id, item.fio, item.login, item.email, item.mobileNumber, this.props.classNumber)
-                                                this.props.updateStudent(item._id, item.fio, item.login, item.email, item.mobileNumber, this.props.classId)
+                                                this.props.updateStudent(item._id, item.fio, item.login, item.email, item.mobileNumber, this.props.classId, this.props.classNumber)
                                                 this.props.getClassroom(this.props.classId)
                                             }
                                             }
