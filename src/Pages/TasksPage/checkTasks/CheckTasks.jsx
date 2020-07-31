@@ -51,7 +51,7 @@ const CheckTasks = (props) => {
                         {props.homeworks.map((homework, index) => (
                             <>
                                 {
-                                    homework.teacher === "Геровская Наталья"
+                                    homework.teacher === props.auth.fio
                                         ?
                                         <StyledTableRow key={index}>
                                             <NavLink to={`/tasks/checkTasks/` + homework._id}>

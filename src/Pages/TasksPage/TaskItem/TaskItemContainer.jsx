@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {getTaskItem, updateTask, setTaskItem } from "../../../Redux/taskReducer";
 import TaskItem from "./TaskItem";
 import Preloader from "../../../Assets/Commons/Preloader";
+import { addHomework } from "../../../Redux/homeworkReducer";
 
 const TaskItemContainer = (props) => {
 
@@ -32,5 +33,5 @@ const mapStateToProps = state => {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {getTaskItem, updateTask, setTaskItem })
+    connect(mapStateToProps, {getTaskItem, updateTask, setTaskItem, addHomework})
 )(TaskItemContainer);

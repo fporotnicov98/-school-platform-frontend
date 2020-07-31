@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {withRouter, Redirect, NavLink} from "react-router-dom";
+import {Redirect, NavLink} from "react-router-dom";
 import date from "../../../Assets/Other/date";
-import {connect} from "react-redux";
-import {compose} from "redux";
-import {getTaskItem, updateTask} from "../../../Redux/taskReducer";
 import Preloader from "../../../Assets/Commons/Preloader";
+
 
 const TaskItem = (props) => {
 
@@ -113,7 +111,7 @@ const TaskItem = (props) => {
                                 <input type='text' value={answer} onChange={handleAnswer}/>
                             </div>
                             <button className="btn waves-effect waves-light cyan darken-2" type="submit"
-                                    name="action">Отправить ответ<i className="material-icons right">send</i>
+                                    name="action" onClick = {() => props.addHomework(props.auth.classNumber,props.taskItem._id, props.auth.fio, date(), props.taskItem.subject, props.taskItem.teacher,answer, props.taskItem.deadlineDate, props.taskItem.taskTitle)}>Отправить ответ<i className="material-icons right">send</i>
                             </button>
                         </div>
                     </div>
@@ -122,6 +120,5 @@ const TaskItem = (props) => {
         </>
     );
 };
-
 
 export default TaskItem
