@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {withRouter, Redirect} from "react-router-dom";
+import {withRouter, Redirect, NavLink} from "react-router-dom";
 import date from "../../../Assets/Other/date";
 import {connect} from "react-redux";
 import {compose} from "redux";
@@ -19,10 +19,17 @@ const TaskItem = (props) => {
     }
 
     if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
-    if (!props.taskItem) return <Preloader />
+    if (!props.taskItem) return <Preloader/>
     return (
         <>
             <div className='wrapper'>
+                <nav className='blue-grey lighten-4'>
+                    <div className="nav-wrapper">
+                        <NavLink to="/tasks" className="breadcrumb">Задания</NavLink>
+                        <NavLink to="/tasks/showTasks" className="breadcrumb">Все задания</NavLink>
+                        <a href="#!" className="breadcrumb">Изменить задание</a>
+                    </div>
+                </nav>
                 <div className='z-depth-2 add-tasks blue-grey lighten-4'>
                     <div className='tasks-body'>
                         <div className='class-number'>
@@ -42,7 +49,7 @@ const TaskItem = (props) => {
                             <input type="text" value={props.taskItem.publicDate}/>
                         </div>
                         <div className='deadline'>Срок сдачи:
-                            {props.taskItem.deadlineDate}
+                            <input type='text' value={props.taskItem.deadlineDate}/>
                         </div>
                         <div className='description'>Описание задания
                             <div className="input-field">

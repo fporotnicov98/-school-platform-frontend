@@ -28,10 +28,17 @@ const ShowTasks = (props) => {
     if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
     return (
         <div className='wrapper'>
+            <nav className='blue-grey lighten-4'>
+                <div className="nav-wrapper">
+                    <NavLink to="/tasks" className="breadcrumb">Задания</NavLink>
+                    <a href="#!" className="breadcrumb">Все задания</a>
+                </div>
+            </nav>
             <TableContainer component={Paper}>
                 <Table aria-label="customized table">
                     <TableHead className='blue-grey z-depth-1-half lighten-4'>
                         <TableRow>
+                            <TableCell>Номер задания</TableCell>
                             <TableCell>Предмет</TableCell>
                             <TableCell>Тема</TableCell>
                             <TableCell>Класс</TableCell>
@@ -47,12 +54,13 @@ const ShowTasks = (props) => {
                                         ?
                                         <StyledTableRow key={index}>
                                             <NavLink to={`/tasks/showTasks/` + task._id}>
-                                                <TableCell component="th" scope="row">{task.subject}</TableCell>
-                                                <TableCell align="left">{task.taskTitle}</TableCell>
-                                                <TableCell align="left">{task.classNumber}</TableCell>
-                                                <TableCell align="left">{task.deadlineDate}</TableCell>
-                                                <TableCell align="left">{task.editedDate}</TableCell>
+                                                <TableCell component="th" scope="row">{index + 1}</TableCell>
                                             </NavLink>
+                                            <TableCell>{task.subject}</TableCell>
+                                            <TableCell>{task.taskTitle}</TableCell>
+                                            <TableCell>{task.classNumber}</TableCell>
+                                            <TableCell>{task.deadlineDate}</TableCell>
+                                            <TableCell>{task.editedDate}</TableCell>
                                         </StyledTableRow>
                                         : null
                                 }
