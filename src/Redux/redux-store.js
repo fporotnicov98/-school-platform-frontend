@@ -6,6 +6,7 @@ import classReducer from "./classReducer";
 import dialogsReducer from "./dialogsReducer";
 import scheduleReducer from "./scheduleReducer";
 import taskReducer from "./taskReducer";
+import homeworkReducer from "./homeworkReducer";
 
 let reducers = combineReducers({
     auth: authReducer,
@@ -14,6 +15,7 @@ let reducers = combineReducers({
     dialogs: dialogsReducer,
     schedule: scheduleReducer,
     task: taskReducer,
+    homework: homeworkReducer
 })
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware))

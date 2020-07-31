@@ -34,7 +34,7 @@ const CheckTasks = (props) => {
                     <TableHead className='blue-grey z-depth-1-half lighten-4'>
                         <TableRow>
                             <TableCell>Номер задания</TableCell>
-                            <TableCell>Предмет</TableCell>
+                            <TableCell>Ученик</TableCell>
                             <TableCell>Тема</TableCell>
                             <TableCell>Класс</TableCell>
                             <TableCell>Срок сдачи</TableCell>
