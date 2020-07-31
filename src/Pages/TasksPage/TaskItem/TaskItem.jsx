@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import React, {useEffect,useState} from 'react';
-import {withRouter, Redirect} from "react-router-dom";
-=======
 import React, {useEffect, useState} from 'react';
 import {withRouter, Redirect, NavLink} from "react-router-dom";
->>>>>>> dcf839b3748bb70927a93456c583a6fae3226b25
 import date from "../../../Assets/Other/date";
 import {connect} from "react-redux";
 import {compose} from "redux";
