@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
 import {getClasses} from "../../Redux/classReducer";
-import M from "materialize-css";
 import './TasksPage.scss'
 
 class TasksPage extends React.Component {
