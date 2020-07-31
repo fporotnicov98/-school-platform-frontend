@@ -42,7 +42,7 @@ function App() {
                     <Route path='/tasks/addTasks' render={() => <AddTasks/>}/>
                     <Route path='/tasks/showTasks' exact render={() => <ShowTasks/>}/>
                     <Route path='/tasks/showTasks/:tasksId?' render={() => <TaskItemContainer/>}/>
-                    <Route path='/tasks/checkTasks' render={() => <CheckTasks/>}/>
+                    <Route path='/tasks/checkTasks' exact render={() => <CheckTasks/>}/>
                     <Route path='/tasks/checkTasks/:tasksId?' render={() => <CheckingTasksContainer/>}/>
                 </Switch>
             </div>

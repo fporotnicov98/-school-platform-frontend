@@ -15,31 +15,31 @@ const CheckingTasks = (props) => {
                 <div className='tasks-body'>
                     <div className='class-number'>
                         <span>Класс: </span>
-                        {/*<span>{props.taskItem.classNumber}</span>*/}
+                        <span>{props.homeworkItem.classNumber}</span>
                     </div>
                     <div className='subject'>Предмет:
-                        {/*<span className='subject-text'>{props.taskItem.subject}</span>*/}
+                        <span className='subject-text'>{props.homeworkItem.subject}</span>
                     </div>
                     <div className='topic'>Тема задания:
-                        {/*<span>{props.taskItem.taskTitle}</span>*/}
+                        <span>{props.homeworkItem.taskTitle}</span>
                     </div>
                     <div className='date'>Ученик:
-                        {/*<span>{props.taskItem.publicDate}</span>*/}
+                        <span>{props.homeworkItem.student}</span>
                     </div>
                     <div className='deadline'>Срок сдачи:
-                        {/*<span>{props.taskItem.deadlineDate}</span>*/}
+                        <span>{props.homeworkItem.deadlineDate}</span>
                     </div>
                     <div className='description'>Дата публикации ученика
-                        {/*<span>{props.taskItem.taskText}</span>*/}
+                        <span>{props.homeworkItem.publicDate}</span>
                     </div>
                     <div className='description'>Ответ ученика
-                        {/*<span>{props.taskItem.taskText}</span>*/}
+                        <span>{props.homeworkItem.answerToTask}</span>
                     </div>
                     <div className='description'>Примечание
-                        {/*<span>{props.taskItem.taskText}</span>*/}
+                        <span></span>
                     </div>
                     <div className='answer'>Оценка
-                        {/*<input type='text' value={answer} onChange={handleAnswer}/>*/}
+                        
                     </div>
                     <button className="btn waves-effect waves-light cyan darken-2" type="submit" name="action">
                         Отправить результат првоерки

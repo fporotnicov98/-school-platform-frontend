@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from "react-redux";
-import {NavLink, Redirect} from "react-router-dom";
+import React, { useEffect } from 'react';
+import { connect } from "react-redux";
+import { NavLink, Redirect } from "react-router-dom";
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -9,8 +9,14 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import withStyles from "@material-ui/core/styles/withStyles";
+import { getHomeworks } from "../../../Redux/homeworkReducer";
 
 const CheckTasks = (props) => {
+    
+    useEffect(() => {
+        props.getHomeworks()
+    }, [])
+
 
     const StyledTableRow = withStyles((theme) => ({
         root: {
@@ -34,33 +40,33 @@ const CheckTasks = (props) => {
                     <TableHead className='blue-grey z-depth-1-half lighten-4'>
                         <TableRow>
                             <TableCell>Номер задания</TableCell>
+                            <TableCell>Класс</TableCell>
                             <TableCell>Ученик</TableCell>
                             <TableCell>Тема</TableCell>
-                            <TableCell>Класс</TableCell>
-                            <TableCell>Срок сдачи</TableCell>
-                            <TableCell>Дата обновления</TableCell>
+                            <TableCell>Срок сдачи задания</TableCell>
+                            <TableCell>Дата отправки учеником</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {/*{props.tasks.map((task, index) => (*/}
-                        {/*    <>*/}
-                        {/*        {*/}
-                        {/*            task.teacher === props.auth.fio*/}
-                        {/*                ?*/}
-                        {/*                <StyledTableRow key={index}>*/}
-                        {/*                    <NavLink to={`/tasks/showTasks/` + task._id}>*/}
-                        {/*                        <TableCell component="th" scope="row">{index + 1}</TableCell>*/}
-                        {/*                    </NavLink>*/}
-                        {/*                    <TableCell>{task.subject}</TableCell>*/}
-                        {/*                    <TableCell>{task.taskTitle}</TableCell>*/}
-                        {/*                    <TableCell>{task.classNumber}</TableCell>*/}
-                        {/*                    <TableCell>{task.deadlineDate}</TableCell>*/}
-                        {/*                    <TableCell>{task.editedDate}</TableCell>*/}
-                        {/*                </StyledTableRow>*/}
-                        {/*                : null*/}
-                        {/*        }*/}
-                        {/*    </>*/}
-                        {/*))}*/}
+                        {props.homeworks.map((homework, index) => (
+                            <>
+                                {
+                                    homework.teacher === "Геровская Наталья"
+                                        ?
+                                        <StyledTableRow key={index}>
+                                            <NavLink to={`/tasks/checkTasks/` + homework._id}>
+                                                <TableCell component="th" scope="row">{index + 1}</TableCell>
+                                            </NavLink>
+                                            <TableCell>{homework.classNumber}</TableCell>
+                                            <TableCell>{homework.student}</TableCell>
+                                            <TableCell>{homework.taskTitle}</TableCell>
+                                            <TableCell>{homework.deadlineDate}</TableCell>
+                                            <TableCell>{homework.publicDate}</TableCell>
+                                        </StyledTableRow>
+                                        : null
+                                }
+                            </>
+                        ))}
                     </TableBody>
                 </Table>
             </TableContainer>
@@ -71,7 +77,8 @@ const CheckTasks = (props) => {
 const mapStateToProps = state => {
     return {
         auth: state.auth,
+        homeworks: state.homework.homeworks
     }
 }
 
-export default connect(mapStateToProps, {})(CheckTasks)
+export default connect(mapStateToProps, {getHomeworks})(CheckTasks)

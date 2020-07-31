@@ -48,8 +48,8 @@ export const getHomeworkItem = (id) => dispatch => {
         })
 }
 
-export const addHomework = (classNumber,taskId, student, publicDate, subject, teacher,answerToTask) => dispatch => {
-    homeworkAPI.addHomework(classNumber,taskId, student, publicDate, subject, teacher,answerToTask)
+export const addHomework = (classNumber,taskId, student, publicDate, subject, teacher,answerToTask, taskTitle) => dispatch => {
+    homeworkAPI.addHomework(classNumber,taskId, student, publicDate, subject, teacher,answerToTask,taskTitle)
         .then(response => {
             regSuccess(response.data.message)
             dispatch(getHomeworks())
