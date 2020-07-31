@@ -34,41 +34,84 @@ const ShowTasks = (props) => {
                     <a href="#!" className="breadcrumb">Все задания</a>
                 </div>
             </nav>
-            <TableContainer component={Paper}>
-                <Table aria-label="customized table">
-                    <TableHead className='blue-grey z-depth-1-half lighten-4'>
-                        <TableRow>
-                            <TableCell>Номер задания</TableCell>
-                            <TableCell>Предмет</TableCell>
-                            <TableCell>Тема</TableCell>
-                            <TableCell>Класс</TableCell>
-                            <TableCell>Срок сдачи</TableCell>
-                            <TableCell>Дата обновления</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {props.tasks.map((task, index) => (
-                            <>
-                                {
-                                    task.teacher === props.auth.fio
-                                        ?
-                                        <StyledTableRow key={index}>
-                                            <NavLink to={`/tasks/showTasks/` + task._id}>
-                                                <TableCell component="th" scope="row">{index + 1}</TableCell>
-                                            </NavLink>
-                                            <TableCell>{task.subject}</TableCell>
-                                            <TableCell>{task.taskTitle}</TableCell>
-                                            <TableCell>{task.classNumber}</TableCell>
-                                            <TableCell>{task.deadlineDate}</TableCell>
-                                            <TableCell>{task.editedDate}</TableCell>
-                                        </StyledTableRow>
-                                        : null
-                                }
-                            </>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            {
+                props.auth.role === 'teacher' &&
+                <TableContainer component={Paper}>
+                    <Table aria-label="customized table">
+                        <TableHead className='blue-grey z-depth-1-half lighten-4'>
+                            <TableRow>
+                                <TableCell>Номер задания</TableCell>
+                                <TableCell>Предмет</TableCell>
+                                <TableCell>Тема</TableCell>
+                                <TableCell>Класс</TableCell>
+                                <TableCell>Срок сдачи</TableCell>
+                                <TableCell>Дата обновления</TableCell>
+                                <TableCell>Статус</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {props.tasks.map((task, index) => (
+                                <>
+                                    {
+                                        task.teacher === props.auth.fio
+                                            ?
+                                            <StyledTableRow key={index}>
+                                                <NavLink to={`/tasks/showTasks/` + task._id}>
+                                                    <TableCell component="th" scope="row">{index + 1}</TableCell>
+                                                </NavLink>
+                                                <TableCell>{task.subject}</TableCell>
+                                                <TableCell>{task.taskTitle}</TableCell>
+                                                <TableCell>{task.classNumber}</TableCell>
+                                                <TableCell>{task.deadlineDate}</TableCell>
+                                                <TableCell>{task.editedDate}</TableCell>
+                                                <TableCell>Не проверено</TableCell>
+                                            </StyledTableRow>
+                                            : null
+                                    }
+                                </>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            }
+            {
+                props.auth.role === 'student' &&
+                <TableContainer component={Paper}>
+                    <Table aria-label="customized table">
+                        <TableHead className='blue-grey z-depth-1-half lighten-4'>
+                            <TableRow>
+                                <TableCell>Номер задания</TableCell>
+                                <TableCell>Предмет</TableCell>
+                                <TableCell>Тема</TableCell>
+                                <TableCell>Класс</TableCell>
+                                <TableCell>Срок сдачи</TableCell>
+                                <TableCell>Дата обновления</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {props.tasks.map((task, index) => (
+                                <>
+                                    {
+                                        task.classNumber === props.auth.classNumber
+                                            ?
+                                            <StyledTableRow key={index}>
+                                                <NavLink to={`/tasks/showTasks/` + task._id}>
+                                                    <TableCell component="th" scope="row">{index + 1}</TableCell>
+                                                </NavLink>
+                                                <TableCell>{task.subject}</TableCell>
+                                                <TableCell>{task.taskTitle}</TableCell>
+                                                <TableCell>{task.classNumber}</TableCell>
+                                                <TableCell>{task.deadlineDate}</TableCell>
+                                                <TableCell>{task.editedDate}</TableCell>
+                                            </StyledTableRow>
+                                            : null
+                                    }
+                                </>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            }
         </div>
     );
 }
