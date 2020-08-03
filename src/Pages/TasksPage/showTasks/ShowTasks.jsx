@@ -27,7 +27,7 @@ const ShowTasks = (props) => {
         },
     }))(TableRow);
 
-    if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+    if (!props.auth.isAuth) return <Redirect to={'/'}/>
     return (
         <div className='wrapper'>
             <nav className='blue-grey lighten-4'>

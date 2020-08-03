@@ -6,7 +6,6 @@ import AuthPageContainer from "./Pages/AuthPage/AuthPage";
 import PersonalPageContainer from "./Pages/PersonalPage/PersonalPage";
 import HeaderContainer from "./Components/Header/Header";
 import ProfilePageContainer from "./Pages/ProfilePage/ProfilePage";
-import JournalPage from "./Pages/JournalPage/JournalPage";
 import SchedulePageContainer from "./Pages/SchedulePage/ScheduleTS";
 import Classes from "./Pages/Users/Classes";
 import Students from "./Pages/Users/Students";
@@ -21,6 +20,7 @@ import CheckTasks from "./Pages/TasksPage/checkTasks/CheckTasks";
 import TaskItemContainer from "./Pages/TasksPage/TaskItem/TaskItemContainer";
 import CheckingTasksContainer from "./Pages/TasksPage/checkTasks/CheckingTasks/CheckingTasksContainer";
 import TaskCheckingInfoContainer from "./Pages/TasksPage/TaskItem/TaskCheckingInfoContainer";
+import JournalPageContainer from "./Pages/JournalPage/JournalPageContainer";
 
 function App() {
     return (
@@ -29,7 +29,7 @@ function App() {
             <div className="container">
                 <Switch>
                     <Route path='/' exact render={() => <AuthPageContainer/>}/>
-                    <Route path='/journal' render={() => <JournalPage/>}/>
+                    <Route path='/journal/:classId?' render={() => <JournalPageContainer/>}/>
                     <Route path='/schedule' render={() => <SchedulePageContainer/>}/>
                     <Route path='/profile' render={() => <ProfilePageContainer/>}/>
                     <Route path='/personal' exact render={() => <PersonalPageContainer/>}/>

@@ -15,8 +15,7 @@ class Header extends React.Component {
             <>
                 <nav className="header nav-wrapper blue-grey lighten-4">
                     {
-                        (this.props.isAuth) &&
-                        <a href="#s" data-target="slide-out" className="sidenav-trigger show-on-large"><i
+                        this.props.isAuth && <a href="#s" data-target="slide-out" className="sidenav-trigger show-on-large"><i
                             className="material-icons">menu</i></a>}
                     <a href="#s" className="brand-logo">LearnSchool</a>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
@@ -54,8 +53,11 @@ class Header extends React.Component {
                             <>
                                 <NavLink to='/schedule'
                                          className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Расписание</NavLink>
-                                <NavLink to='/journal'
-                                         className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Журнал</NavLink>
+                                {
+                                    this.props.auth.classId
+                                    && <NavLink to={'/journal/' + this.props.auth.classId}
+                                                className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Журнал</NavLink>
+                                }
                                 {
                                     this.props.auth.classId
                                     && <NavLink to={'/dialogs/' + this.props.auth.classId}
