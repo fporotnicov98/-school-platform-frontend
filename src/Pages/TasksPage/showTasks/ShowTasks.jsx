@@ -118,7 +118,7 @@ const ShowTasks = (props) => {
                                                 <TableCell>
                                                     {
                                                         props.homeworks.length > 0
-                                                            ? <span className='green-text'>Не отправлено</span>
+                                                            ? <span className='green-text'>Не отправленgо</span>
                                                             : props.homeworks.map(item =>
                                                             item.taskId === task._id &&
                                                             <span className='red-text'>{item.status}</span>
