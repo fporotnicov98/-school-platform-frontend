@@ -8,6 +8,23 @@
   font-size: 2em;
   margin-bottom: 20px;
 }
+.chooseSubject {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .MuiInputLabel-root {
+    margin-right: 20px;
+    display: inline-block !important;
+    transform-origin: top left;
+  }
+  .MuiInputBase-root {
+    text-align: center;
+    width: 15%;
+  }
+}
+
 .schedule {
   display: flex;
   align-items: center;
@@ -27,9 +44,18 @@
         justify-content: space-between;
         .main-class {
           width: 40%;
+          font-size: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          color: #0097A7;
+          font-weight: bold;
         }
         .add-class {
-          font-size: 12px;
+          .MuiSelect-select.MuiSelect-select {
+            font-size: 12px;
+          }
           width: 40%;
           display: flex;
           padding: 0 10px;
@@ -41,6 +67,7 @@
           border-right: 1px solid #a7a7a7;
           width: 20%;
           padding: 15px 7px;
+          font-weight: bold;
         }
       }
 

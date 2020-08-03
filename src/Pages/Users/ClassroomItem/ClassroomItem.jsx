@@ -50,10 +50,6 @@ class ClassroomItem extends Component {
                     <div className="card-content">
                         <div className='class-header'>
                             <span className="card-title">{this.props.classNumber}</span>
-                            <span className='add-schedule' onClick={() => {
-                                this.props.addSchedule(this.props.classNumber, this.props.classId)
-                                setTimeout(() => this.props.getScheduleItem(this.props.classId), 500)
-                            }}>Добавить расписание</span>
                             <span className='class-teacher'>Классный руководитель:
                                 {
                                     this.props.class.classTeacher.fio
@@ -105,12 +101,29 @@ class ClassroomItem extends Component {
                                 </div>
                             )
                         }
-                        <span className='add-student'>Добавить ученика:
-                            <a onClick={() => this.handleStudents()}
-                               className="btn-floating btn-small waves-effect waves-light cyan darken-2">
-                                <i className="material-icons">add</i>
-                            </a>
-                        </span>
+                        <div className='add-student'>
+                            <span>Добавить ученика:
+                                <a onClick={() => this.handleStudents()}
+                                   className="btn-floating btn-small waves-effect waves-light cyan darken-2">
+                                    <i className="material-icons">add</i>
+                                </a>
+                            </span>
+                            {
+                                !this.props.scheduleItem.length > 0
+                                    ? <span>Добавить расписание
+                                <a onClick={() => {
+                                    this.props.addSchedule(this.props.classNumber, this.props.classId)
+                                    setTimeout(() => this.props.getScheduleItem(this.props.classId), 500)
+                                }}
+                                   className="btn-floating btn-small waves-effect waves-light cyan darken-2">
+                                        <i className="material-icons">event_note</i>
+                                    </a>
+                            </span>
+                                    : null
+                            }
+
+                        </div>
+
                         <div className='students'>
                             {this.state.isClick &&
                             this.props.students.map((item, index) =>

@@ -36,11 +36,19 @@ export const userAPI = {
     deleteUser(id) {
         return instanse.delete(`/users/deleteUser/${id}`)
     },
-    updateStudent(id, fio, login, email, mobileNumber, classId,classNumber) {
+    updateStudent(id, fio, login, email, mobileNumber, classId, classNumber) {
         return instanse.put(`/users/updateStudent/${id}`, {fio, login, email, mobileNumber, classId, classNumber})
     },
-    updateTeacher(id, fio, login, email, mobileNumber, subject, classId,classNumber) {
-        return instanse.put(`/users/updateTeacher/${id}`, {fio, login, email, mobileNumber, subject, classId,classNumber})
+    updateTeacher(id, fio, login, email, mobileNumber, subject, classId, classNumber) {
+        return instanse.put(`/users/updateTeacher/${id}`, {
+            fio,
+            login,
+            email,
+            mobileNumber,
+            subject,
+            classId,
+            classNumber
+        })
     },
     updateModerator(id, fio, login) {
         return instanse.put(`/users/updateModerator/${id}`, {fio, login})
@@ -120,34 +128,52 @@ export const scheduleAPI = {
 }
 
 export const taskAPI = {
-    getTasks(){
+    getTasks() {
         return instanse.get('/task/getTasks')
     },
-    getTaskItem(taskId){
+    getTaskItem(taskId) {
         return instanse.get(`/task/${taskId}`)
     },
-    updateTask(taskId,taskTitle,taskText,editedDate){
-        return instanse.put(`/task/updateTask/${taskId}`,{taskTitle,taskText,editedDate})
+    updateTask(taskId, taskTitle, taskText, editedDate) {
+        return instanse.put(`/task/updateTask/${taskId}`, {taskTitle, taskText, editedDate})
     },
-    addTask(classNumber,publicDate,deadlineDate,subject,teacher,taskTitle,taskText){
-        return instanse.post(`/task/addTask`,{classNumber,publicDate,deadlineDate,subject,teacher,taskTitle,taskText})
+    addTask(classNumber, publicDate, deadlineDate, subject, teacher, taskTitle, taskText) {
+        return instanse.post(`/task/addTask`, {
+            classNumber,
+            publicDate,
+            deadlineDate,
+            subject,
+            teacher,
+            taskTitle,
+            taskText
+        })
     },
-    deleteTask(taskId){
+    deleteTask(taskId) {
         return instanse.delete(`/task/deleteTask/${taskId}`)
     }
 }
 
 export const homeworkAPI = {
-    getHomeworks(){
+    getHomeworks() {
         return instanse.get('/homework/getHomeworks')
     },
-    getHomeworkItem(id){
+    getHomeworkItem(id) {
         return instanse.get(`/homework/${id}`)
     },
-    setMark(id,mark,teacherDesc){
-        return instanse.put(`/homework/setMark/${id}`,{mark,teacherDesc})
+    setMark(id, mark, teacherDesc) {
+        return instanse.put(`/homework/setMark/${id}`, {mark, teacherDesc})
     },
-    addHomework(classNumber,taskId, student, publicDate, subject, teacher,answerToTask, deadlineDate, taskTitle){
-        return instanse.post(`/homework/addHomework`,{classNumber,taskId, student, publicDate, subject, teacher,answerToTask, deadlineDate,taskTitle})
+    addHomework(classNumber, taskId, student, publicDate, subject, teacher, answerToTask, deadlineDate, taskTitle) {
+        return instanse.post(`/homework/addHomework`, {
+            classNumber,
+            taskId,
+            student,
+            publicDate,
+            subject,
+            teacher,
+            answerToTask,
+            deadlineDate,
+            taskTitle
+        })
     }
 }

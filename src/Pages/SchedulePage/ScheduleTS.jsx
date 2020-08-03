@@ -1,12 +1,12 @@
 import React from 'react';
 import './ScheduleTS.scss'
 import {Redirect, withRouter} from "react-router-dom";
-import Preloader from "../../Assets/Commons/Preloader";
 import Select from '@material-ui/core/Select'
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {getSchedule} from "../../Redux/scheduleReducer";
 import {getClasses, getClassroom} from "../../Redux/classReducer";
+import InputLabel from "@material-ui/core/InputLabel";
 
 class ScheduleTS extends React.Component {
 
@@ -29,10 +29,10 @@ class ScheduleTS extends React.Component {
         return (
             <>
                 <div className='schedule-title'>
-                    <span>Выбрать класс: </span>
+                    <InputLabel id="demo-simple-select-label">Выбрать класс</InputLabel>
                     <Select
                         className='class'
-                        native
+                        id="demo-simple-select"
                         value={this.state.selectedClass}
                         onChange={this.setClass}
                         inputProps={{
@@ -40,7 +40,7 @@ class ScheduleTS extends React.Component {
                             id: 'class-number',
                         }}
                     >
-                        <option value="" disabled selected>Выбрать класс</option>
+                        {/*<option value="" disabled selected>Выбрать класс</option>*/}
                         {
                             this.props.classroom.map(item =>
                                 <option

@@ -16,6 +16,15 @@ const AddTasks = (props) => {
         let [classNumber, setClass] = useState('')
         let [title, setTitle] = useState('')
         let [description, setDesc] = useState('')
+        let [files, setFiles] = useState('')
+
+        let handleFiles = (e) => {
+            setFiles(e.target.value)
+        }
+
+        let showFiles = () => {
+            console.log(files)
+        }
 
         let handleDay = (e) => {
             setDay(e.target.value)
@@ -81,7 +90,8 @@ const AddTasks = (props) => {
                             </div>
                             <div className='topic'>Тема задания:
                                 <div className="input-field">
-                                    <input id="topic" type="text" className="validate" value={title} onChange={handleTitle}/>
+                                    <input id="topic" type="text" className="validate" value={title}
+                                           onChange={handleTitle}/>
                                 </div>
                             </div>
                             <div className='date'>Дата публикации:
@@ -167,8 +177,20 @@ const AddTasks = (props) => {
                             </div>
                             <div className='description'>Описание задания
                                 <div className="input-field">
-                                    <textarea className='materialize-textarea' value={description}
-                                              onChange={handleDesc}/>
+                                <textarea className='materialize-textarea' value={description}
+                                          onChange={handleDesc}/>
+                                </div>
+                            </div>
+                            <div className='files'>Добавить файл
+                                <div className="file-field input-field">
+                                    <div className="file-path-wrapper">
+                                        <input className="file-path validate" value={files} type="text"
+                                               onChange={handleFiles}/>
+                                    </div>
+                                    <div className="btn add-files waves-effect waves-light cyan darken-2">
+                                        <span>File</span>
+                                        <input type="file"/>
+                                    </div>
                                 </div>
                             </div>
                             <button className="btn waves-effect waves-light cyan darken-2" type="submit"
@@ -178,8 +200,8 @@ const AddTasks = (props) => {
                             }}>Опубликовать задание
                                 <i className="material-icons right">send</i>
                             </button>
+                            <button onClick={() => showFiles()}>Посмотреть</button>
                         </div>
-
                     </div>
                 </div>
             </>

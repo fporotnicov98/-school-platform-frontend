@@ -40,5 +40,15 @@
   text-align: center;
   font-size: 2em;
   margin: 10px 0 !important;
+  .MuiInputLabel-root {
+    margin-right: 20px;
+    font-size: 22px;
+    display: inline-block !important;
+    transform-origin: top left;
+  }
+  .MuiInputBase-root {
+    text-align: center;
+    width: 15%;
+  }
 }
 
