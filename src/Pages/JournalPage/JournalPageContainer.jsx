@@ -15,9 +15,11 @@ const JournalPageContainer = (props) => {
         props.getClassroom(props.match.params.classId)
         props.getTasks()
         props.getHomeworks()
+        props.getTasks()
+        props.getHomeworks()
     }, [props.match.params.classId])
 
-    if (!props.classroom) return <Preloader />
+    if (!props.auth.isAuth) return <Redirect to={'/'}/>
     return (
         <div>
             <JournalPage {...props}/>
@@ -28,7 +30,9 @@ const JournalPageContainer = (props) => {
 const mapStateToProps = state => {
     return {
         auth: state.auth,
-        classroom: state.classroom.classroom,
+        class: state.classroom.class,
+        tasks: state.task.tasks,
+        homeworks: state.homework.homeworks
     }
 }
 

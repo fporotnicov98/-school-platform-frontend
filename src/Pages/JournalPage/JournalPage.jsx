@@ -10,6 +10,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import withStyles from "@material-ui/core/styles/withStyles";
+import Preloader from "../../Assets/Commons/Preloader";
 
 const JournalPage = (props) => {
 
@@ -21,31 +22,40 @@ const JournalPage = (props) => {
         },
     }))(TableRow);
 
-    if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+    if (!props.class) return <Preloader/>
+    if (!props.auth.isAuth) return <Redirect to={'/'}/>
     return (
         <div className='z-depth-2 journal blue-grey lighten-4'>
             <h5>Электронный журнал:</h5>
             <TableContainer component={Paper}>
                 <Table aria-label="customized table">
-                    <TableHead className='blue-grey z-depth-1-half lighten-4'>
+                    <TableHead className='z-depth-1-half'>
                         <TableRow>
-                            <TableCell></TableCell>
-                            <TableCell>Предмет</TableCell>
-                            <TableCell>Тема</TableCell>
-                            <TableCell>Класс</TableCell>
-                            <TableCell>Срок сдачи</TableCell>
-                            <TableCell>Дата обновления</TableCell>
+                            <TableCell>Ученик</TableCell>
+                            {
+                                props.tasks.map(item =>
+                                    item.classNumber === props.auth.classNumber
+                                        ? <TableCell>{item.publicDate}</TableCell>
+                                        : null
+                                )
+                            }
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        <StyledTableRow>
-                            <TableCell component="th" scope="row"></TableCell>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                        </StyledTableRow>
+                        {
+                            props.class.students.map(student =>
+                                <StyledTableRow>
+                                    <TableCell component="th" scope="row">{student.fio}</TableCell>
+                                    {
+                                        props.homeworks.map(homework =>
+                                            homework.classNumber === props.auth.classNumber && homework.student === student.fio && homework.publicTaskDate &&
+                                            < TableCell>{homework.mark}</TableCell>
+                                        )
+                                    }
+                                </StyledTableRow>
+                            )
+                        }
+
                     </TableBody>
                 </Table>
             </TableContainer>
