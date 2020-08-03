@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
-import {connect} from "react-redux";
-import {NavLink, Redirect} from "react-router-dom";
+import React, { useEffect } from 'react';
+import { connect } from "react-redux";
+import { NavLink, Redirect } from "react-router-dom";
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -9,8 +9,8 @@ import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {getTasks} from '../../../Redux/taskReducer'
-import {getHomeworks} from "../../../Redux/homeworkReducer";
+import { getTasks } from '../../../Redux/taskReducer'
+import { getHomeworks } from "../../../Redux/homeworkReducer";
 
 const ShowTasks = (props) => {
 
@@ -27,7 +27,7 @@ const ShowTasks = (props) => {
         },
     }))(TableRow);
 
-    if (!props.auth.isAuth) return <Redirect to={'/'}/>
+    if (!props.auth.isAuth) return <Redirect to={'/'} />
     return (
         <div className='wrapper'>
             <nav className='blue-grey lighten-4'>
@@ -91,13 +91,30 @@ const ShowTasks = (props) => {
                         </TableHead>
                         <TableBody>
                             {props.tasks.map((task, index) => (
+                                
                                 <>
                                     {
                                         task.classNumber === props.auth.classNumber
                                             ?
                                             <StyledTableRow key={index}>
+                                                {/* {
+                                                    props.homeworks.some(homework => homework.taskId === task._id && homework.student === props.auth.fio) 
+                                                   ? <NavLink to={`/tasks/showTasksAfterCheck/` + homework._id}>
+                                                        <TableCell component="th" scope="row">{index + 1}</TableCell>
+                                                    </NavLink>
+                                                    : null
+                                                }
                                                 {
-                                                    props.homeworks.length > 0 &&
+                                                    props.homeworks.some(homework => homework.taskId != task._id && homework.student != props.auth.fio) 
+                                                    ? <NavLink to={`/tasks/showTasks/` + task._id}>
+                                                    <TableCell component="th" scope="row">{index + 1}</TableCell>
+                                                </NavLink>
+                                                     : null
+                                                } */}
+                                                              
+                                                   
+                                                {/* {
+                                                    props.homeworks.taskId != task._id &&
                                                     <NavLink to={`/tasks/showTasks/` + task._id}>
                                                         <TableCell component="th" scope="row">{index + 1}</TableCell>
                                                     </NavLink>
@@ -109,23 +126,25 @@ const ShowTasks = (props) => {
                                                             <TableCell component="th" scope="row">{index + 1}</TableCell>
                                                         </NavLink>
                                                     )
-                                                }
-                                                <TableCell>{task.subject}</TableCell>
-                                                <TableCell>{task.taskTitle}</TableCell>
-                                                <TableCell>{task.classNumber}</TableCell>
-                                                <TableCell>{task.deadlineDate}</TableCell>
-                                                <TableCell>{task.editedDate}</TableCell>
-                                                <TableCell>
-                                                    {
-                                                        props.homeworks.length > 0
-                                                            ? <span className='green-text'>Не отправленgо</span>
-                                                            : props.homeworks.map(item =>
-                                                            item.taskId === task._id &&
-                                                            <span className='red-text'>{item.status}</span>
-                                                            )
-                                                    }
-                                                </TableCell>
-                                            </StyledTableRow>
+                                                } */}
+                                    <TableCell>{task.subject}</TableCell>
+                                    <TableCell>{task.taskTitle}</TableCell>
+                                    <TableCell>{task.classNumber}</TableCell>
+                                    <TableCell>{task.deadlineDate}</TableCell>
+                                    <TableCell>{task.editedDate}</TableCell>
+                                    <TableCell>
+                                        
+                                        { 
+                                            props.homeworks.map(homework => 
+                                            homework.taskId === task._id && homework.student === props.auth.fio
+                                                ? <span className='green-text'>Не отправлено</span>
+                                                : props.homeworks.map(item =>
+                                                    item.taskId === task._id &&
+                                                    <span className='red-text'>{item.status}</span>
+                                                )
+                                            )}
+                                    </TableCell>
+                                </StyledTableRow>
                                             : null
                                     }
                                 </>
@@ -134,7 +153,7 @@ const ShowTasks = (props) => {
                     </Table>
                 </TableContainer>
             }
-        </div>
+        </div >
     );
 }
 
@@ -147,4 +166,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {getTasks, getHomeworks})(ShowTasks)
+export default connect(mapStateToProps, { getTasks, getHomeworks })(ShowTasks)
