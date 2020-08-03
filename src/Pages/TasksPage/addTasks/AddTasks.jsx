@@ -181,18 +181,6 @@ const AddTasks = (props) => {
                                           onChange={handleDesc}/>
                                 </div>
                             </div>
-                            <div className='files'>Добавить файл
-                                <div className="file-field input-field">
-                                    <div className="file-path-wrapper">
-                                        <input className="file-path validate" value={files} type="text"
-                                               onChange={handleFiles}/>
-                                    </div>
-                                    <div className="btn add-files waves-effect waves-light cyan darken-2">
-                                        <span>File</span>
-                                        <input type="file"/>
-                                    </div>
-                                </div>
-                            </div>
                             <button className="btn waves-effect waves-light cyan darken-2" type="submit"
                                     name="action" onClick={() => {
                                 props.addTask(classNumber, date(), `${day} ${month} ${year}`, props.auth.subject, props.auth.fio, title, description)
@@ -200,7 +188,7 @@ const AddTasks = (props) => {
                             }}>Опубликовать задание
                                 <i className="material-icons right">send</i>
                             </button>
-                            <button onClick={() => showFiles()}>Посмотреть</button>
+                            
                         </div>
                     </div>
                 </div>

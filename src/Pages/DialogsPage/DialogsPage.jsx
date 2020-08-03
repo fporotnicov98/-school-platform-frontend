@@ -68,7 +68,7 @@ class DialogsPage extends Component {
                                         ? <li className="me">
                                             <div className="entete">
                                                 <span>
-                                                    {item.authorFio}
+                                                {this.props.class.classTeacher.fio === item.authorFio ? `${item.authorFio} (Классный руководитель)`: item.authorFio}
                                                     {
                                                         <div className='icons'>
                                                             {
@@ -97,10 +97,10 @@ class DialogsPage extends Component {
                                         </li>
                                         : <li className="you">
                                             <div className="entete">
-                                                <span>{item.authorFio}</span>
+                                                {this.props.class.classTeacher.fio === item.authorFio ? <span>{item.authorFio} (Классный руководитель)</span> : <span>{item.authorFio}</span>}
                                             </div>
                                             <div className="message cyan darken-2 white-text">
-                                                :<span>{item.message}</span>
+                                                <span>{item.message}</span>
                                             </div>
                                         </li>
                                 )

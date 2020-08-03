@@ -147,43 +147,43 @@ class ScheduleTS extends React.Component {
                                     <div className="sr card blue-grey lighten-4">
                                         <div className="card-content">
                                         <span className="card-title">
-                                            {schedule.days.Sat.day}
+                                            {schedule.days.Wed.day}
                                         </span>
                                             <div className='lessons white'>
                                                 <div className='lesson'>
                                                     <span className='time'>8:00 - 8:40</span>
                                                     <div className='main-class'>
-                                                        {schedule.days.Sat.subjects[0]}
+                                                        {schedule.days.Wed.subjects[0]}
                                                     </div>
                                                 </div>
                                                 <div className='lesson'>
                                                     <span className='time'>9:00 - 9:40</span>
                                                     <div className='main-class'>
-                                                        {schedule.days.Sat.subjects[1]}
+                                                        {schedule.days.Wed.subjects[1]}
                                                     </div>
                                                 </div>
                                                 <div className='lesson'>
                                                     <span className='time'>10:00 - 10:40</span>
                                                     <div className='main-class'>
-                                                        {schedule.days.Sat.subjects[2]}
+                                                        {schedule.days.Wed.subjects[2]}
                                                     </div>
                                                 </div>
                                                 <div className='lesson'>
                                                     <span className='time'>11:00 - 11:40</span>
                                                     <div className='main-class'>
-                                                        {schedule.days.Sat.subjects[3]}
+                                                        {schedule.days.Wed.subjects[3]}
                                                     </div>
                                                 </div>
                                                 <div className='lesson'>
                                                     <span className='time'>12:00 - 12:40</span>
                                                     <div className='main-class'>
-                                                        {schedule.days.Sat.subjects[4]}
+                                                        {schedule.days.Wed.subjects[4]}
                                                     </div>
                                                 </div>
                                                 <div className='lesson'>
                                                     <span className='time'>13:00 - 13:40</span>
                                                     <div className='main-class'>
-                                                        {schedule.days.Sat.subjects[5]}
+                                                        {schedule.days.Wed.subjects[5]}
                                                     </div>
                                                 </div>
                                             </div>
