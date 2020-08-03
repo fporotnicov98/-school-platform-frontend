@@ -21,7 +21,7 @@ const JournalPage = (props) => {
         },
     }))(TableRow);
 
-    if (props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+    if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
     return (
         <div className='z-depth-2 journal blue-grey lighten-4'>
             <h5>Электронный журнал:</h5>

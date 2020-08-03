@@ -29,7 +29,6 @@ function App() {
             <div className="container">
                 <Switch>
                     <Route path='/' exact render={() => <AuthPageContainer/>}/>
-                    <Route path='/journal/:classId?' render={() => <JournalPageContainer/>}/>
                     <Route path='/schedule' render={() => <SchedulePageContainer/>}/>
                     <Route path='/profile' render={() => <ProfilePageContainer/>}/>
                     <Route path='/personal' exact render={() => <PersonalPageContainer/>}/>
@@ -46,6 +45,7 @@ function App() {
                     <Route path='/tasks/showTasksAfterCheck/:homeworkId?' render={() => <TaskCheckingInfoContainer/>}/>
                     <Route path='/tasks/checkTasks' exact render={() => <CheckTasks/>}/>
                     <Route path='/tasks/checkTasks/:tasksId?' render={() => <CheckingTasksContainer/>}/>
+                    <Route path='/journal/:classId?' render={() => <JournalPageContainer/>}/>
                 </Switch>
             </div>
         </BrowserRouter>

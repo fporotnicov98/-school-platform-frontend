@@ -7,6 +7,7 @@ import JournalPage from "./JournalPage";
 import Preloader from "../../Assets/Commons/Preloader";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 const JournalPageContainer = (props) => {
 
