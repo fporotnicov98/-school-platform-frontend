@@ -1,37 +1,11 @@
-.wrapper {
-  .journal {
-    padding: 20px;
-    width: 100%;
-    min-height: 80vh;
-    h5 {
-      text-align: center;
-      color: #555555;
-      margin: 20px 0;
-    }
-    table {
-      font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-      font-size: 12px;
-      border-collapse: collapse;
-      text-align: center;
-    }
-    th, td:first-child {
-      background: #0097A7;
-      color: white;
-      width: 220px;
-    }
-    th, td {
-      text-align: center;
-      border-style: solid;
-      border-width: 0 1px 1px 0;
-      border-color: white;
-      width: 30px;
-    }
-    td {
-      max-height: 30px;
-      background: #D8E6F3;
-    }
-    th:first-child, td:first-child {
-      text-align: left;
-    }
+.journal {
+  margin: 20px 0;
+  padding: 10px;
+  width: 100%;
+  min-height: 80vh;
+
+  h5 {
+    text-align: center;
+    color: #555555;
   }
 }

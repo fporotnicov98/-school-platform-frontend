@@ -39,7 +39,7 @@ class DialogsPage extends Component {
     }
 
     render() {
-        if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+        if (!this.props.auth.isAuth) return <Redirect to={'/'}/>
         if (!this.props.auth.classId) return <Preloader/>
         if (!this.props.class) return <Preloader/>
         return (

@@ -6,7 +6,7 @@ import {login} from "../../Redux/authReducer";
 import {Redirect} from "react-router-dom";
 
 const AuthPage = (props) => {
-    if (props.isAuth) return <Redirect to={'/profile'}></Redirect>
+    if (props.isAuth) return <Redirect to={'/profile'}/>
     return (
         <div className='wrapper'>
             <LoginFormiks login={props.login}/>

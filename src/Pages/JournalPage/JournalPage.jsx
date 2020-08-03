@@ -1,230 +1,57 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './JournalPage.scss'
 import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
-import M from "materialize-css";
+import {NavLink, Redirect} from "react-router-dom";
+import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableBody from "@material-ui/core/TableBody";
+import TableContainer from "@material-ui/core/TableContainer";
+import withStyles from "@material-ui/core/styles/withStyles";
 
-class JournalPage extends React.Component {
-    componentDidMount() {
-        M.Dropdown.init(this.Dropdown, {})
-    }
+const JournalPage = (props) => {
 
-    render() {
-        if (!this.props.isAuth) return <Redirect to={'/'}></Redirect>
-        return (
-            <div className='wrapper'>
-                <div className='z-depth-2 journal blue-grey lighten-4'>
-                    <ul id="dropdown2" className="dropdown-content">
-                        <li><a href="#!">Математика</a></li>
-                        <li><a href="#!">Литература</a></li>
-                        <li><a href="#!">Биология</a></li>
-                    </ul>
-                    <a ref={Dropdown => {
-                        this.Dropdown = Dropdown;
-                    }} className="white-text cyan darken-2 btn dropdown-trigger" href="#!" data-target="dropdown2">Выбрать предмет<i
-                        className="material-icons right">arrow_drop_down</i></a>
-                    <h5>Электронный журнал:</h5>
-                    <table>
-                        <tr>
-                            <th></th>
-                            <th>Q1</th>
-                            <th>Q2</th>
-                            <th>Q3</th>
-                            <th>Q4</th>
-                            <th>Q4</th>
-                            <th>Q4</th>
-                            <th>Q4</th>
-                            <th>Q4</th>
-                            <th>Q4</th>
-                            <th>Q4</th>
-                            <th>Q4</th>
-                            <th>Q4</th>
-                            <th>Q4</th>
-                            <th>Q4</th>
-                            <th>Q4</th>
-                            <th>Q4</th>
-                            <th>Q4</th>
-                            <th>Q4</th>
-                        </tr>
-                        <tr>
-                            <td>Иванов Петр Сидорович</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Петров Иван Сидорович</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Бла бла бла</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Зубенко Михайил Петрович</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Зубенко Михайил Петрович</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Зубенко Михайил Петрович</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Зубенко Михайил Петрович</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Зубенко Михайил Петрович</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>5</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        );
-    }
+    const StyledTableRow = withStyles((theme) => ({
+        root: {
+            '&:nth-of-type(odd)': {
+                backgroundColor: theme.palette.action.hover,
+            },
+        },
+    }))(TableRow);
+
+    if (props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+    return (
+        <div className='z-depth-2 journal blue-grey lighten-4'>
+            <h5>Электронный журнал:</h5>
+            <TableContainer component={Paper}>
+                <Table aria-label="customized table">
+                    <TableHead className='blue-grey z-depth-1-half lighten-4'>
+                        <TableRow>
+                            <TableCell></TableCell>
+                            <TableCell>Предмет</TableCell>
+                            <TableCell>Тема</TableCell>
+                            <TableCell>Класс</TableCell>
+                            <TableCell>Срок сдачи</TableCell>
+                            <TableCell>Дата обновления</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        <StyledTableRow>
+                            <TableCell component="th" scope="row"></TableCell>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
+                        </StyledTableRow>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </div>
+    );
 };
 
-const mapStateToProps = state => {
-    return {
-        isAuth: state.auth.isAuth,
-    }
-}
 
-export default connect(mapStateToProps, {})(JournalPage);
+export default JournalPage;
