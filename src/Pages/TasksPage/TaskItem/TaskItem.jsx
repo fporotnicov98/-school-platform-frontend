@@ -110,7 +110,7 @@ const TaskItem = (props) => {
                             <input type='text' value={answer} onChange={handleAnswer}/>
                         </div>
                         <button className="btn waves-effect waves-light cyan darken-2"
-                                onClick={() => props.addHomework(props.auth.classNumber, props.taskItem._id, props.auth.fio, date(), props.taskItem.subject, props.taskItem.teacher, answer, props.taskItem.deadlineDate, props.taskItem.taskTitle)}>Отправить
+                                onClick={() => props.addHomework(props.auth.classNumber, props.taskItem._id, props.auth.fio, date(), props.taskItem.publicDate, props.taskItem.subject, props.taskItem.teacher, answer, props.taskItem.deadlineDate, props.taskItem.taskTitle)}>Отправить
                             ответ<i className="material-icons right">send</i>
                         </button>
                     </div>

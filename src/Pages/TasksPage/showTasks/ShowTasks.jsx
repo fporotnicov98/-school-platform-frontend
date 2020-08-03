@@ -97,7 +97,7 @@ const ShowTasks = (props) => {
                                             ?
                                             <StyledTableRow key={index}>
                                                 {
-                                                    props.homeworks.length === 0 &&
+                                                    props.homeworks.length > 0 &&
                                                     <NavLink to={`/tasks/showTasks/` + task._id}>
                                                         <TableCell component="th" scope="row">{index + 1}</TableCell>
                                                     </NavLink>
@@ -117,7 +117,7 @@ const ShowTasks = (props) => {
                                                 <TableCell>{task.editedDate}</TableCell>
                                                 <TableCell>
                                                     {
-                                                        props.homeworks.length === 0
+                                                        props.homeworks.length > 0
                                                             ? <span className='green-text'>Не отправлено</span>
                                                             : props.homeworks.map(item =>
                                                             item.taskId === task._id &&
