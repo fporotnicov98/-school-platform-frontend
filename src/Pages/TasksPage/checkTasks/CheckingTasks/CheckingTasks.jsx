@@ -15,8 +15,15 @@ const CheckingTasks = (props) => {
     let handleNotation = (e) => {
         setNotation(e.target.value)
     }
+    let resetRating = () => {
+        setRating("")
+    }
+    let resetNotation = () => {
+        setNotation("")
+    }
 
     if (!props.auth.isAuth) return <Redirect to={'/'}/>
+    if (props.homeworkItem.mark) return <Redirect to={'/tasks/checkTasks'}/>
     return (
         <div className='wrapper'>
             <nav className='blue-grey lighten-4'>
@@ -69,8 +76,13 @@ const CheckingTasks = (props) => {
                             <MenuItem value={'5'}>5</MenuItem>
                         </Select>
                     </div>
-                    <button className="btn waves-effect waves-light cyan darken-2" type="submit" name="action" onClick = {() => props.setMark(props.homeworkItem._id, rating, notation)}>
-                        Отправить результат првоерки
+                    <button className="btn waves-effect waves-light cyan darken-2" type="submit" name="action" onClick = {() => {
+                        props.setMark(props.homeworkItem._id, rating, notation)
+                        resetRating()
+                        resetNotation()
+                        setTimeout(() => props.getHomeworkItem(props.homeworkItem._id),500)
+                        }}>
+                        Отправить результат проверки
                     </button>
                 </div>
             </div>

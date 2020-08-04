@@ -28,7 +28,8 @@ const mapStateToProps = state => {
     return {
         taskItem: state.task.taskItem,
         auth: state.auth,
-        homeworkItem: state.homework.homeworkItem
+        homeworkItem: state.homework.homeworkItem,
+        homeworks: state.homework.homeworks
     }
 }
 
