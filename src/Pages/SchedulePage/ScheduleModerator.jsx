@@ -31,7 +31,7 @@ class ScheduleModerator extends React.Component {
         return (
             <div className='wrapper-schedule'>
                 <div className='chooseSubject'>
-                    <InputLabel id="demo-simple-select-label">Выбрать день недели</InputLabel>
+                    <InputLabel id="demo-simple-select-label">Выбрать день недели:</InputLabel>
                     <Select
                         id="demo-simple-select"
                         value={this.state.selectedDay}
