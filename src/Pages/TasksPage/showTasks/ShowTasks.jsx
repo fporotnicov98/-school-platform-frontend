@@ -125,9 +125,11 @@ const ShowTasks = (props) => {
                                                     {
                                                         props.homeworks.some(homework => homework.taskId === task._id)
                                                             ? props.homeworks.map(item =>
-                                                            item.taskId === task._id && item.status === 'Проверено'
-                                                            ? <span className='green-text'>{item.status}</span>
-                                                                : <span className='red-text'>{item.status}</span>
+                                                            item.taskId === task._id &&
+                                                            <span className={item.status === 'Не проверено'
+                                                                ? 'red-text'
+                                                                : 'green-text'
+                                                            }>{item.status}</span>
                                                             )
                                                             : <span className='blue-text'>Не отправлено</span>
                                                     }
