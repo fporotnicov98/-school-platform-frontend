@@ -3,14 +3,7 @@ import {Field, Form, withFormik} from "formik";
 import '../Form.scss'
 import {moderatorReg} from './../../../Redux/authReducer'
 
-class RegisterFormModerator extends React.Component {
-    componentDidMount() {
-        document.addEventListener('DOMContentLoaded', function () {
-            let elems = document.querySelectorAll('select');
-            let instances = window.M.FormSelect.init(elems, {});
-        });
-    }
-    render() {
+const RegisterFormModerator = () => {
         return (
             <Form className='login'>
                 <div className="card blue-grey lighten-4">
@@ -56,7 +49,6 @@ class RegisterFormModerator extends React.Component {
                 </div>
             </Form>
         );
-    }
 }
 
 export const RegisterModeratorFormiks = withFormik({
