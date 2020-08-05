@@ -42,108 +42,108 @@ const ShowTasks = (props) => {
                 </nav>
             }
             {
-                props.auth.role === 'teacher' &&
-                <TableContainer component={Paper}>
-                    <Table aria-label="customized table">
-                        <TableHead className='blue-grey z-depth-1-half lighten-4'>
-                            <TableRow>
-                                <TableCell>Номер задания</TableCell>
-                                <TableCell>Предмет</TableCell>
-                                <TableCell>Тема</TableCell>
-                                <TableCell>Класс</TableCell>
-                                <TableCell>Дата обновления</TableCell>
-                                <TableCell>Срок сдачи</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {props.tasks.map((task, index) => (
-                                <>
-                                    {
-                                        task.teacher === props.auth.fio
-                                            ?
-                                            <StyledTableRow key={index}>
-                                                <NavLink to={`/tasks/showTasks/` + task._id}>
-                                                    <TableCell component="th" scope="row">{index + 1}</TableCell>
-                                                </NavLink>
-                                                <TableCell>{task.subject}</TableCell>
-                                                <TableCell>{task.taskTitle}</TableCell>
-                                                <TableCell>{task.classNumber}</TableCell>
-                                                <TableCell>{task.editedDate}</TableCell>
-                                                <TableCell className='delete'>{task.deadlineDate}<i onClick={() => props.deleteTask(task._id)} className="material-icons tiny">delete</i>
-                                                </TableCell>
-                                            </StyledTableRow>
-                                            : null
-                                    }
-                                </>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            }
-            {
-                props.auth.role === 'student' &&
-                <TableContainer component={Paper}>
-                    <Table aria-label="customized table">
-                        <TableHead className='blue-grey z-depth-1-half lighten-4'>
-                            <TableRow>
-                                <TableCell>Номер задания</TableCell>
-                                <TableCell>Предмет</TableCell>
-                                <TableCell>Тема</TableCell>
-                                <TableCell>Класс</TableCell>
-                                <TableCell>Срок сдачи</TableCell>
-                                <TableCell>Дата обновления</TableCell>
-                                <TableCell>Статус</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {props.tasks.map((task, index) => (
-                                <>
-                                    {
-                                        task.classNumber === props.auth.classNumber
-                                            ?
-                                            <StyledTableRow key={index}>
-                                                {
-                                                    props.homeworks.map(homework =>
-                                                        homework.taskId === task._id
-                                                        && <NavLink to={`/tasks/showTasksAfterCheck/` + homework._id}>
-                                                            <TableCell component="th" scope="row">{index + 1}</TableCell>
-                                                        </NavLink>
-                                                    )
-                                                }
-                                                {
-                                                    props.homeworks.some(homework => homework.taskId === task._id)
-                                                        ? null
-                                                        : <NavLink to={`/tasks/showTasks/` + task._id}>
-                                                            <TableCell component="th" scope="row">{index + 1}</TableCell>
-                                                        </NavLink>
-                                                }
-                                                <TableCell>{task.subject}</TableCell>
-                                                <TableCell>{task.taskTitle}</TableCell>
-                                                <TableCell>{task.classNumber}</TableCell>
-                                                <TableCell>{task.deadlineDate}</TableCell>
-                                                <TableCell>{task.editedDate}</TableCell>
-                                                <TableCell className='status'>
+                props.auth.role === 'teacher'
+                    ? <TableContainer component={Paper}>
+                        <Table aria-label="customized table">
+                            <TableHead className='blue-grey z-depth-1-half lighten-4'>
+                                <TableRow>
+                                    <TableCell>Номер задания</TableCell>
+                                    <TableCell>Предмет</TableCell>
+                                    <TableCell>Тема</TableCell>
+                                    <TableCell>Класс</TableCell>
+                                    <TableCell>Дата обновления</TableCell>
+                                    <TableCell>Срок сдачи</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {props.tasks.map((task, index) => (
+                                    <>
+                                        {
+                                            task.teacher === props.auth.fio
+                                                ?
+                                                <StyledTableRow key={index}>
+                                                    <NavLink to={`/tasks/showTasks/` + task._id}>
+                                                        <TableCell component="th" scope="row">{index + 1}</TableCell>
+                                                    </NavLink>
+                                                    <TableCell>{task.subject}</TableCell>
+                                                    <TableCell>{task.taskTitle}</TableCell>
+                                                    <TableCell>{task.classNumber}</TableCell>
+                                                    <TableCell>{task.editedDate}</TableCell>
+                                                    {/*<TableCell className='delete'>{task.deadlineDate}<i onClick={() => props.deleteTask(task._id)} className="material-icons tiny">delete</i>*/}
+                                                    <TableCell>{task.deadlineDate}</TableCell>
+                                                </StyledTableRow>
+                                                : null
+                                        }
+                                    </>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    : <TableContainer component={Paper}>
+                        <Table aria-label="customized table">
+                            <TableHead className='blue-grey z-depth-1-half lighten-4'>
+                                <TableRow>
+                                    <TableCell>Номер задания</TableCell>
+                                    <TableCell>Предмет</TableCell>
+                                    <TableCell>Тема</TableCell>
+                                    <TableCell>Класс</TableCell>
+                                    <TableCell>Срок сдачи</TableCell>
+                                    <TableCell>Дата обновления</TableCell>
+                                    <TableCell>Статус</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {props.tasks.map((task, index) => (
+                                    <>
+                                        {
+                                            task.classNumber === props.auth.classNumber
+                                                ?
+                                                <StyledTableRow key={index}>
+                                                    {
+                                                        props.homeworks.map(homework =>
+                                                            homework.taskId === task._id
+                                                            // && homework.fio === props.auth.fio
+                                                            && <NavLink to={`/tasks/showTasksAfterCheck/` + homework._id}>
+                                                                <TableCell component="th"
+                                                                           scope="row">{index + 1}</TableCell>
+                                                            </NavLink>
+                                                        )
+                                                    }
                                                     {
                                                         props.homeworks.some(homework => homework.taskId === task._id)
-                                                            ? props.homeworks.map(item =>
-                                                            item.taskId === task._id &&
-                                                            <span className={item.status === 'Не проверено'
-                                                                ? 'red-text'
-                                                                : 'green-text'
-                                                            }>{item.status}</span>
-                                                            )
-                                                            : <span className='blue-text'>Не отправлено</span>
+                                                            ? null
+                                                            : <NavLink to={`/tasks/showTasks/` + task._id}>
+                                                                <TableCell component="th"
+                                                                           scope="row">{index + 1}</TableCell>
+                                                            </NavLink>
                                                     }
-                                                </TableCell>
+                                                    <TableCell>{task.subject}</TableCell>
+                                                    <TableCell>{task.taskTitle}</TableCell>
+                                                    <TableCell>{task.classNumber}</TableCell>
+                                                    <TableCell>{task.deadlineDate}</TableCell>
+                                                    <TableCell>{task.editedDate}</TableCell>
+                                                    <TableCell className='status'>
+                                                        {
+                                                            props.homeworks.some(homework => homework.taskId === task._id)
+                                                                ? props.homeworks.map(item =>
+                                                                item.taskId === task._id &&
+                                                                <span className={item.status === 'Не проверено'
+                                                                    ? 'red-text'
+                                                                    : 'green-text'
+                                                                }>{item.status}</span>
+                                                                )
+                                                                : <span className='blue-text'>Не отправлено</span>
+                                                        }
+                                                    </TableCell>
 
-                                            </StyledTableRow>
-                                            : null
-                                    }
-                                </>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                                                </StyledTableRow>
+                                                : null
+                                        }
+                                    </>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
             }
         </div>
     );

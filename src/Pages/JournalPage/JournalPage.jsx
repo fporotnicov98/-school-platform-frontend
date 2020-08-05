@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import './JournalPage.scss'
-import {Redirect,withRouter} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import Paper from "@material-ui/core/Paper";
@@ -15,15 +15,28 @@ import Preloader from "../../Assets/Commons/Preloader";
 import {getClassroom} from "../../Redux/classReducer";
 import {getHomeworks} from "../../Redux/homeworkReducer";
 import {getTasks} from "../../Redux/taskReducer";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import {uniq} from "lodash";
+// import uniq from 'lodash/uniq'
 
 const JournalPage = (props) => {
+
+    let [subject, setSubject] = React.useState()
+    let [uniqueTasks, setUniqueTasks] = React.useState([])
+
+    let handleSubject = (e) => setSubject(e.target.value)
+
+    let selectUniqueSubject = () => {
+        setUniqueTasks(uniq(props.tasks.map(item => item.subject)))
+    }
 
     useEffect(() => {
         props.getClassroom(props.match.params.classId)
         props.getTasks()
         props.getHomeworks()
-        props.getTasks()
-        props.getHomeworks()
+        selectUniqueSubject()
     }, [props.match.params.classId])
 
     const StyledTableRow = withStyles((theme) => ({
@@ -34,41 +47,64 @@ const JournalPage = (props) => {
         },
     }))(TableRow);
 
-    if (!props.class || !props.tasks || !props.homeworks ) return <Preloader/>
+    if (!props.class || !props.tasks || !props.homeworks) return <Preloader/>
     if (!props.auth.isAuth) return <Redirect to={'/'}/>
     return (
-        <div className='z-depth-2 journal blue-grey lighten-4'>
+        <div o className='z-depth-2 journal blue-grey lighten-4'>
             <h5>Электронный журнал:</h5>
-            <TableContainer component={Paper}>
-                <Table aria-label="customized table">
-                    <TableHead className='z-depth-1-half'>
-                        <TableRow>
-                            <TableCell>Ученик</TableCell>
-                            {
-                                props.tasks.map(item =>  
-                                    item.classNumber === props.auth.classNumber && <TableCell>{item.publicDate}</TableCell> 
-                                )
-                            }
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
+            {
+                props.auth.role === 'student' &&
+                <div className='select-subject'>
+                    <InputLabel id="demo-simple-select-label">Предмет: </InputLabel>
+                    <Select
+                        id="demo-simple-select"
+                        value={subject}
+                        onChange={handleSubject}
+                    >
                         {
-                            props.class.students.map(student =>
-                                <StyledTableRow>
-                                    <TableCell component="th" scope="row">{student.fio}</TableCell>
-                                    {
-                                        props.homeworks.map(homework =>
-                                            homework.classNumber === props.auth.classNumber
-                                             && homework.student === student.fio 
-                                             && <TableCell>{homework.mark}</TableCell>
-                                        )
-                                    }
-                                </StyledTableRow>
+                            uniqueTasks.map(item =>
+                                <MenuItem value={item}>{item}</MenuItem>
                             )
                         }
-                    </TableBody>
-                </Table>
-            </TableContainer>
+
+                    </Select>
+                </div>
+            }
+            {
+                subject &&
+                <TableContainer component={Paper}>
+                    <Table aria-label="customized table">
+                        <TableHead className='z-depth-1-half'>
+                            <TableRow>
+                                <TableCell>Ученик</TableCell>
+                                {
+                                    props.tasks.map(item =>
+                                        item.classNumber === props.auth.classNumber && subject === item.subject &&
+                                        <TableCell className='dates'>{item.publicDate}</TableCell>
+                                    )
+                                }
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {
+                                props.class.students.map(student =>
+                                    <StyledTableRow>
+                                        <TableCell component="th" scope="row">{student.fio}</TableCell>
+                                        {
+                                            props.homeworks.map(homework =>
+                                                homework.classNumber === props.auth.classNumber
+                                                && homework.student === student.fio
+                                                && homework.subject === subject
+                                                && <TableCell className='marks'>{homework.mark}</TableCell>
+                                            )
+                                        }
+                                    </StyledTableRow>
+                                )
+                            }
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            }
         </div>
     );
 };

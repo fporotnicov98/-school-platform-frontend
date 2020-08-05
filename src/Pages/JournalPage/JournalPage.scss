@@ -3,7 +3,40 @@
   padding: 10px;
   width: 100%;
   min-height: 80vh;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #585858;
+  .MuiTableContainer-root {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .MuiTableCell-head {
+    border-right: 1px solid #b1b1b1;
+    &:last-child {
+      border-right: none;
+    }
+  }
+  .marks {
+    text-align: center;
+    border-left: 1px solid #b1b1b1;
+  }
+  .select-subject {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    label {
+      margin-right: 20px;
+    }
+    .MuiInputBase-root {
+      width: 60%;
+    }
+  }
+  .dates {
+    width: 10%;
+  }
   h5 {
     text-align: center;
     color: #555555;

@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { connect } from "react-redux";
-import { NavLink, Redirect } from "react-router-dom";
+import React, {useEffect} from 'react';
+import {connect} from "react-redux";
+import {NavLink, Redirect} from "react-router-dom";
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -9,10 +9,10 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { getHomeworks } from "../../../Redux/homeworkReducer";
+import {getHomeworks} from "../../../Redux/homeworkReducer";
 
 const CheckTasks = (props) => {
-    
+
     useEffect(() => {
         props.getHomeworks()
     }, [])
@@ -26,7 +26,7 @@ const CheckTasks = (props) => {
         },
     }))(TableRow);
 
-    if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+    if (!props.auth.isAuth) return <Redirect to={'/'}/>
     return (
         <div className='wrapper'>
             <nav className='blue-grey lighten-4'>
@@ -35,41 +35,45 @@ const CheckTasks = (props) => {
                     <a href="#!" className="breadcrumb">Ответы учеников</a>
                 </div>
             </nav>
-            <TableContainer component={Paper}>
-                <Table aria-label="customized table">
-                    <TableHead className='blue-grey z-depth-1-half lighten-4'>
-                        <TableRow>
-                            <TableCell>Номер задания</TableCell>
-                            <TableCell>Класс</TableCell>
-                            <TableCell>Ученик</TableCell>
-                            <TableCell>Тема</TableCell>
-                            <TableCell>Срок сдачи задания</TableCell>
-                            <TableCell>Дата отправки учеником</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {props.homeworks.map((homework, index) => (
-                            <>
-                                {
-                                    homework.teacher === props.auth.fio && !homework.mark
-                                        ?
-                                        <StyledTableRow key={index}>
-                                            <NavLink to={`/tasks/checkTasks/` + homework._id}>
-                                                <TableCell component="th" scope="row">{index + 1}</TableCell>
-                                            </NavLink>
-                                            <TableCell>{homework.classNumber}</TableCell>
-                                            <TableCell>{homework.student}</TableCell>
-                                            <TableCell>{homework.taskTitle}</TableCell>
-                                            <TableCell>{homework.deadlineDate}</TableCell>
-                                            <TableCell>{homework.publicDate}</TableCell>
-                                        </StyledTableRow>
-                                        : null
-                                }
-                            </>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            {
+                props.homeworks.length <= 0 ? <h4>Пока ни один ученик не прислал ответы на задания</h4>
+                    : <TableContainer component={Paper}>
+                        <Table aria-label="customized table">
+                            <TableHead className='blue-grey z-depth-1-half lighten-4'>
+                                <TableRow>
+                                    <TableCell>Номер задания</TableCell>
+                                    <TableCell>Класс</TableCell>
+                                    <TableCell>Ученик</TableCell>
+                                    <TableCell>Тема</TableCell>
+                                    <TableCell>Срок сдачи задания</TableCell>
+                                    <TableCell>Дата отправки учеником</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {props.homeworks.map((homework, index) => (
+                                    <>
+                                        {
+                                            homework.teacher === props.auth.fio && !homework.mark
+                                                ?
+                                                <StyledTableRow key={index}>
+                                                    <NavLink to={`/tasks/checkTasks/` + homework._id}>
+                                                        <TableCell component="th" scope="row">{index + 1}</TableCell>
+                                                    </NavLink>
+                                                    <TableCell>{homework.classNumber}</TableCell>
+                                                    <TableCell>{homework.student}</TableCell>
+                                                    <TableCell>{homework.taskTitle}</TableCell>
+                                                    <TableCell>{homework.deadlineDate}</TableCell>
+                                                    <TableCell>{homework.publicDate}</TableCell>
+                                                </StyledTableRow>
+                                                : null
+                                        }
+                                    </>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+            }
+
         </div>
     );
 }
