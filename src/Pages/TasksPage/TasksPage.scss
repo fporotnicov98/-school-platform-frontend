@@ -66,3 +66,8 @@
 .status {
   font-weight: bold !important;
 }
+.delete {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+}

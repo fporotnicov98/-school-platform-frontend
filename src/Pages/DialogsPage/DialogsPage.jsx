@@ -43,8 +43,8 @@ const DialogsPage = (props) => {
                 {
                     props.class.students.map(item =>
                         item.fio === props.auth.fio
-                        ? <div className='students students-main'><i className="fas fa-star"/>{item.fio}</div>
-                        : <div className='students'>{item.fio}</div>
+                            ? <div className='students students-main'><i className="fas fa-star"/>{item.fio}</div>
+                            : <div className='students'>{item.fio}</div>
                     )
                 }
             </div>
@@ -58,22 +58,20 @@ const DialogsPage = (props) => {
                                     ? <li className="me">
                                         <div className="entete">
                                             <span>{props.class.classTeacher.fio === item.authorFio ? `${item.authorFio} (Классный руководитель)` : item.authorFio}</span>
-                                            {
-                                                <div className='icons'>
-                                                    {
-                                                        <i onClick={() => {
-                                                            {
-                                                                handleUpdateText(item.message)
-                                                                handleUpdateId(item._id)
-                                                            }
-                                                        }} className='material-icons'>mode_edit</i>
-                                                    }
+                                            <div className='icons'>
+                                                {
                                                     <i onClick={() => {
-                                                        props.deleteMessage(this.props.auth.classId, item._id)
-                                                        setTimeout(() => this.props.getClassroom(this.props.auth.classId), 300)
-                                                    }} className='material-icons'>delete</i>
-                                                </div>
-                                            }
+                                                        {
+                                                            handleUpdateText(item.message)
+                                                            handleUpdateId(item._id)
+                                                        }
+                                                    }} className='material-icons'>mode_edit</i>
+                                                }
+                                                <i onClick={() => {
+                                                    props.deleteMessage(props.auth.classId, item._id)
+                                                    setTimeout(() => props.getClassroom(props.auth.classId), 300)
+                                                }} className='material-icons'>delete</i>
+                                            </div>
                                         </div>
                                         <div className="message blue-grey lighten-4">
                                             {
@@ -85,9 +83,18 @@ const DialogsPage = (props) => {
                                     </li>
                                     : <li className="you">
                                         <div className="entete">
-                                            {props.class.classTeacher.fio === item.authorFio ?
-                                                <span>{item.authorFio} (Классный руководитель)</span> :
-                                                <span>{item.authorFio}</span>}
+                                            <span>{props.class.classTeacher.fio === item.authorFio ? `${item.authorFio} (Классный руководитель)` : item.authorFio}</span>
+                                            <div className='icons'>
+                                                {
+                                                    props.class.classTeacher.fio === props.auth.fio
+                                                        ? <i onClick={() => {
+                                                            props.deleteMessage(props.auth.classId, item._id)
+                                                            setTimeout(() => props.getClassroom(props.auth.classId), 300)
+                                                        }} className='material-icons'>delete</i>
+                                                        : null
+                                                }
+
+                                            </div>
                                         </div>
                                         <div className="message white">
                                             <span>{item.message}</span>

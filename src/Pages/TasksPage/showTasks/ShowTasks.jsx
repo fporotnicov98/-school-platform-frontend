@@ -9,7 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {getTasks} from '../../../Redux/taskReducer'
+import {deleteTask, getTasks} from '../../../Redux/taskReducer'
 import {getHomeworks} from "../../../Redux/homeworkReducer";
 import './../TasksPage.scss'
 
@@ -51,8 +51,8 @@ const ShowTasks = (props) => {
                                 <TableCell>Предмет</TableCell>
                                 <TableCell>Тема</TableCell>
                                 <TableCell>Класс</TableCell>
-                                <TableCell>Срок сдачи</TableCell>
                                 <TableCell>Дата обновления</TableCell>
+                                <TableCell>Срок сдачи</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -68,8 +68,9 @@ const ShowTasks = (props) => {
                                                 <TableCell>{task.subject}</TableCell>
                                                 <TableCell>{task.taskTitle}</TableCell>
                                                 <TableCell>{task.classNumber}</TableCell>
-                                                <TableCell>{task.deadlineDate}</TableCell>
                                                 <TableCell>{task.editedDate}</TableCell>
+                                                <TableCell className='delete'>{task.deadlineDate}<i onClick={() => props.deleteTask(task._id)} className="material-icons tiny">delete</i>
+                                                </TableCell>
                                             </StyledTableRow>
                                             : null
                                     }
@@ -156,4 +157,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {getTasks, getHomeworks})(ShowTasks)
+export default connect(mapStateToProps, {getTasks, getHomeworks, deleteTask})(ShowTasks)

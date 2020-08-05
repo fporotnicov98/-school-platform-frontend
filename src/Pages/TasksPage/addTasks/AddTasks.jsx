@@ -122,6 +122,13 @@ const AddTasks = (props) => {
                             <InputLabel>Описание задания: </InputLabel>
                             <textarea className='materialize-textarea' value={description} onChange={handleDesc}/>
                         </div>
+                        <div className="task-item file-field">
+                            <div className="add-file">
+                                <InputLabel>Загрузить файл</InputLabel>
+                                <input type="file"/>
+                            </div>
+                            <input className="" type="text"/>
+                        </div>
                         <button className="btn waves-effect waves-light cyan darken-2" onClick={() => {
                             props.addTask(classNumber, date(), `${day} ${month} ${year}`, props.auth.subject, props.auth.fio, title, description)
                             resetForms("")

@@ -50,6 +50,7 @@ export const getTaskItem = (id) => dispatch => {
 export const deleteTask = (id) => dispatch => {
     taskAPI.deleteTask(id)
         .then(response => {
+            regSuccess(response.data.message)
             dispatch(getTasks())
         })
 }
