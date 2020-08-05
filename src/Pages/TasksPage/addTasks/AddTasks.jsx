@@ -33,7 +33,8 @@ const AddTasks = (props) => {
             setDesc(val)
         }
 
-        const days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+        let days = [...Array(32).keys()].splice(1)
+        let months = ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"]
 
         if (!props.auth.isAuth) return <Redirect to={'/'}/>
         return (
@@ -85,37 +86,9 @@ const AddTasks = (props) => {
                                         value={day}
                                         onChange={handleDay}
                                     >
-                                        <MenuItem value={1}>1</MenuItem>
-                                        <MenuItem value={2}>2</MenuItem>
-                                        <MenuItem value={3}>3</MenuItem>
-                                        <MenuItem value={4}>4</MenuItem>
-                                        <MenuItem value={5}>5</MenuItem>
-                                        <MenuItem value={6}>6</MenuItem>
-                                        <MenuItem value={7}>7</MenuItem>
-                                        <MenuItem value={8}>8</MenuItem>
-                                        <MenuItem value={9}>9</MenuItem>
-                                        <MenuItem value={10}>10</MenuItem>
-                                        <MenuItem value={11}>11</MenuItem>
-                                        <MenuItem value={12}>12</MenuItem>
-                                        <MenuItem value={13}>13</MenuItem>
-                                        <MenuItem value={14}>14</MenuItem>
-                                        <MenuItem value={15}>15</MenuItem>
-                                        <MenuItem value={16}>16</MenuItem>
-                                        <MenuItem value={17}>17</MenuItem>
-                                        <MenuItem value={18}>18</MenuItem>
-                                        <MenuItem value={19}>19</MenuItem>
-                                        <MenuItem value={20}>20</MenuItem>
-                                        <MenuItem value={21}>21</MenuItem>
-                                        <MenuItem value={22}>22</MenuItem>
-                                        <MenuItem value={23}>23</MenuItem>
-                                        <MenuItem value={24}>24</MenuItem>
-                                        <MenuItem value={25}>25</MenuItem>
-                                        <MenuItem value={26}>26</MenuItem>
-                                        <MenuItem value={27}>27</MenuItem>
-                                        <MenuItem value={28}>28</MenuItem>
-                                        <MenuItem value={29}>29</MenuItem>
-                                        <MenuItem value={30}>30</MenuItem>
-                                        <MenuItem value={31}>31</MenuItem>
+                                        {
+                                            days.map(day => <MenuItem value={day}>{day}</MenuItem>)
+                                        }
                                     </Select>
                                 </div>
                                 <div className='deadline-month'>
@@ -126,18 +99,9 @@ const AddTasks = (props) => {
                                         value={month}
                                         onChange={handleMonth}
                                     >
-                                        <MenuItem value={'Январь'}>Январь</MenuItem>
-                                        <MenuItem value={'Февраль'}>Февраль</MenuItem>
-                                        <MenuItem value={'Март'}>Март</MenuItem>
-                                        <MenuItem value={'Апрель'}>Апрель</MenuItem>
-                                        <MenuItem value={'Май'}>Май</MenuItem>
-                                        <MenuItem value={'Июнь'}>Июнь</MenuItem>
-                                        <MenuItem value={'Июль'}>Июль</MenuItem>
-                                        <MenuItem value={'Август'}>Август</MenuItem>
-                                        <MenuItem value={'Сентябрь'}>Сентябрь</MenuItem>
-                                        <MenuItem value={'Октябрь'}>Октябрь</MenuItem>
-                                        <MenuItem value={'Ноябрь'}>Ноябрь</MenuItem>
-                                        <MenuItem value={'Декабрь'}>Декабрь</MenuItem>
+                                        {
+                                            months.map(month => <MenuItem value={month}>{month}</MenuItem>)
+                                        }
                                     </Select>
                                 </div>
                                 <div className='deadline-year'>
@@ -150,7 +114,6 @@ const AddTasks = (props) => {
                                     >
                                         <MenuItem value={2020}>2020</MenuItem>
                                         <MenuItem value={2020}>2021</MenuItem>
-                                        <MenuItem value={2020}>2022</MenuItem>
                                     </Select>
                                 </div>
                             </div>

@@ -1,4 +1,3 @@
-import React from 'react';
 import {classAPI} from "../Api/Api";
 import {regSuccess} from "../Components/ConfirmForm/SuccessConfirm";
 import {regError} from "../Components/ConfirmForm/ErrorConfirm";

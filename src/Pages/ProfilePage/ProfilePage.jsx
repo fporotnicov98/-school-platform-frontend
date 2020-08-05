@@ -8,7 +8,7 @@ const ProfilePage = props => {
 
     useEffect(() => {
         props.getClasses()
-    }, [props.classroom])
+    }, [])
 
         if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
         return (

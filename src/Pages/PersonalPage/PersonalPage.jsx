@@ -36,7 +36,7 @@ class PersonalPage extends React.Component {
 
     render() {
         if (!this.props.isAuth) return <Redirect to={'/'}></Redirect>
-        if (this.props.role != 'moderator') return null
+        if (this.props.role !== 'moderator') return null
         return (
             <div className='wrapper'>
                 <div className='moderator'>

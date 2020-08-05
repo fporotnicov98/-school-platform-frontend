@@ -1,36 +1,16 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
 import {getClasses} from "../../Redux/classReducer";
 import './TasksPage.scss'
 
-class TasksPage extends React.Component {
-    state = {
-        addTasks: false,
-        showTasks: false,
-        checkTasks: false
-    }
+const TasksPage = props => {
 
-    componentDidMount() {
-        this.props.getClasses()
-    }
-
-    addTasks = () => {
-        this.setState({addTasks: true, showTasks: false, checkTasks: false})
-    }
-    showTasks = () => {
-        this.setState({addTasks: false, showTasks: true, checkTasks: false})
-    }
-    checkTasks = () => {
-        this.setState({addTasks: false, showTasks: false, checkTasks: true})
-    }
-
-    render() {
-        if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+        if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
         return (
             <div>
                 {
-                    this.props.auth.role === 'student' &&
+                    props.auth.role === 'student' &&
                     <div>
                         <div className='wrapper'>
                             <div className='z-depth-2 tasks blue-grey lighten-4'>
@@ -45,7 +25,7 @@ class TasksPage extends React.Component {
                     </div>
                 }
                 {
-                    this.props.auth.role === 'teacher' &&
+                    props.auth.role === 'teacher' &&
                     <div className='wrapper'>
                         <div className='z-depth-2 tasks blue-grey lighten-4'>
                             <div className='class'>
@@ -63,7 +43,6 @@ class TasksPage extends React.Component {
                 }
             </div>
         );
-    }
 }
 
 const mapStateToProps = state => {
