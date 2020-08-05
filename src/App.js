@@ -20,7 +20,7 @@ import CheckTasks from "./Pages/TasksPage/checkTasks/CheckTasks";
 import TaskItemContainer from "./Pages/TasksPage/TaskItem/TaskItemContainer";
 import CheckingTasksContainer from "./Pages/TasksPage/checkTasks/CheckingTasks/CheckingTasksContainer";
 import TaskCheckingInfoContainer from "./Pages/TasksPage/TaskItem/TaskCheckingInfoContainer";
-import JournalPageContainer from "./Pages/JournalPage/JournalPageContainer";
+import JournalPage from "./Pages/JournalPage/JournalPage";
 
 function App() {
     return (
@@ -45,7 +45,7 @@ function App() {
                     <Route path='/tasks/showTasksAfterCheck/:homeworkId?' render={() => <TaskCheckingInfoContainer/>}/>
                     <Route path='/tasks/checkTasks' exact render={() => <CheckTasks/>}/>
                     <Route path='/tasks/checkTasks/:tasksId?' render={() => <CheckingTasksContainer/>}/>
-                    <Route path='/journal/:classId?' render={() => <JournalPageContainer/>}/>
+                    <Route path='/journal/:classId?' render={() => <JournalPage/>}/>
                 </Switch>
             </div>
         </BrowserRouter>

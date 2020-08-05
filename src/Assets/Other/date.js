@@ -1,4 +1,4 @@
-export let date = () => {
+let date = () => {
     let fMonth = '';
     let Data = new Date();
     let Year = Data.getFullYear();
@@ -17,6 +17,8 @@ export let date = () => {
         case 9: fMonth = "Октября"; break;
         case 10: fMonth = "Ноября"; break;
         case 11: fMonth = "Декабря"; break;
+        default:
+            return null;
     }
     return `${Day} ${fMonth} ${Year}`
 }

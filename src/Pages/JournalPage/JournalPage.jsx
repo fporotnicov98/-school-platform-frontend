@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import './JournalPage.scss'
+import {Redirect,withRouter} from "react-router-dom";
+import {compose} from "redux";
 import {connect} from "react-redux";
-import {NavLink, Redirect} from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -11,8 +12,19 @@ import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Preloader from "../../Assets/Commons/Preloader";
+import {getClassroom} from "../../Redux/classReducer";
+import {getHomeworks} from "../../Redux/homeworkReducer";
+import {getTasks} from "../../Redux/taskReducer";
 
 const JournalPage = (props) => {
+
+    useEffect(() => {
+        props.getClassroom(props.match.params.classId)
+        props.getTasks()
+        props.getHomeworks()
+        props.getTasks()
+        props.getHomeworks()
+    }, [props.match.params.classId])
 
     const StyledTableRow = withStyles((theme) => ({
         root: {
@@ -22,7 +34,7 @@ const JournalPage = (props) => {
         },
     }))(TableRow);
 
-    if (!props.class) return <Preloader/>
+    if (!props.class || !props.tasks || !props.homeworks ) return <Preloader/>
     if (!props.auth.isAuth) return <Redirect to={'/'}/>
     return (
         <div className='z-depth-2 journal blue-grey lighten-4'>
@@ -33,10 +45,8 @@ const JournalPage = (props) => {
                         <TableRow>
                             <TableCell>Ученик</TableCell>
                             {
-                                props.tasks.map(item =>
-                                    item.classNumber === props.auth.classNumber
-                                        ? <TableCell>{item.publicDate}</TableCell>
-                                        : null
+                                props.tasks.map(item =>  
+                                    item.classNumber === props.auth.classNumber && <TableCell>{item.publicDate}</TableCell> 
                                 )
                             }
                         </TableRow>
@@ -48,14 +58,14 @@ const JournalPage = (props) => {
                                     <TableCell component="th" scope="row">{student.fio}</TableCell>
                                     {
                                         props.homeworks.map(homework =>
-                                            homework.classNumber === props.auth.classNumber && homework.student === student.fio && homework.publicTaskDate &&
-                                            < TableCell>{homework.mark}</TableCell>
+                                            homework.classNumber === props.auth.classNumber
+                                             && homework.student === student.fio 
+                                             && <TableCell>{homework.mark}</TableCell>
                                         )
                                     }
                                 </StyledTableRow>
                             )
                         }
-
                     </TableBody>
                 </Table>
             </TableContainer>
@@ -63,5 +73,18 @@ const JournalPage = (props) => {
     );
 };
 
+const mapStateToProps = state => {
+    return {
+        auth: state.auth,
+        class: state.classroom.class,
+        tasks: state.task.tasks,
+        homeworks: state.homework.homeworks
+    }
+}
 
-export default JournalPage;
+export default compose(
+    withRouter,
+    connect(mapStateToProps, {getClassroom, getTasks, getHomeworks})
+)(JournalPage)
+
+

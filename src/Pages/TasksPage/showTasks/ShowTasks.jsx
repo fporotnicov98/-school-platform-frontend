@@ -15,7 +15,6 @@ import { getHomeworks } from "../../../Redux/homeworkReducer";
 
 const ShowTasks = (props) => {
 
-
     useEffect(() => {
         props.getTasks()
         props.getHomeworks()
@@ -28,8 +27,6 @@ const ShowTasks = (props) => {
             },
         },
     }))(TableRow);
-
-    let homeworkId = ''
 
     if (!props.auth.isAuth) return <Redirect to={'/'} />
     return (

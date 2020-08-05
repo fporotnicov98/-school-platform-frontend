@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {getTaskItem, updateTask, setTaskItem } from "../../../Redux/taskReducer";
 import TaskItem from "./TaskItem";
 import Preloader from "../../../Assets/Commons/Preloader";
-import {addHomework, getHomeworkItem, getHomeworks} from "../../../Redux/homeworkReducer";
+import {addHomework, getHomeworkItem} from "../../../Redux/homeworkReducer";
 
 const TaskItemContainer = (props) => {
 

@@ -6,9 +6,7 @@ import M from "materialize-css";
 import './Classes.scss'
 import {deleteClassroom, getClasses} from "../../Redux/classReducer";
 import {deleteSchedule} from "../../Redux/scheduleReducer";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
+
 
 class Classes extends Component {
 

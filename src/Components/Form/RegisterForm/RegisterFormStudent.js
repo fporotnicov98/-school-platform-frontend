@@ -3,12 +3,7 @@ import {Field, Form, withFormik} from "formik";
 import '../Form.scss'
 
 class RegisterFormStudent extends React.Component {
-    componentDidMount() {
-        document.addEventListener('DOMContentLoaded', function () {
-            let elems = document.querySelectorAll('select');
-            let instances = window.M.FormSelect.init(elems, {});
-        });
-    }
+
     render() {
         return (
             <Form className='login'>

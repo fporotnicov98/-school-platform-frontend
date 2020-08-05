@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState,useEffect} from 'react';
 import {Redirect, withRouter} from "react-router-dom";
 import './DialogsPage.scss'
 import {Field, Form, withFormik} from "formik";
@@ -8,152 +8,141 @@ import {getClassroom} from "../../Redux/classReducer";
 import Preloader from "../../Assets/Commons/Preloader";
 import {addMessage, deleteMessage, updateMessage} from "../../Redux/dialogsReducer";
 
-class DialogsPage extends Component {
+const DialogsPage = (props) => {
 
-    state = {
-        newsText: null,
-        updateId: null,
-        modifyText: false
-    }
+    const [updateId,setUpdateId] = useState(null)
+    const [formText,setFormText] = useState(null)
 
-    componentDidMount() {
-        this.props.getClassroom(this.props.auth.classId)
-    }
+    useEffect(() => {
+        props.getClassroom(props.auth.classId)
+    }, [props.auth.classId])
 
-    setUpdateId = (id) => {
-        this.setState({updateId: id})
+    const handleUpdateId = (id) => {
+        setUpdateId(id)
     }
-    removeUpdateId = (id) => {
-        this.setState({updateId: null})
+    const handleUpdateText= (text) => {
+        setFormText(text)
     }
+    const handleFormText= (e) => {
+        setFormText(e.target.value)
+    }
+    const handleRemoveUpdateId = () => {
+        setUpdateId(null)
+    }
+   
+    if (!props.auth.isAuth) return <Redirect to={'/'}/>
+    if (!props.auth.classId) return <Preloader/>
+    if (!props.class) return <Preloader/>
 
-    setText = (text) => {
-        this.setState({newsText: text})
-    }
-
-    updateText = (e) => {
-        this.setState({newsText: e.currentTarget.value})
-    }
-    modifyText = () => {
-        this.setState({modifyText: true})
-    }
-
-    render() {
-        if (!this.props.auth.isAuth) return <Redirect to={'/'}/>
-        if (!this.props.auth.classId) return <Preloader/>
-        if (!this.props.class) return <Preloader/>
-        return (
-            <div className='dialogs'>
-                <div className='users-dialogs'>
-                    <div className='teacher cyan darken-3 white-text'>
-                        <div>Классный руководитель:</div>
-                        {this.props.class.classTeacher.fio}
-                    </div>
-                    <div>Ученики:</div>
-                    {
-                        this.props.class.students.map(item =>
-                            <div className='students'>{item.fio}</div>
-                        )
-                    }
+    return (
+        <div className='dialogs'>
+            <div className='users-dialogs'>
+                <div className='teacher cyan darken-3 white-text'>
+                    <div>Классный руководитель:</div>
+                    {props.class.classTeacher.fio}
                 </div>
-                <div className='messages'>
-                    <div className='message-area'>
-                        <div className='message-header cyan darken-2 white-text'>
-                            {this.props.auth.fio}
-                        </div>
-                        <ul className="chat">
-                            {
-                                this.props.class.classForumMessages.map(item =>
-                                    this.props.auth.id === item.authorId
-                                        ? <li className="me">
-                                            <div className="entete">
-                                                <span>
-                                                {this.props.class.classTeacher.fio === item.authorFio ? `${item.authorFio} (Классный руководитель)`: item.authorFio}
-                                                    {
-                                                        <div className='icons'>
-                                                            {
-                                                                <i onClick={() => {
-                                                                    {
-                                                                        this.setText(item.message)
-                                                                        this.setUpdateId(item._id)
-                                                                    }
-                                                                }} className='material-icons'>mode_edit</i>
-                                                            }
-                                                            <i onClick={() => {
-                                                                this.props.deleteMessage(this.props.auth.classId, item._id)
-                                                                setTimeout(() => this.props.getClassroom(this.props.auth.classId), 300)
-                                                            }} className='material-icons'>delete</i>
-                                                        </div>
-                                                    }
-                                                </span>
-                                            </div>
-                                            <div className="message white">
-                                                {
-                                                    item.edited === '1'
-                                                        ? <span>{`${item.message} (изменено)`}</span>
-                                                        : <span>{item.message}</span>
-                                                }
-                                            </div>
-                                        </li>
-                                        : <li className="you">
-                                            <div className="entete">
-                                                {this.props.class.classTeacher.fio === item.authorFio ? <span>{item.authorFio} (Классный руководитель)</span> : <span>{item.authorFio}</span>}
-                                            </div>
-                                            <div className="message cyan darken-2 white-text">
-                                                <span>{item.message}</span>
-                                            </div>
-                                        </li>
-                                )
-                            }
-                        </ul>
-                        <Form className='message-submit'>
-                            <div className='input-field s10'>
-                                {
-                                    this.props.class.classForumMessages.some(item => item._id === this.state.updateId)
-                                        ? <Field
-                                            as='textarea'
-                                            id="message"
-                                            name='message'
-                                            className="materialize-textarea"
-                                            placeholder='Введите сообщение'
-                                            onChange={this.updateText}
-                                            value={this.state.newsText}>
-                                        </Field>
-                                        : <Field
-                                            as='textarea'
-                                            id="message"
-                                            name='message'
-                                            className="materialize-textarea"
-                                            placeholder='Введите сообщение'>
-                                        </Field>
-                                }
-                            </div>
-                            {
-                                this.props.class.classForumMessages.some(item => item._id === this.state.updateId)
-                                    ? <button onClick={() => {
-                                        {
-                                            this.removeUpdateId(this.state.updateId)
-                                            this.modifyText()
-                                            this.props.updateMessage(this.props.auth.classId, this.state.updateId, this.state.newsText)
-                                            setTimeout(() => this.props.getClassroom(this.props.auth.classId), 500)
-
-                                        }
-                                    }} className="btn waves-effect waves-light cyan darken-2" type="submit"
-                                              name="action">Изменить
-                                    </button>
-                                    : <button className="btn waves-effect waves-light cyan darken-2" type="submit"
-                                              name="action">Отправить
-                                    </button>
-                            }
-                        </Form>
-                    </div>
-
-                </div>
+                <div>Ученики:</div>
+                {
+                    props.class.students.map(item =>
+                        <div className='students'>{item.fio}</div>
+                    )
+                }
             </div>
-        );
-    }
-}
+            <div className='messages'>
+                <div className='message-area'>
+                    <div className='message-header cyan darken-2 white-text'>
+                        {props.auth.fio}
+                    </div>
+                    <ul className="chat">
+                        {
+                            props.class.classForumMessages.map(item =>
+                                props.auth.id === item.authorId
+                                    ? <li className="me">
+                                        <div className="entete">
+                                            <span>
+                                            {props.class.classTeacher.fio === item.authorFio ? `${item.authorFio} (Классный руководитель)`: item.authorFio}
+                                                {
+                                                    <div className='icons'>
+                                                        {
+                                                            <i onClick={() => {
+                                                                {
+                                                                    handleUpdateText(item.message)
+                                                                    handleUpdateId(item._id)
+                                                                }
+                                                            }} className='material-icons'>mode_edit</i>
+                                                        }
+                                                        <i onClick={() => {
+                                                            props.deleteMessage(this.props.auth.classId, item._id)
+                                                            setTimeout(() => this.props.getClassroom(this.props.auth.classId), 300)
+                                                        }} className='material-icons'>delete</i>
+                                                    </div>
+                                                }
+                                            </span>
+                                        </div>
+                                        <div className="message white">
+                                            {
+                                                item.edited === '1'
+                                                    ? <span>{`${item.message} (изменено)`}</span>
+                                                    : <span>{item.message}</span>
+                                            }
+                                        </div>
+                                    </li>
+                                    : <li className="you">
+                                        <div className="entete">
+                                            {props.class.classTeacher.fio === item.authorFio ? <span>{item.authorFio} (Классный руководитель)</span> : <span>{item.authorFio}</span>}
+                                        </div>
+                                        <div className="message cyan darken-2 white-text">
+                                            <span>{item.message}</span>
+                                        </div>
+                                    </li>
+                            )
+                        }
+                    </ul>
+                    <Form className='message-submit'>
+                        <div className='input-field s10'>
+                            {
+                                props.class.classForumMessages.some(item => item._id === updateId)
+                                    ? <Field
+                                        as='textarea'
+                                        id="message"
+                                        name='message'
+                                        className="materialize-textarea"
+                                        placeholder='Введите сообщение'
+                                        onChange={handleFormText}
+                                        value={formText}>
+                                    </Field>
+                                    : <Field
+                                        as='textarea'
+                                        id="message"
+                                        name='message'
+                                        className="materialize-textarea"
+                                        placeholder='Введите сообщение'>
+                                    </Field>
+                            }
+                        </div>
+                        {
+                            props.class.classForumMessages.some(item => item._id === updateId)
+                                ? <button onClick={() => {
+                                    {
+                                        handleRemoveUpdateId(updateId)
+                                        props.updateMessage(props.auth.classId, updateId, formText)
+                                        setTimeout(() => props.getClassroom(props.auth.classId), 500)
 
+                                    }
+                                }} className="btn waves-effect waves-light cyan darken-2" type="submit"
+                                          name="action">Изменить
+                                </button>
+                                : <button className="btn waves-effect waves-light cyan darken-2" type="submit"
+                                          name="action">Отправить
+                                </button>
+                        }
+                    </Form>
+                </div>
+
+            </div>
+        </div>
+    );
+}
 
 export const DialogsFormik = withFormik({
     mapPropsToValues({message}) {
