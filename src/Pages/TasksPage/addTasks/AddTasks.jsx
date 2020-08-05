@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {connect} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
-import './../TasksPage.scss';
+import './AddTasks.scss';
 import Select from "@material-ui/core/Select";
 import date from '../../../Assets/Other/date'
 import InputLabel from "@material-ui/core/InputLabel";
@@ -17,13 +17,13 @@ const AddTasks = (props) => {
         let [title, setTitle] = useState('')
         let [description, setDesc] = useState('')
 
-        let handleDay = e =>  setDay(e.target.value)
+        let handleDay = e => setDay(e.target.value)
         let handleMonth = e => setMonth(e.target.value)
         let handleYear = e => setYear(e.target.value)
         let handleClass = e => setClass(e.target.value)
         let handleTitle = e => setTitle(e.target.value)
         let handleDesc = e => setDesc(e.target.value)
-        
+
         let resetForms = val => {
             setClass(val)
             setDay(val)
@@ -34,50 +34,51 @@ const AddTasks = (props) => {
         }
 
         let days = [...Array(32).keys()].splice(1)
-        let months = ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"]
+        let months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
 
         if (!props.auth.isAuth) return <Redirect to={'/'}/>
         return (
-            <>
-                <div className='wrapper'>
-                    <nav className='blue-grey lighten-4'>
-                        <div className="nav-wrapper">
-                            <NavLink to="/tasks" className="breadcrumb">Задания</NavLink>
-                            <a href="#!" className="breadcrumb">Добавить задание</a>
+            <div className='wrapper'>
+                <nav className='blue-grey lighten-4'>
+                    <div className="nav-wrapper">
+                        <NavLink to="/tasks" className="breadcrumb">Задания</NavLink>
+                        <a href="#!" className="breadcrumb">Добавить задание</a>
+                    </div>
+                </nav>
+                <div className='z-depth-2 add-tasks blue-grey lighten-4'>
+                    <div className='tasks-body'>
+                        <div className='task-item'>
+                            <InputLabel id="demo-simple-select-label">Выбрать класс: </InputLabel>
+                            <Select
+                                className='class'
+                                id="demo-simple-select"
+                                onChange={handleClass}
+                                value={classNumber}
+                            >
+                                {
+                                    props.classroom.map(item =>
+                                        <MenuItem
+                                            value={item.classNumber}>{item.classNumber}</MenuItem>
+                                    )
+                                }
+                            </Select>
                         </div>
-                    </nav>
-                    <div className='z-depth-2 add-tasks blue-grey lighten-4'>
-                        <div className='tasks-body'>
-                            <div className='class-number'>
-                                <span>Выбрать класс: </span>
-                                <Select
-                                    className='class'
-                                    native
-                                    onChange={handleClass}
-                                    value={classNumber}
-                                >
-                                    <option value="" disabled selected>Выбрать класс</option>
-                                    {
-                                        props.classroom.map(item =>
-                                            <option
-                                                value={item.classNumber}>{item.classNumber}</option>
-                                        )
-                                    }
-                                </Select>
-                            </div>
-                            <div className='subject'>Предмет:
-                                <span className='subject-text'>{props.auth.subject}</span>
-                            </div>
-                            <div className='topic'>Тема задания:
-                                <div className="input-field">
-                                    <input id="topic" type="text" className="validate" value={title}
-                                           onChange={handleTitle}/>
-                                </div>
-                            </div>
-                            <div className='date'>Дата публикации:
-                                <input type="text" value={date()}/>
-                            </div>
-                            <div className='deadline'>Срок сдачи:
+                        <div className='task-item'>
+                            <InputLabel>Предмет: </InputLabel>
+                            <span className='subject-text'>{props.auth.subject}</span>
+                        </div>
+                        <div className='task-item'>
+                            <InputLabel>Тема задания: </InputLabel>
+                            <input id="topic" type="text" className="validate" value={title}
+                                   onChange={handleTitle}/>
+                        </div>
+                        <div className='task-item'>
+                            <InputLabel>Дата публикации: </InputLabel>
+                            <span>{date()}</span>
+                        </div>
+                        <div className='task-item'>
+                            <InputLabel>Срок сдачи: </InputLabel>
+                            <div className='deadline-days'>
                                 <div className='deadline-day'>
                                     <InputLabel id="demo-simple-select-label">День</InputLabel>
                                     <Select
@@ -91,7 +92,7 @@ const AddTasks = (props) => {
                                         }
                                     </Select>
                                 </div>
-                                <div className='deadline-month'>
+                                <div className='deadline-day'>
                                     <InputLabel id="demo-simple-select-label">Месяц</InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
@@ -104,7 +105,7 @@ const AddTasks = (props) => {
                                         }
                                     </Select>
                                 </div>
-                                <div className='deadline-year'>
+                                <div className='deadline-day'>
                                     <InputLabel id="demo-simple-select-label">Год</InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
@@ -117,24 +118,20 @@ const AddTasks = (props) => {
                                     </Select>
                                 </div>
                             </div>
-                            <div className='description'>Описание задания
-                                <div className="input-field">
-                                <textarea className='materialize-textarea' value={description}
-                                          onChange={handleDesc}/>
-                                </div>
-                            </div>
-                            <button className="btn waves-effect waves-light cyan darken-2" type="submit"
-                                    name="action" onClick={() => {
-                                props.addTask(classNumber, date(), `${day} ${month} ${year}`, props.auth.subject, props.auth.fio, title, description)
-                                resetForms("")
-                            }}>Опубликовать задание
-                                <i className="material-icons right">send</i>
-                            </button>
-                            
                         </div>
+                        <div className='description'>
+                            <InputLabel>Описание задания: </InputLabel>
+                            <textarea className='materialize-textarea' value={description}
+                                      onChange={handleDesc}/>
+                        </div>
+                        <button className="btn waves-effect waves-light cyan darken-2" onClick={() => {
+                            props.addTask(classNumber, date(), `${day} ${month} ${year}`, props.auth.subject, props.auth.fio, title, description)
+                            resetForms("")
+                        }}>Опубликовать задание
+                        </button>
                     </div>
                 </div>
-            </>
+            </div>
         );
     }
 ;

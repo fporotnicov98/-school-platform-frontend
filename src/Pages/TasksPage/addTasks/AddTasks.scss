@@ -1,0 +1,110 @@
+.wrapper {
+  color: #585858;
+
+  .add-tasks {
+    padding: 40px 20px;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .tasks-body {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 14px;
+
+      .task-item {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        align-items: center;
+
+        .class {
+          width: 30%;
+        }
+
+        input {
+          width: 72%;
+          margin: 0 !important;
+          text-align: right;
+          border-bottom: 1px solid #9e9e9e !important;
+        }
+
+        .deadline-days {
+          display: flex;
+          justify-content: space-between;
+          width: 72%;
+
+          .deadline-day {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex: 0 0 33.3%;
+
+            label {
+              margin-right: 10px;
+            }
+
+            .MuiInputBase-root {
+              width: 50% !important;
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+
+    .description {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      align-items: center;
+
+      .input-field {
+        textarea {
+          text-align: right;
+        }
+
+        width: 72%;
+        margin: 0 !important;
+      }
+
+      span {
+        text-align: right;
+        width: 72%;
+      }
+    }
+
+    .answer {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+
+      input {
+        text-align: right;
+        width: 72%;
+        font-size: 18px;
+      }
+
+    }
+
+    .btn {
+      width: 70%;
+    }
+
+    textarea.materialize-textarea {
+      line-height: normal;
+      overflow-y: hidden;
+      padding: .8rem .8rem .8rem .8rem;
+      min-height: 3rem;
+      box-sizing: border-box;
+    }
+  }
+}
+

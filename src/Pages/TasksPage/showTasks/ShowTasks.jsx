@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { connect } from "react-redux";
-import { NavLink, Redirect } from "react-router-dom";
+import React, {useEffect} from 'react';
+import {connect} from "react-redux";
+import {NavLink, Redirect} from "react-router-dom";
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -9,8 +9,9 @@ import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { getTasks } from '../../../Redux/taskReducer'
-import { getHomeworks } from "../../../Redux/homeworkReducer";
+import {getTasks} from '../../../Redux/taskReducer'
+import {getHomeworks} from "../../../Redux/homeworkReducer";
+import './../TasksPage.scss'
 
 
 const ShowTasks = (props) => {
@@ -28,15 +29,18 @@ const ShowTasks = (props) => {
         },
     }))(TableRow);
 
-    if (!props.auth.isAuth) return <Redirect to={'/'} />
+    if (!props.auth.isAuth) return <Redirect to={'/'}/>
     return (
         <div className='wrapper'>
-            <nav className='blue-grey lighten-4'>
-                <div className="nav-wrapper">
-                    <NavLink to="/tasks" className="breadcrumb">Задания</NavLink>
-                    <a href="#!" className="breadcrumb">Все задания</a>
-                </div>
-            </nav>
+            {
+                props.auth.role === 'teacher' &&
+                <nav className='blue-grey lighten-4'>
+                    <div className="nav-wrapper">
+                        <NavLink to="/tasks" className="breadcrumb">Задания</NavLink>
+                        <a href="#!" className="breadcrumb">Все задания</a>
+                    </div>
+                </nav>
+            }
             {
                 props.auth.role === 'teacher' &&
                 <TableContainer component={Paper}>
@@ -98,33 +102,34 @@ const ShowTasks = (props) => {
                                             ?
                                             <StyledTableRow key={index}>
                                                 {
-                                                    props.homeworks.map(homework => 
+                                                    props.homeworks.map(homework =>
                                                         homework.taskId === task._id
                                                         && <NavLink to={`/tasks/showTasksAfterCheck/` + homework._id}>
                                                             <TableCell component="th" scope="row">{index + 1}</TableCell>
                                                         </NavLink>
                                                     )
                                                 }
-                                                 {
-                                                    props.homeworks.some(homework => homework.taskId === task._id) 
-                                                        ? null 
+                                                {
+                                                    props.homeworks.some(homework => homework.taskId === task._id)
+                                                        ? null
                                                         : <NavLink to={`/tasks/showTasks/` + task._id}>
-                                                        <TableCell component="th" scope="row">{index + 1}</TableCell>
-                                                    </NavLink>
+                                                            <TableCell component="th" scope="row">{index + 1}</TableCell>
+                                                        </NavLink>
                                                 }
                                                 <TableCell>{task.subject}</TableCell>
                                                 <TableCell>{task.taskTitle}</TableCell>
                                                 <TableCell>{task.classNumber}</TableCell>
                                                 <TableCell>{task.deadlineDate}</TableCell>
                                                 <TableCell>{task.editedDate}</TableCell>
-                                                <TableCell>
+                                                <TableCell className='status'>
                                                     {
                                                         props.homeworks.some(homework => homework.taskId === task._id)
                                                             ? props.homeworks.map(item =>
-                                                                item.taskId === task._id &&
-                                                                <span className='red-text'>{item.status}</span>
+                                                            item.taskId === task._id && item.status === 'Проверено'
+                                                            ? <span className='green-text'>{item.status}</span>
+                                                                : <span className='red-text'>{item.status}</span>
                                                             )
-                                                            : <span className='green-text'>Не отправлено</span>
+                                                            : <span className='blue-text'>Не отправлено</span>
                                                     }
                                                 </TableCell>
 
@@ -137,7 +142,7 @@ const ShowTasks = (props) => {
                     </Table>
                 </TableContainer>
             }
-        </div >
+        </div>
     );
 }
 
@@ -150,4 +155,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { getTasks, getHomeworks })(ShowTasks)
+export default connect(mapStateToProps, {getTasks, getHomeworks})(ShowTasks)

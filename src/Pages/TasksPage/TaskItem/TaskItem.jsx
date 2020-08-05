@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {Redirect, NavLink} from "react-router-dom";
 import date from "../../../Assets/Other/date";
 import Preloader from "../../../Assets/Commons/Preloader";
+import './../addTasks/AddTasks.scss'
+import InputLabel from "@material-ui/core/InputLabel";
 
 
 const TaskItem = (props) => {
@@ -13,9 +15,10 @@ const TaskItem = (props) => {
     let handleTitle = (e) => setTitle(e.target.value)
     let handleDesc = (e) => setDesc(e.target.value)
     let handleAnswer = (e) => setAnswer(e.target.value)
-    
+
     if (!props.auth.isAuth) return <Redirect to={'/'}/>
-    if (props.homeworks.some(homework => homework.taskId === props.taskItem._id)) return <Redirect to={'/tasks/showTasks'}/>
+    if (props.auth.role === 'student' && props.homeworks.some(homework => homework.taskId === props.taskItem._id)) return <Redirect
+        to={'/tasks/showTasks'}/>
     if (!props.taskItem) return <Preloader/>
     return (
         <div className='wrapper'>
@@ -43,36 +46,35 @@ const TaskItem = (props) => {
                 props.auth.role === 'teacher' &&
                 <div className='z-depth-2 add-tasks blue-grey lighten-4'>
                     <div className='tasks-body'>
-                        <div className='class-number'>
-                            <span>Класс: </span>
+                        <div className='task-item'>
+                            <InputLabel>Класс: </InputLabel>
                             <span>{props.taskItem.classNumber}</span>
                         </div>
-                        <div className='subject'>Предмет:
-                            <span className='subject-text'>{props.taskItem.subject}</span>
+                        <div className='task-item'>
+                            <InputLabel>Предмет: </InputLabel>
+                            <span>{props.taskItem.subject}</span>
                         </div>
-                        <div className='topic'>Тема задания:
-                            <div className="input-field">
-                                <input id="topic" type="text" className="validate" value={title}
-                                       onChange={handleTitle} placeholder="Введите тему задания"/>
-                            </div>
+                        <div className='task-item'>
+                            <InputLabel>Тема задания: </InputLabel>
+                            <input id="topic" type="text" className="validate" value={title}
+                                   onChange={handleTitle} placeholder="Введите тему задания"/>
                         </div>
-                        <div className='date'>Дата публикации:
-                            <input type="text" value={props.taskItem.publicDate}/>
+                        <div className='task-item'>
+                            <InputLabel>Дата публикации: </InputLabel>
+                            <span>{props.taskItem.publicDate}</span>
                         </div>
-                        <div className='deadline'>Срок сдачи:
-                            <input type='text' value={props.taskItem.deadlineDate}/>
+                        <div className='task-item'>
+                            <InputLabel>Срок сдачи: </InputLabel>
+                            <span>{props.taskItem.deadlineDate}</span>
                         </div>
-                        <div className='description'>Описание задания
-                            <div className="input-field">
-                                    <textarea className='materialize-textarea' value={description}
-                                              onChange={handleDesc}/>
-                            </div>
+                        <div className='task-item'>
+                            <InputLabel>Описание задания: </InputLabel>
+                            <textarea className='materialize-textarea' value={description}
+                                      onChange={handleDesc}/>
                         </div>
-                        <button className="btn waves-effect waves-light cyan darken-2" type="submit"
-                                name="action"
+                        <button className="btn waves-effect waves-light cyan darken-2"
                                 onClick={() => props.updateTask(props.taskItem._id, title, description, date())}>Изменить
                             задание
-                            <i className="material-icons right">send</i>
                         </button>
                     </div>
                 </div>
@@ -81,33 +83,38 @@ const TaskItem = (props) => {
                 props.auth.role === 'student' &&
                 <div className='z-depth-2 add-tasks blue-grey lighten-4'>
                     <div className='tasks-body'>
-                        <div className='class-number'>
-                            <span>Класс: </span>
+                        <div className='task-item'>
+                            <InputLabel>Класс: </InputLabel>
                             <span>{props.taskItem.classNumber}</span>
                         </div>
-                        <div className='subject'>Предмет:
-                            <span className='subject-text'>{props.taskItem.subject}</span>
+                        <div className='task-item'>
+                            <InputLabel>Предмет: </InputLabel>
+                            <span>{props.taskItem.subject}</span>
                         </div>
-                        <div className='topic'>Тема задания:
+                        <div className='task-item'>
+                            <InputLabel>Тема задания: </InputLabel>
                             <span>{props.taskItem.taskTitle}</span>
                         </div>
-                        <div className='date'>Дата публикации:
+                        <div className='task-item'>
+                            <InputLabel>Дата публикации: </InputLabel>
                             <span>{props.taskItem.publicDate}</span>
                         </div>
-                        <div className='deadline'>Срок сдачи:
+                        <div className='task-item'>
+                            <InputLabel>Срок сдачи: </InputLabel>
                             <span>{props.taskItem.deadlineDate}</span>
                         </div>
-                        <div className='description'>Описание задания
+                        <div className='task-item'>
+                            <InputLabel>Описание задания: </InputLabel>
                             <span>{props.taskItem.taskText}</span>
                         </div>
-                        <div className='answer'>Ответ на задание
+                        <div className='task-item'>
+                            <InputLabel>Ответ на задание: </InputLabel>
                             <input type='text' value={answer} onChange={handleAnswer}/>
                         </div>
                         <button className="btn waves-effect waves-light cyan darken-2"
                                 onClick={() => {
                                     props.addHomework(props.auth.classNumber, props.taskItem._id, props.auth.fio, date(), props.taskItem.publicDate, props.taskItem.subject, props.taskItem.teacher, answer, props.taskItem.deadlineDate, props.taskItem.taskTitle)
-                                }}> Отправить
-                            ответ<i className="material-icons right">send</i>
+                                }}>Отправить
                         </button>
                     </div>
                 </div>

@@ -33,10 +33,6 @@ const ScheduleModerator = props => {
                     id="demo-simple-select"
                     value={selectedDay}
                     onChange={handleSelectedDay}
-                    inputProps={{
-                        name: 'selectedDay',
-                        id: 'selectedDay',
-                    }}
                 >
                     <MenuItem value={"Понедельник"}>Понедельник</MenuItem>
                     <MenuItem value={"Вторник"}>Вторник</MenuItem>

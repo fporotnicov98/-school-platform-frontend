@@ -7,7 +7,10 @@
     color: rgba(0, 0, 0, 0.87);
     font-weight: 500;
     line-height: 1.5rem;
-    border: 1px solid #b1b1b1;
+    border-right: 1px solid #b1b1b1;
+    &:last-child {
+      border-right: none;
+    }
   }
   nav {
     width: 90%;
@@ -19,170 +22,6 @@
   }
 
   // AddTasks
-
-  .add-tasks {
-    width: 90%;
-    min-height: 76vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .tasks-body {
-      width: 90%;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      font-size: 18px;
-      align-items: center;
-
-      .class-number {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        align-items: center;
-        //min-height: 54px;
-
-        .class {
-          width: 30%;
-        }
-      }
-
-      .subject {
-        //min-height: 54px;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        align-items: center;
-      }
-
-      .topic {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        align-items: center;
-
-        .input-field {
-          width: 72%;
-          margin: 0 !important;
-
-          input {
-            text-align: right;
-            border-bottom: 1px solid #9e9e9e !important;
-          }
-
-        }
-
-      }
-
-      .date {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        align-items: center;
-
-        input {
-          text-align: right;
-          width: 72%;
-        }
-      }
-
-      .deadline {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        align-items: center;
-
-        input {
-          text-align: right;
-          width: 72%;
-        }
-
-        .deadline-day {
-
-        }
-
-        .deadline-month {
-
-        }
-
-        .deadline-year {
-
-        }
-      }
-
-      .description {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        align-items: center;
-
-        .input-field {
-          textarea {
-            text-align: right;
-          }
-
-          width: 72%;
-          margin: 0 !important;
-        }
-
-        span {
-          text-align: right;
-          width: 72%;
-        }
-      }
-
-      .answer {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        input {
-          text-align: right;
-          width: 72%;
-          font-size: 18px;
-        }
-
-      }
-      .files {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .file-field {
-          width: 72%;
-          display: flex;
-          .file-path-wrapper {
-            width: 80%;
-          }
-
-          .add-files {
-            width: 20%;
-            margin-left: 20px;
-          }
-        }
-
-      }
-
-      .btn {
-        width: 70%;
-      }
-
-      textarea.materialize-textarea {
-        line-height: normal;
-        overflow-y: hidden;
-        padding: .8rem .8rem .8rem .8rem;
-        min-height: 3rem;
-        box-sizing: border-box;
-      }
-    }
-  }
 
   .tasks {
     padding: 20px;
@@ -217,3 +56,6 @@
 
 //ShowTasks
 
+.status {
+  font-weight: bold !important;
+}
