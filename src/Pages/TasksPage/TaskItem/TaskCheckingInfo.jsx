@@ -22,8 +22,9 @@ const TaskCheckingInfo = (props) => {
                         </div>
                         : <div className='tasks-body'>
                             <h4>Ваша работы была оценена учителем</h4>
-                            <span>Оценка {props.homeworkItem.mark}</span>
-                            <span>Комментарий учителя {props.homeworkItem.teacherDesc}</span>
+                            <div className='mark'><h6>Оценка:</h6><span>{props.homeworkItem.mark}</span></div>
+                            <div className='desc'><h6>Комментарий учителя:</h6>
+                                <span>{props.homeworkItem.teacherDesc}</span></div>
                         </div>
                 }
             </div>

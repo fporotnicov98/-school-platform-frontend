@@ -134,7 +134,6 @@ const ShowTasks = (props) => {
                                                             : <span className='blue-text'>Не отправлено</span>
                                                     }
                                                 </TableCell>
-
                                             </StyledTableRow>
                                             : null
                                     }

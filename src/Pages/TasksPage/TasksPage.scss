@@ -3,15 +3,22 @@
     width: 90%;
     overflow-x: auto;
   }
+
   .MuiTableCell-head {
     color: rgba(0, 0, 0, 0.87);
     font-weight: 500;
     line-height: 1.5rem;
     border-right: 1px solid #b1b1b1;
+
     &:last-child {
       border-right: none;
     }
   }
+
+  .MuiTableCell-root {
+    border-bottom: none;
+  }
+
   nav {
     width: 90%;
     margin-bottom: 20px;

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {NavLink, Redirect} from "react-router-dom";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
 
 const CheckingTasks = (props) => {
 
@@ -27,32 +28,40 @@ const CheckingTasks = (props) => {
             <div className='z-depth-2 add-tasks blue-grey lighten-4'>
                 <div className='tasks-body'>
                     <div className='task-item'>
-                        <span>Класс: </span>
+                        <InputLabel>Класс: </InputLabel>
                         <span>{props.homeworkItem.classNumber}</span>
                     </div>
-                    <div className='task-item'>Предмет:
-                        <span className='subject-text'>{props.homeworkItem.subject}</span>
+                    <div className='task-item'>
+                        <InputLabel>Предмет: </InputLabel>
+                        <span>{props.homeworkItem.subject}</span>
                     </div>
-                    <div className='task-item'>Тема задания:
+                    <div className='task-item'>
+                        <InputLabel>Тема задания: </InputLabel>
                         <span>{props.homeworkItem.taskTitle}</span>
                     </div>
-                    <div className='task-item'>Ученик:
+                    <div className='task-item'>
+                        <InputLabel>Ученик: </InputLabel>
                         <span>{props.homeworkItem.student}</span>
                     </div>
-                    <div className='task-item'>Срок сдачи:
+                    <div className='task-item'>
+                        <InputLabel>Срок сдачи: </InputLabel>
                         <span>{props.homeworkItem.deadlineDate}</span>
                     </div>
-                    <div className='task-item'>Дата публикации ученика
+                    <div className='task-item'>
+                        <InputLabel>Дата публикации ученика: </InputLabel>
                         <span>{props.homeworkItem.publicDate}</span>
                     </div>
-                    <div className='task-item'>Ответ ученика
+                    <div className='task-item'>
+                        <InputLabel>Ответ ученика: </InputLabel>
                         <span>{props.homeworkItem.answerToTask}</span>
                     </div>
-                    <div className='task-item'>Примечание
+                    <div className='task-item'>
+                        <InputLabel>Примечание: </InputLabel>
                         <textarea className='materialize-textarea' value={notation}
                                   onChange={handleNotation}/>
                     </div>
-                    <div className='task-item'>Оценка
+                    <div className='task-item'>
+                        <InputLabel id="demo-simple-select-label">Оценка: </InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
