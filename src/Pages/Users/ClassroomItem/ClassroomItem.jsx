@@ -17,18 +17,10 @@ const ClassroomItem = (props) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [click, setClick] = React.useState(false)
 
-    const handleStudents = () => {
-        setClick(!click)
-    }
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
+    const handleStudents = () => setClick(!click)
+    const handleClick = (e) => setAnchorEl(e.currentTarget)
+    const handleClose = () => setAnchorEl(null);
+    
     useEffect(() => {
         props.getClassroom(props.match.params.classId)
         props.getStudent()
