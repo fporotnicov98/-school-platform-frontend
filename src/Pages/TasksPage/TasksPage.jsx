@@ -10,9 +10,6 @@ const TasksPage = props => {
         return (
             <div>
                 {
-<<<<<<< HEAD
-                    this.props.auth.role === 'teacher' &&
-=======
                     props.auth.role === 'student' &&
                     <div>
                         <div className='wrapper'>
@@ -29,7 +26,6 @@ const TasksPage = props => {
                 }
                 {
                     props.auth.role === 'teacher' &&
->>>>>>> 8c4ba9561ce049bdb9dc50587c8f68ce26e1760e
                     <div className='wrapper'>
                         <div className='z-depth-2 tasks blue-grey lighten-4'>
                             <div className='class'>
