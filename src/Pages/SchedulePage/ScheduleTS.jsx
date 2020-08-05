@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { getSchedule } from "../../Redux/scheduleReducer";
 import { getClasses } from "../../Redux/classReducer";
 import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const ScheduleTS = props => {
 
@@ -15,7 +16,7 @@ const ScheduleTS = props => {
     useEffect(() => {
         props.getSchedule()
         props.getClasses()
-    }, [props.classroom, props.schedule])
+    }, [])
 
     let handleClass = (e) => setClass(e.target.value)
 
@@ -26,19 +27,14 @@ const ScheduleTS = props => {
             <div className='schedule-title'>
                 <InputLabel id="demo-simple-select-label">Выбрать класс</InputLabel>
                 <Select
-                    className='class'
                     id="demo-simple-select"
                     value={selectedClass}
                     onChange={handleClass}
-                    inputProps={{
-                        name: 'class-number',
-                        id: 'class-number',
-                    }}
                 >
                     {
                         props.classroom.map(item =>
-                            <option
-                                value={item.classNumber}>{item.classNumber}</option>
+                            <MenuItem
+                                value={item.classNumber}>{item.classNumber}</MenuItem>
                         )
                     }
                 </Select>
