@@ -65,12 +65,11 @@ const AddTasks = (props) => {
                         </div>
                         <div className='task-item'>
                             <InputLabel>Предмет: </InputLabel>
-                            <span className='subject-text'>{props.auth.subject}</span>
+                            <span>{props.auth.subject}</span>
                         </div>
                         <div className='task-item'>
                             <InputLabel>Тема задания: </InputLabel>
-                            <input id="topic" type="text" className="validate" value={title}
-                                   onChange={handleTitle}/>
+                            <input type="text" value={title} onChange={handleTitle}/>
                         </div>
                         <div className='task-item'>
                             <InputLabel>Дата публикации: </InputLabel>
@@ -119,10 +118,9 @@ const AddTasks = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div className='description'>
+                        <div className='task-item'>
                             <InputLabel>Описание задания: </InputLabel>
-                            <textarea className='materialize-textarea' value={description}
-                                      onChange={handleDesc}/>
+                            <textarea className='materialize-textarea' value={description} onChange={handleDesc}/>
                         </div>
                         <button className="btn waves-effect waves-light cyan darken-2" onClick={() => {
                             props.addTask(classNumber, date(), `${day} ${month} ${year}`, props.auth.subject, props.auth.fio, title, description)

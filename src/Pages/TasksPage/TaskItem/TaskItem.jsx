@@ -56,8 +56,7 @@ const TaskItem = (props) => {
                         </div>
                         <div className='task-item'>
                             <InputLabel>Тема задания: </InputLabel>
-                            <input id="topic" type="text" className="validate" value={title}
-                                   onChange={handleTitle} placeholder="Введите тему задания"/>
+                            <input type="text" value={title} onChange={handleTitle}/>
                         </div>
                         <div className='task-item'>
                             <InputLabel>Дата публикации: </InputLabel>
