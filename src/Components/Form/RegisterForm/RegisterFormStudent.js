@@ -2,9 +2,7 @@ import React from 'react';
 import {Field, Form, withFormik} from "formik";
 import '../Form.scss'
 
-class RegisterFormStudent extends React.Component {
-
-    render() {
+const RegisterFormStudent = () => {
         return (
             <Form className='login'>
                 <div className="card blue-grey lighten-4">
@@ -70,7 +68,6 @@ class RegisterFormStudent extends React.Component {
                 </div>
             </Form>
         );
-    }
 }
 
 export const RegisterStudentFormiks = withFormik({

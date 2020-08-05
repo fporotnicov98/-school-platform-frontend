@@ -136,7 +136,6 @@ const DialogsPage = (props) => {
                         }
                     </Form>
                 </div>
-
             </div>
         </div>
     );

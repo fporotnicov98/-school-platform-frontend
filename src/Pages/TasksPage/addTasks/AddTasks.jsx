@@ -16,35 +16,14 @@ const AddTasks = (props) => {
         let [classNumber, setClass] = useState('')
         let [title, setTitle] = useState('')
         let [description, setDesc] = useState('')
-        let [files, setFiles] = useState('')
 
-        let handleFiles = (e) => {
-            setFiles(e.target.value)
-        }
-
-        let showFiles = () => {
-            console.log(files)
-        }
-
-        let handleDay = (e) => {
-            setDay(e.target.value)
-        }
-        let handleMonth = (e) => {
-            setMonth(e.target.value)
-        }
-        let handleYear = (e) => {
-            setYear(e.target.value)
-        }
-        let handleClass = (e) => {
-            setClass(e.target.value)
-        }
-        let handleTitle = (e) => {
-            setTitle(e.target.value)
-        }
-        let handleDesc = (e) => {
-            setDesc(e.target.value)
-        }
-
+        let handleDay = e =>  setDay(e.target.value)
+        let handleMonth = e => setMonth(e.target.value)
+        let handleYear = e => setYear(e.target.value)
+        let handleClass = e => setClass(e.target.value)
+        let handleTitle = e => setTitle(e.target.value)
+        let handleDesc = e => setDesc(e.target.value)
+        
         let resetForms = val => {
             setClass(val)
             setDay(val)
@@ -54,6 +33,7 @@ const AddTasks = (props) => {
             setDesc(val)
         }
 
+        const days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
 
         if (!props.auth.isAuth) return <Redirect to={'/'}/>
         return (
@@ -75,7 +55,6 @@ const AddTasks = (props) => {
                                     onChange={handleClass}
                                     value={classNumber}
                                 >
-
                                     <option value="" disabled selected>Выбрать класс</option>
                                     {
                                         props.classroom.map(item =>

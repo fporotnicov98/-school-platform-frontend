@@ -2,8 +2,7 @@ import React from 'react';
 import {Field, Form, withFormik} from "formik";
 import '../Form.scss'
 
-class LoginForm extends React.Component {
-    render() {
+const LoginForm = () => {
         return (
             <Form className='login'>
                 <div className="card blue-grey lighten-4">
@@ -38,7 +37,6 @@ class LoginForm extends React.Component {
                 </div>
             </Form>
         );
-    }
 }
 
 export const LoginFormiks = withFormik({
