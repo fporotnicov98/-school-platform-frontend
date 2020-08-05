@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Redirect, withRouter} from "react-router-dom";
 import './DialogsPage.scss'
 import {Field, Form, withFormik} from "formik";
@@ -10,8 +10,8 @@ import {addMessage, deleteMessage, updateMessage} from "../../Redux/dialogsReduc
 
 const DialogsPage = (props) => {
 
-    const [updateId,setUpdateId] = useState(null)
-    const [formText,setFormText] = useState(null)
+    const [updateId, setUpdateId] = useState(null)
+    const [formText, setFormText] = useState(null)
 
     useEffect(() => {
         props.getClassroom(props.auth.classId)
@@ -20,66 +20,62 @@ const DialogsPage = (props) => {
     const handleUpdateId = (id) => {
         setUpdateId(id)
     }
-    const handleUpdateText= (text) => {
+    const handleUpdateText = (text) => {
         setFormText(text)
     }
-    const handleFormText= (e) => {
+    const handleFormText = (e) => {
         setFormText(e.target.value)
     }
     const handleRemoveUpdateId = () => {
         setUpdateId(null)
     }
-   
+
     if (!props.auth.isAuth) return <Redirect to={'/'}/>
     if (!props.auth.classId) return <Preloader/>
     if (!props.class) return <Preloader/>
 
     return (
         <div className='dialogs'>
-            <div className='users-dialogs'>
-                <div className='teacher cyan darken-3 white-text'>
-                    <div>Классный руководитель:</div>
-                    {props.class.classTeacher.fio}
+            <div className='users-dialogs blue-grey lighten-4'>
+                <div className='teacher'>
+                    <i className="fas fa-crown"/>{props.class.classTeacher.fio}
                 </div>
-                <div>Ученики:</div>
                 {
                     props.class.students.map(item =>
-                        <div className='students'>{item.fio}</div>
+                        item.fio === props.auth.fio
+                        ? <div className='students students-main'><i className="fas fa-star"/>{item.fio}</div>
+                        : <div className='students'>{item.fio}</div>
                     )
                 }
             </div>
             <div className='messages'>
                 <div className='message-area'>
-                    <div className='message-header cyan darken-2 white-text'>
-                        {props.auth.fio}
-                    </div>
+                    <div className='message-header'>{props.auth.fio}</div>
                     <ul className="chat">
                         {
                             props.class.classForumMessages.map(item =>
                                 props.auth.id === item.authorId
                                     ? <li className="me">
                                         <div className="entete">
-                                            <span>
-                                            {props.class.classTeacher.fio === item.authorFio ? `${item.authorFio} (Классный руководитель)`: item.authorFio}
-                                                {
-                                                    <div className='icons'>
-                                                        {
-                                                            <i onClick={() => {
-                                                                {
-                                                                    handleUpdateText(item.message)
-                                                                    handleUpdateId(item._id)
-                                                                }
-                                                            }} className='material-icons'>mode_edit</i>
-                                                        }
+                                            <span>{props.class.classTeacher.fio === item.authorFio ? `${item.authorFio} (Классный руководитель)` : item.authorFio}</span>
+                                            {
+                                                <div className='icons'>
+                                                    {
                                                         <i onClick={() => {
-                                                            props.deleteMessage(this.props.auth.classId, item._id)
-                                                            setTimeout(() => this.props.getClassroom(this.props.auth.classId), 300)
-                                                        }} className='material-icons'>delete</i>
-                                                    </div>
-                                                }
-                                            </span>
+                                                            {
+                                                                handleUpdateText(item.message)
+                                                                handleUpdateId(item._id)
+                                                            }
+                                                        }} className='material-icons'>mode_edit</i>
+                                                    }
+                                                    <i onClick={() => {
+                                                        props.deleteMessage(this.props.auth.classId, item._id)
+                                                        setTimeout(() => this.props.getClassroom(this.props.auth.classId), 300)
+                                                    }} className='material-icons'>delete</i>
+                                                </div>
+                                            }
                                         </div>
-                                        <div className="message white">
+                                        <div className="message blue-grey lighten-4">
                                             {
                                                 item.edited === '1'
                                                     ? <span>{`${item.message} (изменено)`}</span>
@@ -89,9 +85,11 @@ const DialogsPage = (props) => {
                                     </li>
                                     : <li className="you">
                                         <div className="entete">
-                                            {props.class.classTeacher.fio === item.authorFio ? <span>{item.authorFio} (Классный руководитель)</span> : <span>{item.authorFio}</span>}
+                                            {props.class.classTeacher.fio === item.authorFio ?
+                                                <span>{item.authorFio} (Классный руководитель)</span> :
+                                                <span>{item.authorFio}</span>}
                                         </div>
-                                        <div className="message cyan darken-2 white-text">
+                                        <div className="message white">
                                             <span>{item.message}</span>
                                         </div>
                                     </li>
@@ -129,10 +127,10 @@ const DialogsPage = (props) => {
                                         setTimeout(() => props.getClassroom(props.auth.classId), 500)
 
                                     }
-                                }} className="btn waves-effect waves-light cyan darken-2" type="submit"
+                                }} className="btn waves-effect waves-light blue-grey lighten-4" type="submit"
                                           name="action">Изменить
                                 </button>
-                                : <button className="btn waves-effect waves-light cyan darken-2" type="submit"
+                                : <button className="btn waves-effect waves-light blue-grey lighten-4" type="submit"
                                           name="action">Отправить
                                 </button>
                         }

@@ -30,21 +30,6 @@ class TasksPage extends React.Component {
         return (
             <div>
                 {
-                    this.props.auth.role === 'student' &&
-                    <div>
-                        <div className='wrapper'>
-                            <div className='z-depth-2 tasks blue-grey lighten-4'>
-                                <div className='class'>
-                                    <div className='class-block'>
-                                        <NavLink to='/tasks/showTasks' className='white-text btn small cyan darken-2'>Мои
-                                            задания</NavLink>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-                {
                     this.props.auth.role === 'teacher' &&
                     <div className='wrapper'>
                         <div className='z-depth-2 tasks blue-grey lighten-4'>

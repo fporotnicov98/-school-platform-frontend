@@ -2,11 +2,18 @@
   margin-top: 30px;
 }
 
+.wrapper {
+
+}
+
 .breadcrumb:before {
   color: inherit;
 }
 
 .users {
+  .nav-wrapper {
+    padding: 0 15px;
+  }
   margin-top: 30px;
 
   .collapsible-header {
@@ -56,17 +63,17 @@
         .login {
           margin: 0 10px;
           text-align: center;
-          flex: 0 0 25%;
+          flex: 0 0 15%;
         }
         .email {
           margin: 0 10px;
           text-align: center;
-          flex: 0 0 23%;
+          flex: 0 0 20%;
         }
         .mobileNumber {
           margin: 0 10px;
           text-align: center;
-          flex: 0 0 15%;
+          flex: 0 0 10%;
         }
         .subject {
           margin: 0 10px;
