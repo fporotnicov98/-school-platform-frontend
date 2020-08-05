@@ -51,8 +51,8 @@ const ShowTasks = (props) => {
                                 <TableCell>Предмет</TableCell>
                                 <TableCell>Тема</TableCell>
                                 <TableCell>Класс</TableCell>
-                                <TableCell>Срок сдачи</TableCell>
                                 <TableCell>Дата обновления</TableCell>
+                                <TableCell>Срок сдачи</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -68,8 +68,9 @@ const ShowTasks = (props) => {
                                                 <TableCell>{task.subject}</TableCell>
                                                 <TableCell>{task.taskTitle}</TableCell>
                                                 <TableCell>{task.classNumber}</TableCell>
-                                                <TableCell>{task.deadlineDate}</TableCell>
                                                 <TableCell>{task.editedDate}</TableCell>
+                                                <TableCell className='delete'>{task.deadlineDate}<i onClick={() => props.deleteTask(task._id)} className="material-icons tiny">delete</i>
+                                                </TableCell>
                                             </StyledTableRow>
                                             : null
                                     }
