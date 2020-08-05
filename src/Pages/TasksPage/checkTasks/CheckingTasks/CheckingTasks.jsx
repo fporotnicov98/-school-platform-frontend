@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {NavLink, Redirect} from "react-router-dom";
-import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
@@ -9,18 +8,10 @@ const CheckingTasks = (props) => {
     let [rating, setRating] = useState('')
     let [notation, setNotation] = useState('')
 
-    let handleRating = (e) => {
-        setRating(e.target.value)
-    }
-    let handleNotation = (e) => {
-        setNotation(e.target.value)
-    }
-    let resetRating = () => {
-        setRating("")
-    }
-    let resetNotation = () => {
-        setNotation("")
-    }
+    let handleRating = (e) =>  setRating(e.target.value)
+    let handleNotation = (e) =>  setNotation(e.target.value)
+    let resetRating = () => setRating("")
+    let resetNotation = () => setNotation("")
 
     if (!props.auth.isAuth) return <Redirect to={'/'}/>
     if (props.homeworkItem.mark) return <Redirect to={'/tasks/checkTasks'}/>

@@ -34,12 +34,10 @@ const AddClass = props => {
     ];
     
 
-    let handleChangeSelect1 = (selectedOption1) => {
-        setSelecetedOption1(selectedOption1);
-    };
-    let handleChangeSelect2 = (selectedOption2) => {
-        setSelecetedOption2(selectedOption2);
-    };
+    let handleChangeSelect1 = (selectedOption1) => setSelecetedOption1(selectedOption1)
+    
+    let handleChangeSelect2 = (selectedOption2) => setSelecetedOption2(selectedOption2);
+    
 
         return (
             <div className="login">

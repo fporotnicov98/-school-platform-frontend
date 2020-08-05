@@ -1,36 +1,35 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
 import {getClasses} from "../../Redux/classReducer";
 import './TasksPage.scss'
 
-class TasksPage extends React.Component {
-    state = {
-        addTasks: false,
-        showTasks: false,
-        checkTasks: false
-    }
+const TasksPage = props => {
 
-    componentDidMount() {
-        this.props.getClasses()
-    }
-
-    addTasks = () => {
-        this.setState({addTasks: true, showTasks: false, checkTasks: false})
-    }
-    showTasks = () => {
-        this.setState({addTasks: false, showTasks: true, checkTasks: false})
-    }
-    checkTasks = () => {
-        this.setState({addTasks: false, showTasks: false, checkTasks: true})
-    }
-
-    render() {
-        if (!this.props.auth.isAuth) return <Redirect to={'/'}></Redirect>
+        if (!props.auth.isAuth) return <Redirect to={'/'}></Redirect>
         return (
             <div>
                 {
+<<<<<<< HEAD
                     this.props.auth.role === 'teacher' &&
+=======
+                    props.auth.role === 'student' &&
+                    <div>
+                        <div className='wrapper'>
+                            <div className='z-depth-2 tasks blue-grey lighten-4'>
+                                <div className='class'>
+                                    <div className='class-block'>
+                                        <NavLink to='/tasks/showTasks' className='white-text btn small cyan darken-2'>Мои
+                                            задания</NavLink>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                {
+                    props.auth.role === 'teacher' &&
+>>>>>>> 8c4ba9561ce049bdb9dc50587c8f68ce26e1760e
                     <div className='wrapper'>
                         <div className='z-depth-2 tasks blue-grey lighten-4'>
                             <div className='class'>
@@ -48,7 +47,6 @@ class TasksPage extends React.Component {
                 }
             </div>
         );
-    }
 }
 
 const mapStateToProps = state => {

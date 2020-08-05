@@ -15,7 +15,7 @@ class Classes extends Component {
         this.props.getStudent();
         this.props.getModerator();
         this.props.getTeacher();
-        M.Collapsible.init(this.Collapsible, {accordion: false});
+        M.AutoInit();
     }
 
     render() {
@@ -29,9 +29,7 @@ class Classes extends Component {
                             <a href="#!" className="breadcrumb">Классы</a>
                         </div>
                     </nav>
-                    <ul ref={Collapsible => {
-                        this.Collapsible = Collapsible;
-                    }} className="collapsible popout">
+                    <ul className="collapsible popout">
                         <li className='active'>
                             <div className="collapsible-header blue-grey lighten-4">Классы</div>
                             <div className="collapsible-body">

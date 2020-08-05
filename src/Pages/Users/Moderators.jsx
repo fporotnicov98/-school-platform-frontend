@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import M from "materialize-css";
 import {connect} from "react-redux";
-import {getModerator, deleteUser, updateUser, updateModerator} from "../../Redux/userReducer";
+import {getModerator, deleteUser, updateModerator} from "../../Redux/userReducer";
 import {NavLink, Redirect} from "react-router-dom";
 import './Classes.scss'
 

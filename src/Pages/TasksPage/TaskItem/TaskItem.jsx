@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Redirect, NavLink} from "react-router-dom";
 import date from "../../../Assets/Other/date";
 import Preloader from "../../../Assets/Commons/Preloader";
@@ -10,17 +10,10 @@ const TaskItem = (props) => {
     let [description, setDesc] = useState(props.taskItem && props.taskItem.taskText)
     let [answer, setAnswer] = useState('')
 
-    let handleTitle = (e) => {
-        setTitle(e.target.value)
-    }
-    let handleDesc = (e) => {
-        setDesc(e.target.value)
-    }
-    let handleAnswer = (e) => {
-        setAnswer(e.target.value)
-    }
-
-
+    let handleTitle = (e) => setTitle(e.target.value)
+    let handleDesc = (e) => setDesc(e.target.value)
+    let handleAnswer = (e) => setAnswer(e.target.value)
+    
     if (!props.auth.isAuth) return <Redirect to={'/'}/>
     if (props.homeworks.some(homework => homework.taskId === props.taskItem._id)) return <Redirect to={'/tasks/showTasks'}/>
     if (!props.taskItem) return <Preloader/>

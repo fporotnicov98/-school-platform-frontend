@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import M from "materialize-css";
 import {connect} from "react-redux";
-import {deleteUser, getModerator, getStudent, getTeacher, updateTeacher} from "../../Redux/userReducer";
+import {deleteUser, getTeacher, updateTeacher} from "../../Redux/userReducer";
 import {NavLink, Redirect} from "react-router-dom";
 
 class Teachers extends Component {

@@ -1,7 +1,6 @@
 import React from 'react';
 import {NavLink, Redirect} from "react-router-dom";
 import Preloader from "../../../Assets/Commons/Preloader";
-import date from "../../../Assets/Other/date";
 
 const TaskCheckingInfo = (props) => {
     if (!props.auth.isAuth) return <Redirect to={'/'}/>
