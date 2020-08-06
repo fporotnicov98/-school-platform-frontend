@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './JournalPage.scss'
-import { Redirect, withRouter } from "react-router-dom";
+import { Redirect, withRouter, NavLink } from "react-router-dom";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import Paper from "@material-ui/core/Paper";
@@ -115,7 +115,10 @@ const JournalPage = (props) => {
                                                                 homework.student === student.fio
                                                                 && homework.subject === subject
                                                                 && date === homework.publicTaskDate
-                                                                && <span>{homework.mark}</span>
+                                                                && <span><NavLink to={`/tasks/showTasksAfterCheck/` + homework._id}>
+                                                                    {homework.mark}
+                                                                </NavLink>
+                                                                </span>
                                                             )
                                                         }
                                                     </TableCell>
