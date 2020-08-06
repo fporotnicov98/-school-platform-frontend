@@ -6,7 +6,7 @@ import Select from "@material-ui/core/Select";
 import date from '../../../Assets/Other/date'
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import {addTask} from "../../../Redux/taskReducer";
+import {addTask, saveFile} from "../../../Redux/taskReducer";
 
 const AddTasks = (props) => {
 
@@ -16,6 +16,7 @@ const AddTasks = (props) => {
         let [classNumber, setClass] = useState('')
         let [title, setTitle] = useState('')
         let [description, setDesc] = useState('')
+        let [file,setFile] = useState('')
 
         let handleDay = e => setDay(e.target.value)
         let handleMonth = e => setMonth(e.target.value)
@@ -31,6 +32,14 @@ const AddTasks = (props) => {
             setYear(val)
             setTitle(val)
             setDesc(val)
+            setFile(val)
+        }
+
+        const selectedDocument = (e) => {
+            if (e.target.files.length) {
+                setFile(e.target.files[0])
+                
+            }
         }
 
         let days = [...Array(32).keys()].splice(1)
@@ -125,14 +134,15 @@ const AddTasks = (props) => {
                         <div className="task-item file-field">
                             <div className="add-file">
                                 <InputLabel>Загрузить файл</InputLabel>
-                                <input type="file"/>
+                                <input onChange={selectedDocument} type="file"/>
                             </div>
-                            <input className="" type="text"/>
+                            <input className="file-path validate" type="text"/>
                         </div>
                         <button className="btn waves-effect waves-light cyan darken-2" onClick={() => {
                             props.addTask(classNumber, date(), `${day} ${month} ${year}`, props.auth.subject, props.auth.fio, title, description)
+                            props.saveFile(file)
                             resetForms("")
-                        }}>Опубликовать задание
+                        }}>Опубликовать задание 
                         </button>
                     </div>
                 </div>
@@ -149,7 +159,7 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {addTask})(AddTasks)
+export default connect(mapStateToProps, {addTask, saveFile})(AddTasks)
 
 
 

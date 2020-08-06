@@ -69,3 +69,11 @@ export const updateTask = (taskId, taskTitle, taskText, editedDate) => dispatch 
             }
         })
 }
+export const saveFile = (file) => dispatch => {
+    taskAPI.saveFile(file)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                regSuccess(response.data.message)
+            }
+        })
+}

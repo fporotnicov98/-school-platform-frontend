@@ -150,6 +150,15 @@ export const taskAPI = {
     },
     deleteTask(taskId) {
         return instanse.delete(`/task/deleteTask/${taskId}`)
+    },
+    saveFile(photoFile) {
+        let formData = new FormData();  
+        formData.append('image', photoFile)
+        return instanse.post(`/upload`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
     }
 }
 
