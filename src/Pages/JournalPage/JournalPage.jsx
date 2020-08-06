@@ -102,22 +102,24 @@ const JournalPage = (props) => {
                                     <StyledTableRow>
                                         <TableCell className='students' component="th"
                                                    scope="row">{student.fio}</TableCell>
-                                        {
-                                            props.homeworks.some(homework =>
-                                                homework.classNumber === props.auth.classNumber
-                                                && sameData.some(item => item === homework.publicTaskDate)
-                                                && homework.student === student.fio
-                                                && homework.subject === subject
-                                            ) && <TableCell className='marks'>
-                                                {
-                                                    props.homeworks.map(homework =>
-                                                        homework.student === student.fio
-                                                        && homework.subject === subject
-                                                        && sameData.map(item => item === homework.publicTaskDate)
-                                                        && homework.mark
-                                                    )
-                                                }
-                                            </TableCell>
+                                        {   
+                                            sameData.map(date => 
+                                                props.homeworks.some(homework =>
+                                                    homework.classNumber === props.auth.classNumber
+                                                    && date === homework.publicTaskDate
+                                                    && homework.student === student.fio
+                                                    && homework.subject === subject
+                                                ) && <TableCell className='marks'>
+                                                    {
+                                                        props.homeworks.map(homework =>
+                                                            homework.student === student.fio
+                                                            && homework.subject === subject
+                                                            && date === homework.publicTaskDate
+                                                            && homework.mark
+                                                        )
+                                                    }
+                                                </TableCell>
+                                            )
 
                                         }
                                         <TableCell className='final-mark'></TableCell>
