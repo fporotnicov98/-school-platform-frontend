@@ -76,28 +76,44 @@ const JournalPage = (props) => {
                     <Table aria-label="customized table">
                         <TableHead className='z-depth-1-half'>
                             <TableRow>
-                                <TableCell>Ученик</TableCell>
+                                <TableCell className='students'>Ученик</TableCell>
                                 {
                                     props.tasks.map(item =>
                                         item.classNumber === props.auth.classNumber && subject === item.subject &&
                                         <TableCell className='dates'>{item.publicDate}</TableCell>
                                     )
                                 }
+                                <TableCell className='final-mark'>Итоговая оценка</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {
                                 props.class.students.map(student =>
                                     <StyledTableRow>
-                                        <TableCell component="th" scope="row">{student.fio}</TableCell>
+                                        <TableCell className='students' component="th"
+                                                   scope="row">{student.fio}</TableCell>
+                                        {
+                                            props.homeworks.map(homework =>
+                                                homework.student
+                                                    ? homework.classNumber === props.auth.classNumber
+                                                    && homework.subject === subject
+                                                    && <TableCell className='marks'>{homework.mark}</TableCell>
+                                                    : props.tasks.map(task =>
+                                                    task.classNumber == props.auth.classNumber
+                                                    && task.subject === subject
+                                                    && <TableCell className='marks'>-</TableCell>
+                                                    )
+                                            )
+                                        }
                                         {
                                             props.homeworks.map(homework =>
                                                 homework.classNumber === props.auth.classNumber
-                                                && homework.student === student.fio
+                                                // && homework.student === student.fio
                                                 && homework.subject === subject
                                                 && <TableCell className='marks'>{homework.mark}</TableCell>
                                             )
                                         }
+                                        <TableCell className='final-mark'></TableCell>
                                     </StyledTableRow>
                                 )
                             }

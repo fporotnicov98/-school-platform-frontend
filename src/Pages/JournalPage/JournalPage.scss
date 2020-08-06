@@ -12,14 +12,24 @@
     overflow-x: auto;
   }
   .MuiTableCell-head {
-    border-right: 1px solid #b1b1b1;
-    &:last-child {
-      border-right: none;
-    }
+
+  }
+  .students {
+    width: 11%;
+    border: 1px solid #b1b1b1;
+  }
+  .final-mark {
+    width: 5%;
+    border: 1px solid #b1b1b1;
   }
   .marks {
+    width: 5%;
     text-align: center;
-    border-left: 1px solid #b1b1b1;
+    border: 1px solid #b1b1b1;
+  }
+  .dates {
+    border: 1px solid #b1b1b1;
+    width: 5%;
   }
   .select-subject {
     width: 40%;
@@ -33,9 +43,6 @@
     .MuiInputBase-root {
       width: 60%;
     }
-  }
-  .dates {
-    width: 10%;
   }
   h5 {
     text-align: center;
