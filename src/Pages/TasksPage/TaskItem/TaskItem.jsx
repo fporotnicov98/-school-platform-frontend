@@ -112,7 +112,7 @@ const TaskItem = (props) => {
                         </div>
                         <div className='task-item'>
                             <InputLabel>Файл задания: </InputLabel>
-                            <a href='#!' onClick={() => props.downloadFile(props.taskItem.taskFileName)}>{props.taskItem.taskFileName}</a>
+                            <a href='#!' download={props.taskItem.taskFileName} onClick={() => props.downloadFile(props.taskItem.taskFileName)}>{props.taskItem.taskFileName}</a>
                             {/*<input type='text' value={answer} onChange={handleAnswer}/>*/}
                         </div>
                         <button className="btn waves-effect waves-light cyan darken-2"
