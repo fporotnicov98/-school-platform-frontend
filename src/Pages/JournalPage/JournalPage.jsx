@@ -83,9 +83,10 @@ const JournalPage = (props) => {
                                 <TableCell className='students'>Ученик</TableCell>
                                 {
                                     props.homeworks.map(homework =>
-                                        homework.publicTaskDate === sameData.map(data => data))
+                                        homework.publicTaskDate === sameData.map(data => data)
                                         && sameData.map(date =>
                                             <TableCell className='dates'>{date}</TableCell>
+                                    )
                                     )
                                 }
                                 {/*{*/}
