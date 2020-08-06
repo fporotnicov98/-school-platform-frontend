@@ -69,10 +69,6 @@ const ShowTasks = (props) => {
                                                 <TableCell>{task.taskTitle}</TableCell>
                                                 <TableCell>{task.classNumber}</TableCell>
                                                 <TableCell>{task.editedDate}</TableCell>
-                                                {/*<TableCell className='delete'>{task.deadlineDate}<i*/}
-                                                {/*    onClick={() => props.deleteTask(task._id)}*/}
-                                                {/*    className="material-icons tiny">delete</i>*/}
-                                                {/*</TableCell>*/}
                                                 <TableCell>{task.deadlineDate}</TableCell>
                                             </StyledTableRow>
                                             : null

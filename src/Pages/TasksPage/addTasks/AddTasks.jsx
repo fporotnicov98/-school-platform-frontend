@@ -16,7 +16,8 @@ const AddTasks = (props) => {
         let [classNumber, setClass] = useState('')
         let [title, setTitle] = useState('')
         let [description, setDesc] = useState('')
-        let [file,setFile] = useState('')
+        let [file, setFile] = useState('')
+        let [fileName, setFileName] = useState('')
 
         let handleDay = e => setDay(e.target.value)
         let handleMonth = e => setMonth(e.target.value)
@@ -38,7 +39,7 @@ const AddTasks = (props) => {
         const selectedDocument = (e) => {
             if (e.target.files.length) {
                 setFile(e.target.files[0])
-                
+                setFileName(e.target.files[0].name)
             }
         }
 
@@ -139,10 +140,10 @@ const AddTasks = (props) => {
                             <input className="file-path validate" type="text"/>
                         </div>
                         <button className="btn waves-effect waves-light cyan darken-2" onClick={() => {
-                            props.addTask(classNumber, date(), `${day} ${month} ${year}`, props.auth.subject, props.auth.fio, title, description)
+                            props.addTask(classNumber, date(), `${day} ${month} ${year}`, props.auth.subject, props.auth.fio, title, description, fileName)
                             props.saveFile(file)
                             resetForms("")
-                        }}>Опубликовать задание 
+                        }}>Опубликовать задание
                         </button>
                     </div>
                 </div>

@@ -110,6 +110,11 @@ const TaskItem = (props) => {
                             <InputLabel>Ответ на задание: </InputLabel>
                             <input type='text' value={answer} onChange={handleAnswer}/>
                         </div>
+                        <div className='task-item'>
+                            <InputLabel>Файл задания: </InputLabel>
+                            <a href='#!' onClick={() => props.downloadFile(props.taskItem.taskFileName)}>{props.taskItem.taskFileName}</a>
+                            {/*<input type='text' value={answer} onChange={handleAnswer}/>*/}
+                        </div>
                         <button className="btn waves-effect waves-light cyan darken-2"
                                 onClick={() => {
                                     props.addHomework(props.auth.classNumber, props.taskItem._id, props.auth.fio, date(), props.taskItem.publicDate, props.taskItem.subject, props.taskItem.teacher, answer, props.taskItem.deadlineDate, props.taskItem.taskTitle)

@@ -52,7 +52,7 @@ const Header = props => {
                             <NavLink to='/schedule'
                                 className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Расписание</NavLink>
                             {
-                                props.auth.classId
+                                props.auth.role === 'student' && props.auth.classId
                                 && <NavLink to={'/journal/' + props.auth.classId}
                                     className="sidenav-close side-btn waves-effect waves-light btn white-text cyan darken-2">Журнал</NavLink>
                             }

@@ -54,8 +54,8 @@ export const deleteTask = (id) => dispatch => {
         })
 }
 
-export const addTask = (classNumber, publicDate, deadlineDate, subject, teacher, taskTitle, taskText) => dispatch => {
-    taskAPI.addTask(classNumber, publicDate, deadlineDate, subject, teacher, taskTitle, taskText)
+export const addTask = (classNumber, publicDate, deadlineDate, subject, teacher, taskTitle, taskText, taskFileName) => dispatch => {
+    taskAPI.addTask(classNumber, publicDate, deadlineDate, subject, teacher, taskTitle, taskText, taskFileName)
         .then(response => {
             regSuccess(response.data.message)
             dispatch(getTasks())
@@ -76,4 +76,7 @@ export const saveFile = (file) => dispatch => {
                 regSuccess(response.data.message)
             }
         })
+}
+export const downloadFile = (filename) => dispatch => {
+    taskAPI.downloadFile(filename)
 }

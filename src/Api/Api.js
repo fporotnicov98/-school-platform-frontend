@@ -137,7 +137,7 @@ export const taskAPI = {
     updateTask(taskId, taskTitle, taskText, editedDate) {
         return instanse.put(`/task/updateTask/${taskId}`, {taskTitle, taskText, editedDate})
     },
-    addTask(classNumber, publicDate, deadlineDate, subject, teacher, taskTitle, taskText) {
+    addTask(classNumber, publicDate, deadlineDate, subject, teacher, taskTitle, taskText, taskFileName) {
         return instanse.post(`/task/addTask`, {
             classNumber,
             publicDate,
@@ -145,21 +145,26 @@ export const taskAPI = {
             subject,
             teacher,
             taskTitle,
-            taskText
+            taskText,
+            taskFileName
         })
     },
     deleteTask(taskId) {
         return instanse.delete(`/task/deleteTask/${taskId}`)
     },
     saveFile(photoFile) {
-        let formData = new FormData();  
+        let formData = new FormData();
         formData.append('image', photoFile)
         return instanse.post(`/upload`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
+    },
+    downloadFile(filename) {
+        return instanse.get(`/files/${filename}`, {responseType: 'blob'})
     }
+
 }
 
 export const homeworkAPI = {
@@ -172,7 +177,7 @@ export const homeworkAPI = {
     setMark(id, mark, teacherDesc) {
         return instanse.put(`/homework/setMark/${id}`, {mark, teacherDesc})
     },
-    addHomework(classNumber, taskId, student, publicDate,publicTaskDate, subject, teacher, answerToTask, deadlineDate, taskTitle) {
+    addHomework(classNumber, taskId, student, publicDate, publicTaskDate, subject, teacher, answerToTask, deadlineDate, taskTitle) {
         return instanse.post(`/homework/addHomework`, {
             classNumber,
             taskId,
