@@ -104,14 +104,18 @@ const JournalPage = (props) => {
                                                 && <TableCell className='marks'>
                                                     {
                                                         props.homeworks.map(homework =>
+                                                            homework.student === student.fio
+                                                            && homework.subject === subject
+                                                            && homework.classNumber === props.auth.classNumber &&
                                                             props.tasks.map(task =>
-                                                                homework.publicTaskDate === task.publicDate
-                                                                && homework.student
+                                                                homework.classNumber === task.classNumber
+                                                                && homework.subject === subject
+                                                                && homework.publicTaskDate === task.publicDate
+                                                                && homework.mark
                                                             )
                                                         )
                                                     }
-
-                                                    {homework.mark}
+                                                    {/*{homework.mark}*/}
                                                 </TableCell>
                                             )
                                         }
