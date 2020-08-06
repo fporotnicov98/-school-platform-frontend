@@ -17,7 +17,7 @@ const TaskItem = (props) => {
     let handleAnswer = (e) => setAnswer(e.target.value)
 
     if (!props.auth.isAuth) return <Redirect to={'/'}/>
-    if (props.auth.role === 'student' && props.homeworks.some(homework => homework.taskId === props.taskItem._id)) return <Redirect
+    if (props.auth.role === 'student' && props.homeworks.some(homework => homework.taskId === props.taskItem._id && homework.student === props.auth.fio)) return <Redirect
         to={'/tasks/showTasks'}/>
     if (!props.taskItem) return <Preloader/>
     return (

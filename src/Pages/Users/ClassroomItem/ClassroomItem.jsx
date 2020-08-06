@@ -1,11 +1,10 @@
-import React, {Component, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {compose} from "redux";
 import {NavLink, Redirect, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {addStudentToClass, addTeacherToClass, deleteStudentToClass, getClassroom} from "../../../Redux/classReducer";
 import {getStudent, getTeacher, getTeachersInfo, updateStudent, updateTeacher} from "../../../Redux/userReducer";
 import './ClassroomItem.scss'
-import M from "materialize-css";
 import Preloader from "../../../Assets/Commons/Preloader";
 import ScheduleModerator from "../../SchedulePage/ScheduleModerator";
 import {addSchedule, getScheduleItem, updateSchedule} from "../../../Redux/scheduleReducer";

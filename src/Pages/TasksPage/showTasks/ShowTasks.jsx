@@ -125,7 +125,7 @@ const ShowTasks = (props) => {
                                         <TableCell>{task.editedDate}</TableCell>
                                         <TableCell className='status'>
                                             {
-                                                props.homeworks.some(homework => homework.taskId === task._id)
+                                                props.homeworks.some(homework => homework.taskId === task._id && homework.student === props.auth.fio )
                                                     ? props.homeworks.map(item =>
                                                     item.taskId === task._id
                                                     && item.student === props.auth.fio
