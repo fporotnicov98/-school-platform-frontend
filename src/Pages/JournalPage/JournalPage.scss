@@ -9,27 +9,24 @@
   color: #585858;
   .MuiTableContainer-root {
     width: 100%;
-    overflow-x: auto;
-  }
-  .MuiTableCell-head {
-
+    //overflow-x: auto;
   }
   .students {
-    width: 11%;
+    width: 100px;
     border: 1px solid #b1b1b1;
   }
   .final-mark {
-    width: 5%;
+    width: 8%;
     border: 1px solid #b1b1b1;
   }
   .marks {
-    width: 5%;
+    width: 8%;
     text-align: center;
     border: 1px solid #b1b1b1;
   }
   .dates {
     border: 1px solid #b1b1b1;
-    width: 5%;
+    width: 8%;
   }
   .select-subject {
     width: 40%;
