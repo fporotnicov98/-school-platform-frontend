@@ -36,7 +36,7 @@ const AddTasks = (props) => {
             setFile(val)
         }
 
-        const selectedDocument = (e) => {
+        let selectedDocument = (e) => {
             if (e.target.files.length) {
                 setFile(e.target.files[0])
                 setFileName(e.target.files[0].name)

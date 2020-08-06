@@ -163,6 +163,14 @@ export const taskAPI = {
     },
     downloadFile(filename) {
         return instanse.get(`/files/${filename}`, {responseType: 'blob'})
+        .then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', filename);
+            document.body.appendChild(link);
+            link.click();
+          });
     }
 
 }
@@ -177,7 +185,7 @@ export const homeworkAPI = {
     setMark(id, mark, teacherDesc) {
         return instanse.put(`/homework/setMark/${id}`, {mark, teacherDesc})
     },
-    addHomework(classNumber, taskId, student, publicDate, publicTaskDate, subject, teacher, answerToTask, deadlineDate, taskTitle) {
+    addHomework(classNumber, taskId, student, publicDate, publicTaskDate, subject, teacher, answerToTask,answerFileName, deadlineDate, taskTitle) {
         return instanse.post(`/homework/addHomework`, {
             classNumber,
             taskId,
@@ -187,6 +195,7 @@ export const homeworkAPI = {
             subject,
             teacher,
             answerToTask,
+            answerFileName,
             deadlineDate,
             taskTitle
         })

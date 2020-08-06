@@ -56,6 +56,10 @@ const CheckingTasks = (props) => {
                         <span>{props.homeworkItem.answerToTask}</span>
                     </div>
                     <div className='task-item'>
+                            <InputLabel>Файл ученика: </InputLabel>
+                            <a href='#!' download={props.homeworkItem.answerFileName} onClick={() => props.downloadFile(props.homeworkItem.answerFileName)}>{props.homeworkItem.answerFileName}</a>
+                    </div>
+                    <div className='task-item'>
                         <InputLabel>Примечание: </InputLabel>
                         {
                             !props.homeworkItem.teacherDesc

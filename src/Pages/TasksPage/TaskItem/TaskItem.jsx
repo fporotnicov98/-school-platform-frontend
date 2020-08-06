@@ -5,16 +5,24 @@ import Preloader from "../../../Assets/Commons/Preloader";
 import './../addTasks/AddTasks.scss'
 import InputLabel from "@material-ui/core/InputLabel";
 
-
 const TaskItem = (props) => {
 
     let [title, setTitle] = useState(props.taskItem && props.taskItem.taskTitle)
     let [description, setDesc] = useState(props.taskItem && props.taskItem.taskText)
     let [answer, setAnswer] = useState('')
+    let [file, setFile] = useState('')
+    let [fileName, setFileName] = useState('')
 
     let handleTitle = (e) => setTitle(e.target.value)
     let handleDesc = (e) => setDesc(e.target.value)
     let handleAnswer = (e) => setAnswer(e.target.value)
+
+    let selectedDocument = (e) => {
+        if (e.target.files.length) {
+            setFile(e.target.files[0])
+            setFileName(e.target.files[0].name)
+        }
+    }
 
     if (!props.auth.isAuth) return <Redirect to={'/'}/>
     if (props.auth.role === 'student' && props.homeworks.some(homework => homework.taskId === props.taskItem._id && homework.student === props.auth.fio)) return <Redirect
@@ -113,11 +121,15 @@ const TaskItem = (props) => {
                         <div className='task-item'>
                             <InputLabel>Файл задания: </InputLabel>
                             <a href='#!' download={props.taskItem.taskFileName} onClick={() => props.downloadFile(props.taskItem.taskFileName)}>{props.taskItem.taskFileName}</a>
-                            {/*<input type='text' value={answer} onChange={handleAnswer}/>*/}
+                        </div>
+                        <div className='task-item'>
+                                <InputLabel>Загрузить файл</InputLabel>
+                                <input onChange={selectedDocument} type="file"/>
                         </div>
                         <button className="btn waves-effect waves-light cyan darken-2"
                                 onClick={() => {
-                                    props.addHomework(props.auth.classNumber, props.taskItem._id, props.auth.fio, date(), props.taskItem.publicDate, props.taskItem.subject, props.taskItem.teacher, answer, props.taskItem.deadlineDate, props.taskItem.taskTitle)
+                                    props.addHomework(props.auth.classNumber, props.taskItem._id, props.auth.fio, date(), props.taskItem.publicDate, props.taskItem.subject, props.taskItem.teacher, answer,fileName,props.taskItem.deadlineDate, props.taskItem.taskTitle)
+                                    props.saveFile(file)
                                 }}>Отправить
                         </button>
                     </div>
