@@ -1,7 +1,7 @@
 import * as axios from 'axios'
 
 const instanse = axios.create({
-    baseURL: 'https://polite-sorry-46259.herokuapp.com/api',
+    baseURL: 'https://learnschool.herokuapp.com/api',
     withCredentials: true,
 })
 
