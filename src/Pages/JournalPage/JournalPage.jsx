@@ -25,21 +25,22 @@ const JournalPage = (props) => {
 
     let [subject, setSubject] = React.useState()
     let [uniqueTasks, setUniqueTasks] = React.useState([])
-    let [sameData, setSameData] = React.useState([])
 
     let handleSubject = (e) => setSubject(e.target.value)
 
     let selectUniqueSubject = () => setUniqueTasks(uniq(props.tasks.map(item => item.subject)))
-
-    let selectMarkToDate = () => setSameData(uniq(props.homeworks.map(item => item.publicTaskDate)))
+    
+    let dates = uniq(props.tasks.map(item => item.subject === subject && item.publicDate).filter(date => date !== false))
 
     useEffect(() => {
         props.getClassroom(props.match.params.classId)
         props.getTasks()
         props.getHomeworks()
         selectUniqueSubject()
-        selectMarkToDate()
+
     }, [props.match.params.classId])
+
+    let markToStudent = []
 
     const StyledTableRow = withStyles((theme) => ({
         root: {
@@ -80,9 +81,9 @@ const JournalPage = (props) => {
                             <TableRow>
                                 <TableCell className='students'>Ученик</TableCell>
                                 {
-                                    sameData.map(date =>
-                                        props.homeworks.some(homework => /*homework.publicTaskDate === date && */homework.subject === subject)
-                                        && <TableCell className='dates'>{date}</TableCell>
+                                    dates.map(date => 
+                                        props.homeworks.some(homework => homework.publicTaskDate === date && homework.subject === subject)   
+                                    && <TableCell className='dates'>{date}</TableCell>
                                     )
                                 }
 
@@ -101,8 +102,8 @@ const JournalPage = (props) => {
                                     <StyledTableRow>
                                         <TableCell className='students' component="th"
                                                    scope="row">{student.fio}</TableCell>
-                                        {
-                                            sameData.map(date =>
+                                        {   
+                                            dates.map(date => 
                                                 props.homeworks.some(homework =>
                                                     homework.classNumber === props.auth.classNumber
                                                     && date === homework.publicTaskDate
@@ -114,7 +115,7 @@ const JournalPage = (props) => {
                                                             homework.student === student.fio
                                                             && homework.subject === subject
                                                             && date === homework.publicTaskDate
-                                                            && homework.mark
+                                                            && <span>{homework.mark}</span> /*&& markToStudent.push(homework.mark)*/
                                                         )
                                                     }
                                                 </TableCell>

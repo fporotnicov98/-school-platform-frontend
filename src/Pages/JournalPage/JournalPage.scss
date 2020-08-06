@@ -23,6 +23,12 @@
     width: 8%;
     text-align: center;
     border: 1px solid #b1b1b1;
+    span {
+      margin-right: 10px;
+      &:last-child {
+        margin: 0;
+      }
+    }
   }
   .dates {
     border: 1px solid #b1b1b1;
