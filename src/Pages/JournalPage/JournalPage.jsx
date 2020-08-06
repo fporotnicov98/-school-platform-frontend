@@ -115,12 +115,11 @@ const JournalPage = (props) => {
                                                             homework.student === student.fio
                                                             && homework.subject === subject
                                                             && date === homework.publicTaskDate
-                                                            && homework.mark
+                                                            && "-"
                                                         )
                                                     }
                                                 </TableCell>
                                             )
-
                                         }
                                         <TableCell className='final-mark'></TableCell>
                                     </StyledTableRow>
