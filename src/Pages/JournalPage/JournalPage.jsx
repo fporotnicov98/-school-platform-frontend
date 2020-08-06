@@ -109,19 +109,20 @@ const JournalPage = (props) => {
                                                     && date === homework.publicTaskDate
                                                     && homework.student === student.fio
                                                     && homework.subject === subject
-                                                ) && <TableCell className='marks'>
+                                                ) ? <TableCell className='marks'>
                                                     {
                                                         props.homeworks.map(homework =>
                                                             homework.student === student.fio
                                                             && homework.subject === subject
                                                             && date === homework.publicTaskDate
-                                                            && "-"
+                                                            && homework.mark
                                                         )
                                                     }
                                                 </TableCell>
+                                                :<TableCell className='marks'></TableCell>
                                             )
                                         }
-                                        <TableCell className='final-mark'></TableCell>
+                                        <TableCell className='final-mark'>123</TableCell>
                                     </StyledTableRow>
                                 )
                             }
