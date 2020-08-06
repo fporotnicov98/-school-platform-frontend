@@ -25,11 +25,15 @@ const JournalPage = (props) => {
 
     let [subject, setSubject] = React.useState()
     let [uniqueTasks, setUniqueTasks] = React.useState([])
+    let [sameData, setSameData] = React.useState([])
 
     let handleSubject = (e) => setSubject(e.target.value)
 
-    let selectUniqueSubject = () => {
-        setUniqueTasks(uniq(props.tasks.map(item => item.subject)))
+    let selectUniqueSubject = () => setUniqueTasks(uniq(props.tasks.map(item => item.subject)))
+
+
+    let selectMarkToDate = () => {
+
     }
 
     useEffect(() => {
@@ -94,23 +98,21 @@ const JournalPage = (props) => {
                                                    scope="row">{student.fio}</TableCell>
                                         {
                                             props.homeworks.map(homework =>
-                                                homework.student
-                                                    ? homework.classNumber === props.auth.classNumber
-                                                    && homework.subject === subject
-                                                    && <TableCell className='marks'>{homework.mark}</TableCell>
-                                                    : props.tasks.map(task =>
-                                                    task.classNumber == props.auth.classNumber
-                                                    && task.subject === subject
-                                                    && <TableCell className='marks'>-</TableCell>
-                                                    )
-                                            )
-                                        }
-                                        {
-                                            props.homeworks.map(homework =>
                                                 homework.classNumber === props.auth.classNumber
-                                                // && homework.student === student.fio
+                                                && homework.student === student.fio
                                                 && homework.subject === subject
-                                                && <TableCell className='marks'>{homework.mark}</TableCell>
+                                                && <TableCell className='marks'>
+                                                    {
+                                                        props.homeworks.map(homework =>
+                                                            props.tasks.map(task =>
+                                                                homework.publicTaskDate === task.publicDate
+                                                                && homework.student
+                                                            )
+                                                        )
+                                                    }
+
+                                                    {homework.mark}
+                                                </TableCell>
                                             )
                                         }
                                         <TableCell className='final-mark'></TableCell>
