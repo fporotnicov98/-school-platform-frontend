@@ -56,16 +56,18 @@ const CheckingTasks = (props) => {
                         <span>{props.homeworkItem.answerToTask}</span>
                     </div>
                     <div className='task-item'>
-                            <InputLabel>Файл ученика: </InputLabel>
-                            <a href='#!' download={props.homeworkItem.answerFileName} onClick={() => props.downloadFile(props.homeworkItem.answerFileName)}>{props.homeworkItem.answerFileName}</a>
+                        <InputLabel>Файл ученика: </InputLabel>
+                        <a href='#!'
+                           onClick={() => props.downloadFile(props.homeworkItem.answerFileName)}>{props.homeworkItem.answerFileName}<i
+                            className="files fas fa-file-word"/></a>
                     </div>
                     <div className='task-item'>
                         <InputLabel>Примечание: </InputLabel>
                         {
                             !props.homeworkItem.teacherDesc
-                            ? <textarea className='materialize-textarea' value={notation}
-                                        onChange={handleNotation}/>
-                            : <span>{props.homeworkItem.teacherDesc}</span>
+                                ? <textarea className='materialize-textarea' value={notation}
+                                            onChange={handleNotation}/>
+                                : <span>{props.homeworkItem.teacherDesc}</span>
                         }
 
                     </div>
@@ -73,7 +75,7 @@ const CheckingTasks = (props) => {
                         <InputLabel>Оценка: </InputLabel>
                         {
                             !props.homeworkItem.mark
-                            ? <Select
+                                ? <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     value={rating}
@@ -84,7 +86,7 @@ const CheckingTasks = (props) => {
                                     <MenuItem value={'4'}>4</MenuItem>
                                     <MenuItem value={'5'}>5</MenuItem>
                                 </Select>
-                            : <span>{props.homeworkItem.mark}</span>
+                                : <span>{props.homeworkItem.mark}</span>
                         }
 
                     </div>

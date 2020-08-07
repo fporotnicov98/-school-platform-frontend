@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {getTaskItem, updateTask, setTaskItem, downloadFile,saveFile} from "../../../Redux/taskReducer";
+import {getTaskItem, updateTask, setTaskItem, downloadFile, saveFile} from "../../../Redux/taskReducer";
 import TaskItem from "./TaskItem";
 import Preloader from "../../../Assets/Commons/Preloader";
 import {addHomework, getHomeworkItem} from "../../../Redux/homeworkReducer";
@@ -15,8 +15,8 @@ const TaskItemContainer = (props) => {
             props.setTaskItem(null)
         }
     }, [props.match.params.taskId])
-    
-    if (!props.taskItem) return <Preloader />
+
+    if (!props.taskItem) return <Preloader/>
     return (
         <div>
             <TaskItem {...props}/>
@@ -35,5 +35,13 @@ const mapStateToProps = state => {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {getTaskItem, updateTask, setTaskItem, addHomework, getHomeworkItem, downloadFile,saveFile})
+    connect(mapStateToProps, {
+        getTaskItem,
+        updateTask,
+        setTaskItem,
+        addHomework,
+        getHomeworkItem,
+        downloadFile,
+        saveFile
+    })
 )(TaskItemContainer);

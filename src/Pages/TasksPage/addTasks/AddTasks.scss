@@ -14,6 +14,27 @@
       align-items: center;
       font-size: 14px !important;
 
+      h4 {
+        text-align: center;
+      }
+      .mark {
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span {
+          font-weight: bold;
+        }
+      }
+      .desc {
+        width: 50%;
+        justify-content: space-between;
+        align-items: center;
+        display: flex;
+        span {
+          font-weight: bold;
+        }
+      }
       .task-item {
         width: 100%;
         display: flex;
@@ -21,6 +42,13 @@
         margin-bottom: 20px;
         align-items: center;
 
+        a:hover {
+          font-weight: 500;
+          text-decoration: underline;
+        }
+        .files {
+          margin-left: 15px;
+        }
         .class {
           width: 30%;
         }

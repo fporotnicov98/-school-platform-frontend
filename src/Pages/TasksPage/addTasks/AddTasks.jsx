@@ -33,7 +33,7 @@ const AddTasks = (props) => {
             setYear(val)
             setTitle(val)
             setDesc(val)
-            setFile(val)
+            setFileName(val)
         }
 
         let selectedDocument = (e) => {

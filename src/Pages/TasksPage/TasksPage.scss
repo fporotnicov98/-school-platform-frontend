@@ -69,3 +69,9 @@
     cursor: pointer;
   }
 }
+.number-task {
+  &:hover {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+}

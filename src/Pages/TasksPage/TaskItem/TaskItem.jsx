@@ -120,15 +120,20 @@ const TaskItem = (props) => {
                         </div>
                         <div className='task-item'>
                             <InputLabel>Файл задания: </InputLabel>
-                            <a href='#!' download={props.taskItem.taskFileName} onClick={() => props.downloadFile(props.taskItem.taskFileName)}>{props.taskItem.taskFileName}</a>
+                            <a href='#!'
+                               onClick={() => props.downloadFile(props.taskItem.taskFileName)}>{props.taskItem.taskFileName}<i
+                                className="files fas fa-file-word"/></a>
                         </div>
-                        <div className='task-item'>
+                        <div className="task-item file-field">
+                            <div className="add-file">
                                 <InputLabel>Загрузить файл</InputLabel>
                                 <input onChange={selectedDocument} type="file"/>
+                            </div>
+                            <input className="file-path validate" type="text"/>
                         </div>
                         <button className="btn waves-effect waves-light cyan darken-2"
                                 onClick={() => {
-                                    props.addHomework(props.auth.classNumber, props.taskItem._id, props.auth.fio, date(), props.taskItem.publicDate, props.taskItem.subject, props.taskItem.teacher, answer,fileName,props.taskItem.deadlineDate, props.taskItem.taskTitle)
+                                    props.addHomework(props.auth.classNumber, props.taskItem._id, props.auth.fio, date(), props.taskItem.publicDate, props.taskItem.subject, props.taskItem.teacher, answer, fileName, props.taskItem.deadlineDate, props.taskItem.taskTitle)
                                     props.saveFile(file)
                                 }}>Отправить
                         </button>

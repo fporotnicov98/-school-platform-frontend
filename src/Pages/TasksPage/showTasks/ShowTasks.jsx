@@ -63,7 +63,7 @@ const ShowTasks = (props) => {
                                             ?
                                             <StyledTableRow key={index}>
                                                 <NavLink to={`/tasks/showTasks/` + task._id}>
-                                                    <TableCell component="th" scope="row">{index + 1}</TableCell>
+                                                    <TableCell className='number-task' component="th" scope="row">{index + 1}</TableCell>
                                                 </NavLink>
                                                 <TableCell>{task.subject}</TableCell>
                                                 <TableCell>{task.taskTitle}</TableCell>
@@ -103,7 +103,7 @@ const ShowTasks = (props) => {
                                             props.homeworks.map(homework =>
                                                 homework.taskId === task._id && homework.student === props.auth.fio
                                                 && <NavLink to={`/tasks/showTasksAfterCheck/` + homework._id}>
-                                                    <TableCell component="th" scope="row">{index + 1}</TableCell>
+                                                    <TableCell className='number-task'  component="th" scope="row">{index + 1}</TableCell>
                                                 </NavLink>
                                             )
                                         }
@@ -111,7 +111,7 @@ const ShowTasks = (props) => {
                                             props.homeworks.some(homework => homework.taskId === task._id && homework.student === props.auth.fio)
                                                 ? null
                                                 : <NavLink to={`/tasks/showTasks/` + task._id}>
-                                                    <TableCell component="th" scope="row">{index + 1}</TableCell>
+                                                    <TableCell className='number-task'  component="th" scope="row">{index + 1}</TableCell>
                                                 </NavLink>
                                         }
                                         <TableCell>{task.subject}</TableCell>

@@ -69,8 +69,8 @@ const DialogsPage = (props) => {
                                                         }} className='material-icons'>mode_edit</i>
                                                     }
                                                     <i onClick={() => {
-                                                        props.deleteMessage(this.props.auth.classId, item._id)
-                                                        setTimeout(() => this.props.getClassroom(this.props.auth.classId), 300)
+                                                        props.deleteMessage(props.auth.classId, item._id)
+                                                        setTimeout(() => props.getClassroom(props.auth.classId), 300)
                                                     }} className='material-icons'>delete</i>
                                                 </div>
                                             }

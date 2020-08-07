@@ -11,7 +11,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 const ScheduleTS = props => {
 
-    let [selectedClass, setClass] = useState('')
+    let [selectedClass, setClass] = useState(props.auth.classNumber)
 
     useEffect(() => {
         props.getSchedule()
